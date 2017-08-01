@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name" translatable="false">SpaceButtle</string>
+    <string name="attiva_bluethoot">Enable bluethoot</string>
+    <string name="inizia_partita">Starts the match</string>
+    <string name="profilo">My profile</string>
+    <string name="space_buttle" translatable="false">Space Buttle</string>
+    <string name="no_Bluethoot_Default">Your device does not support bluethoot</string>
+    <string name="activated_bluethoot">Enabled bluethoot</string>
+    <string name="disabled_bluethoot">disabled bluethoot</string>
+    <string name="bluethoot_attivo">Bluethoot is enable</string>
+    <string name="textview">Bluethoot found nearby</string>
+    <string name="dispositivi_accoppiati"> Device already paired!</string>
+    <string name="please">Please, enable bluethoot</string>
+    <string name="scanning">Scanning...</string>
+    <string name="name_disp" translatable="false">Name</string>
+    <string name="adress_disp" translatable="false">Indirizzo</string>
+    <string name="place_ships" translatable="true">Place your ships</string>
+    <string name="cancel">Cancel</string>
+    <string name="play">Play</string>
+
+
+</resources>

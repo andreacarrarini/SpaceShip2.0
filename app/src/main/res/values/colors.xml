@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#d5aa54</color>
+    <color name="colorPrimaryDark">#b98428</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="colorFontButtonHomeScreen">#ffffff</color>
+    <color name="colorNotShipAllowed">#eaff0404</color>
+</resources>

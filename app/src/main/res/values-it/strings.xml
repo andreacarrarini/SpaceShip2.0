@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="activated_bluethoot">Bluethoot attivo</string>
+    <string name="attiva_bluethoot">Attiva bluethoot</string>
+    <string name="disabled_bluethoot">Bluethoot disattivato</string>
+    <string name="dispositivi_accoppiati">Dispositivi accoppiati (?)</string>
+    <string name="inizia_partita">Inizia la partita</string>
+    <string name="no_Bluethoot_Default">Il tuo dispositivo non supporta il bluethoot</string>
+    <string name="please">Per favore, attiva il bluethoot</string>
+    <string name="profilo">Profilo personale</string>
+    <string name="textview">Dispositivi disponibili</string>
+    <string name="scanning">Scansiono...</string>
+    <string name="name_disp"></string>
+    <string name="place_ships">Piazza le tue navi</string>
+    <string name="bluethoot_attivo">Bluethoot attivo</string>
+    <string name="play">Gioca</string>
+    <string name="cancel">Annulla</string>
+</resources>
