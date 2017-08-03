@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-        <TableLayout
+        <!--TableLayout
             android:id="@+id/idTab"
             android:layout_width="wrap_content"
             android:layout_height="match_parent">
@@ -553,7 +553,7 @@
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
             </TableRow>
-        </TableLayout>
+        </TableLayout-->
 
 
         <TableLayout
@@ -1102,45 +1102,16 @@
             </TableRow>
         </TableLayout>
 
-        <LinearLayout
-            android:id="@+id/ship_deposit"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:weightSum="1">
-
-            <ImageView
-                android:id="@+id/id_rebel_cruiser"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.26"
-                android:src="@drawable/rebel_cruiser_dx"
-                android:visibility="visible" />
-
-            <ImageView
-                android:id="@+id/id_x_wing"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.32"
-                android:src="@drawable/x_wing_dx" />
-
-            <ImageView
-                android:id="@+id/id_millenium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.31"
-                android:src="@drawable/millenium_falcon_dx"
-                android:visibility="visible" />
-
-        </LinearLayout>
     </LinearLayout>
 
+
     <Button
-        android:id="@+id/btnAnnulla2"
+        android:id="@+id/btnBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/cancel"
+        android:text="@string/back"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"/>
+
 
 </RelativeLayout>

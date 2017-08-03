@@ -16,6 +16,7 @@
     <string name="adress_disp" translatable="false">Indirizzo</string>
     <string name="place_ships" translatable="true">Place your ships</string>
     <string name="cancel">Cancel</string>
+    <string name="back">Back</string>
     <string name="play">Play</string>
 
 

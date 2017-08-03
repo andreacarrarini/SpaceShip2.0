@@ -170,11 +170,12 @@ public class tableActivity2 extends Activity implements View.OnTouchListener, Vi
             @Override
             public void onClick(View v) {
 
-               // Bundle extrainBundle = new Bundle();
-                //extrainBundle.putSerializable("caselleListSX", caselleTableList);
-
                 Intent intent = new Intent(tableActivity2.this, startGameActivity.class);
-               // intent.putExtra("caselleListSX", caselleTableList); //Passa la lista alla nuova activity  "bundle", extrainBundle
+
+                /* Bundle extrainBundle = new Bundle();
+                extrainBundle.putSerializable("caselleListSX", caselleTableList);
+                intent.putExtra("caselleListSX", caselleTableList); //Passa la lista alla nuova activity  "bundle", extrainBundle
+                */
                 startActivity(intent);
 
             }

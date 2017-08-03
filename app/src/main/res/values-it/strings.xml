@@ -15,4 +15,5 @@
     <string name="bluethoot_attivo">Bluethoot attivo</string>
     <string name="play">Gioca</string>
     <string name="cancel">Annulla</string>
+    <string name="back">Indietro</string>
 </resources>
