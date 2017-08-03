@@ -34,9 +34,6 @@ public class tableActivity2 extends Activity implements View.OnTouchListener, Vi
         Resizer r = new Resizer(this);
 
 //ANDREA
-        // Sets the game's table
-        TableRow rowLabels= (TableRow) findViewById(R.id.rowLabels0);
-        r.resize(rowLabels, dim_field_square);
 
         // Sets the activity title
         TextView place_ships = (TextView) findViewById(R.id.id_place_ships);
@@ -172,7 +169,9 @@ public class tableActivity2 extends Activity implements View.OnTouchListener, Vi
 
                 Intent intent = new Intent(tableActivity2.this, startGameActivity.class);
 
-                /* Bundle extrainBundle = new Bundle();
+                /*TODO: inviare la lista caselleTableList a startGameActivity
+
+                 Bundle extrainBundle = new Bundle();
                 extrainBundle.putSerializable("caselleListSX", caselleTableList);
                 intent.putExtra("caselleListSX", caselleTableList); //Passa la lista alla nuova activity  "bundle", extrainBundle
                 */

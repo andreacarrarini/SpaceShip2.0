@@ -1,17 +1,8 @@
 package com.example.andrea.starship_battle.dragNdrop;
 
-import android.app.Activity;
 import android.content.Context;
-import android.graphics.drawable.Drawable;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.DragEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.Toast;
-
-import com.example.andrea.starship_battle.Activities.tableActivity2;
 import com.example.andrea.starship_battle.R;
 import com.example.andrea.starship_battle.model.Casella;
 

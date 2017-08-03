@@ -23,7 +23,7 @@ import java.util.ArrayList;
  * Created by utente on 31/07/2017.
  */
 
-public class startGameActivity extends Activity implements View.OnTouchListener{
+public class startGameActivity extends Activity {
 
     int dim_field_square = 11;
 
@@ -34,12 +34,6 @@ public class startGameActivity extends Activity implements View.OnTouchListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.start_game);
         Resizer r = new Resizer(this);
-
-        TableRow rowLabelsSX = (TableRow) findViewById(R.id.rowLabels0);
-        r.resize(rowLabelsSX, dim_field_square);
-
-        TableRow rowLabelDX = (TableRow) findViewById(R.id.rowLabels0B);
-        r.resize(rowLabelDX, dim_field_square);
 
 
         //TABLE GAME SX: tablegame con le ships inserite dal giocatore
@@ -61,10 +55,26 @@ public class startGameActivity extends Activity implements View.OnTouchListener{
 
         //TABLE GAME DX: tablegame con le ship dell'avversario
         TableLayout rowCompletaRX = (TableLayout) findViewById(R.id.idTabB);
+        rowCompletaRX.setBackground(getResources().getDrawable(R.drawable.sfondotrovadisp));
         for (int i = 1; i < rowCompletaRX.getChildCount(); i++) {
             TableRow row = (TableRow) findViewById(rowCompletaRX.getChildAt(i).getId());
             for (int j = 0; j < row.getChildCount(); j++) {
                 if (row.getChildAt(j) instanceof ImageView) {
+                    row.getChildAt(j).setOnClickListener(
+                            new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+
+                                    /*TODO: se la casella che ho selezionato (dalla lista via bluethoot) è vuota (boolean)
+                                    allora prendi la drawable corrispongente e disegnala*/
+
+                                    v.setVisibility(View.INVISIBLE);
+
+                                    //TODO: altrimenti colorala di rosso
+
+
+                                }
+                            });
                     r.resize(row, dim_field_square); //resize delle caselle della scacchiera
 
                     Casella c = new Casella((ImageView) row.getChildAt(j), false, false); //Matrice di caselle: ImageView vuote
@@ -74,19 +84,8 @@ public class startGameActivity extends Activity implements View.OnTouchListener{
                 }
             }
         }
-        rowCompletaRX.setOnTouchListener(this);
 
         goBack((Button) findViewById(R.id.btnBack));
-    }
-
-    @Override
-    public boolean onTouch(View view, MotionEvent motionEvent) {
-
-        if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
-            view.setBackgroundColor(Color.CYAN);
-            return true;
-        }
-        return false;
     }
 
 
