@@ -16,4 +16,5 @@
     <string name="play">Gioca</string>
     <string name="cancel">Annulla</string>
     <string name="back">Indietro</string>
+    <string name="addShips">Posiziona tutte le navi!</string>
 </resources>

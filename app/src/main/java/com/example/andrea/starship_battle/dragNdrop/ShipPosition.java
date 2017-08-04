@@ -138,7 +138,7 @@ public class ShipPosition{
 
     private boolean casellaLibera(Casella c){
         if (c.getOccupata()){
-           // Toast.makeText(context, "There is another ship here", Toast.LENGTH_SHORT).show();
+           // TODO: QUESTO NON FUNGE --> Toast.makeText(context, "There is another ship here", Toast.LENGTH_SHORT).show();
             return false;
         }
         return true;

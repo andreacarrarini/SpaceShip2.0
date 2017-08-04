@@ -31,5 +31,4 @@ public class Resizer {
             nextChild.setLayoutParams(lp);
         }
     }
-
 }

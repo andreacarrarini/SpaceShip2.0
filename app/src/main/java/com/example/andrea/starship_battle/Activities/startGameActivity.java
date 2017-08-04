@@ -15,6 +15,7 @@ import android.widget.TableRow;
 import com.example.andrea.starship_battle.R;
 import com.example.andrea.starship_battle.dragNdrop.dragShadowBuilder;
 import com.example.andrea.starship_battle.model.Casella;
+import com.example.andrea.starship_battle.model.Designs;
 import com.example.andrea.starship_battle.model.Resizer;
 
 import java.util.ArrayList;
@@ -26,32 +27,33 @@ import java.util.ArrayList;
 public class startGameActivity extends Activity {
 
     int dim_field_square = 11;
-
     ArrayList<Casella> caselleTableListDX = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //ArrayList<Casella> caselleTableListSX = savedInstanceState.getParcelableArrayList()
         setContentView(R.layout.start_game);
         Resizer r = new Resizer(this);
 
 
         //TABLE GAME SX: tablegame con le ships inserite dal giocatore
-       /*Bundle b = getIntent().getBundleExtra("bundle");
-        ArrayList<Casella> caselleTableListSX = (ArrayList<Casella>) b.getSerializable("caselleListSX");*/
+        Bundle b = getIntent().getBundleExtra("bundle");
+        ArrayList<Casella> caselleTableListSX = b.getParcelableArrayList("caselleListSX");
 
-/*       ArrayList<Casella> caselleTableListSX = tableActivity2.caselleTableList;
         TableLayout rowCompletaSX = (TableLayout) findViewById(R.id.idTab);
         for (int i = 1; i < rowCompletaSX.getChildCount(); i++) {
             TableRow row = (TableRow) findViewById(rowCompletaSX.getChildAt(i).getId());
             for (int j = 0; j < row.getChildCount(); j++) {
                 if (row.getChildAt(j) instanceof ImageView) {
-                    ((ImageView) row.getChildAt(j)).setImageDrawable(caselleTableListSX.get(i-1).getDrawable());
+                    if (caselleTableListSX != null) {
+                        ((ImageView) row.getChildAt(j)).setImageDrawable(caselleTableListSX.get(i-1).getDrawable());
+                    }
                     r.resize(row, dim_field_square); //resize delle caselle della scacchiera
 
                 }
             }
-        }*/
+        }
 
         //TABLE GAME DX: tablegame con le ship dell'avversario
         TableLayout rowCompletaRX = (TableLayout) findViewById(R.id.idTabB);
@@ -71,23 +73,19 @@ public class startGameActivity extends Activity {
                                     v.setVisibility(View.INVISIBLE);
 
                                     //TODO: altrimenti colorala di rosso
-
-
                                 }
                             });
                     r.resize(row, dim_field_square); //resize delle caselle della scacchiera
 
-                    Casella c = new Casella((ImageView) row.getChildAt(j), false, false); //Matrice di caselle: ImageView vuote
+                    Casella c = new Casella((ImageView) row.getChildAt(j), false, false);//Matrice di caselle: ImageView vuote
                     caselleTableListDX.add(c);
                 } else {
                     r.resize(row, dim_field_square); //resize delle textView
                 }
             }
         }
-
         goBack((Button) findViewById(R.id.btnBack));
     }
-
 
     public void goBack(Button button) {
         button.setOnClickListener(new View.OnClickListener() {

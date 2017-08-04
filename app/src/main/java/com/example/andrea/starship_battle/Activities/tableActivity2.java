@@ -16,7 +16,6 @@ import android.widget.*;
 import java.util.ArrayList;
 
 
-
 public class tableActivity2 extends Activity implements View.OnTouchListener, View.OnDragListener {
     private static final String LOGCAT = null;
 
@@ -81,8 +80,6 @@ public class tableActivity2 extends Activity implements View.OnTouchListener, Vi
         startGameButton((Button) findViewById(R.id.btnStart));
     }
 
-
-
     @Override
     public boolean onTouch(View view, MotionEvent motionEvent) {
         /*Con lo stesso metodo Touch eseguo le due azioni: si differenzia in base a:
@@ -101,7 +98,6 @@ public class tableActivity2 extends Activity implements View.OnTouchListener, Vi
             } else {
                 view.setVisibility(View.VISIBLE); //Non fa sparire la view se si sbaglia a cliccare
                 check = false;
-
             }
         }else  if (view instanceof TableRow) {  //DROP on Table
             if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
@@ -125,7 +121,6 @@ public class tableActivity2 extends Activity implements View.OnTouchListener, Vi
             case DragEvent.ACTION_DROP:
                 Log.d(LOGCAT, "Drop started");
 
-
                 //ShipPosition gestisce il drop in base al tipo di ship
                 caselleTableList = position.setPositionShip(view, cella, caselleTableList);
                 return true;
@@ -148,7 +143,6 @@ public class tableActivity2 extends Activity implements View.OnTouchListener, Vi
         return !dragEvent.getResult();
     }
 
-
     public void restartShiptable(Button button) {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -156,7 +150,6 @@ public class tableActivity2 extends Activity implements View.OnTouchListener, Vi
                 Intent intent = new Intent(tableActivity2.this, tableActivity2.class);
                 startActivity(intent);
                 caselleTableList = new ArrayList<>();
-
             }
 
         });
@@ -167,18 +160,24 @@ public class tableActivity2 extends Activity implements View.OnTouchListener, Vi
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(tableActivity2.this, startGameActivity.class);
+                if( ((LinearLayout) findViewById(R.id.ship_deposit)).getChildCount() == 0  ) { //non ci sono più navi
 
-                /*TODO: inviare la lista caselleTableList a startGameActivity
+                   /* for (Casella c: caselleTableList)
+                    System.out.println("casella: "+c.getImageView().getId()+
+                            "  occupata: " +c.getOccupata()+
+                            "  drawable: " +c.getImageView().getDrawable());*/
+                    /*TODO: inviare la lista caselleTableList a startGameActivity*/
 
-                 Bundle extrainBundle = new Bundle();
-                extrainBundle.putSerializable("caselleListSX", caselleTableList);
-                intent.putExtra("caselleListSX", caselleTableList); //Passa la lista alla nuova activity  "bundle", extrainBundle
-                */
-                startActivity(intent);
+                    Bundle extrainBundle = new Bundle();
+                    extrainBundle.putParcelableArrayList("caselleListSX", caselleTableList);
 
+                    Intent intent = new Intent(tableActivity2.this, startGameActivity.class);
+                    intent.putExtra("bundle", extrainBundle); //Passa la lista alla nuova activity
+                    startActivity(intent);
+                }else{
+                    Toast.makeText(getApplicationContext(),R.string.addShips , Toast.LENGTH_SHORT).show();
+                }
             }
-
         });
     }
 
