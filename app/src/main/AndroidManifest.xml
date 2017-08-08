@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.andrea.starship_battle"
-   >
+    package="com.example.andrea.starship_battle">
 
-    <uses-permission android:name="android.permission.BLUETOOTH"/>
+    <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
-
-
 
     <application
         android:allowBackup="true"
@@ -39,14 +36,11 @@
         </activity>
         <activity
             android:name=".Activities.startGameActivity"
-            android:screenOrientation="landscape">
-        </activity>
-     </application>
+            android:screenOrientation="landscape"></activity>
+        <activity android:name=".Bluetooth.BluetoothExchanger"></activity>
+    </application>
 
-</manifest>
-
-
-<!--<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />-->
-
-<!-- android:installLocation="preferExternal" :INSERIRE A RIGA 4-->
+</manifest><!--
+<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+--><!-- android:installLocation="preferExternal" :INSERIRE A RIGA 4 -->

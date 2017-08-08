@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.andrea.starship_battle.Bluetooth.BluetoothExchanger">
+
+    <Button
+        android:id="@+id/btnSender"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Send"
+        tools:layout_editor_absoluteX="165dp"
+        tools:layout_editor_absoluteY="236dp" />
+
+    <Button
+        android:id="@+id/btnReceive"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Receive"
+        tools:layout_editor_absoluteX="157dp"
+        tools:layout_editor_absoluteY="349dp" />
+</android.support.constraint.ConstraintLayout>
