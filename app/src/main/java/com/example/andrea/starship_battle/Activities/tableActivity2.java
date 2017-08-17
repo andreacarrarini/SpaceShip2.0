@@ -3,6 +3,7 @@ import com.example.andrea.starship_battle.R;
 import com.example.andrea.starship_battle.dragNdrop.ShipPosition;
 import com.example.andrea.starship_battle.dragNdrop.dragShadowBuilder;
 import com.example.andrea.starship_battle.model.Casella;
+import com.example.andrea.starship_battle.model.CasellaPosition;
 import com.example.andrea.starship_battle.model.Resizer;
 
 import android.app.Activity;
@@ -23,6 +24,7 @@ public class tableActivity2 extends Activity implements View.OnTouchListener, Vi
     int dim_field_square = 9;
     int dim_ship = 4;
     static ArrayList<Casella> caselleTableList = new ArrayList<>();
+    static ArrayList<CasellaPosition> casellePositionList = new ArrayList<>();
     ShipPosition position;
 
     @Override
@@ -62,6 +64,10 @@ public class tableActivity2 extends Activity implements View.OnTouchListener, Vi
 
                     Casella c = new Casella((ImageView) row.getChildAt(j), false, false); //Matrice di caselle: ImageView vuote
                     caselleTableList.add(c);
+                    CasellaPosition casellaPosition = new CasellaPosition();
+                    casellaPosition.setImageName("space");
+                    casellePositionList.add(casellaPosition);
+
                 }else{
                     r.resize(row, dim_field_square); //resize delle textView
                 }
@@ -123,6 +129,7 @@ public class tableActivity2 extends Activity implements View.OnTouchListener, Vi
 
                 //ShipPosition gestisce il drop in base al tipo di ship
                 caselleTableList = position.setPositionShip(view, cella, caselleTableList);
+                casellePositionList = position.setPositionShip2(view, cella, caselleTableList, casellePositionList);
                 return true;
 
             case DragEvent.ACTION_DRAG_ENDED:
@@ -150,6 +157,7 @@ public class tableActivity2 extends Activity implements View.OnTouchListener, Vi
                 Intent intent = new Intent(tableActivity2.this, tableActivity2.class);
                 startActivity(intent);
                 caselleTableList = new ArrayList<>();
+                casellePositionList = new ArrayList<CasellaPosition>();
             }
 
         });

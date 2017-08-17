@@ -15,7 +15,7 @@ import android.widget.TableRow;
 import com.example.andrea.starship_battle.R;
 import com.example.andrea.starship_battle.dragNdrop.dragShadowBuilder;
 import com.example.andrea.starship_battle.model.Casella;
-import com.example.andrea.starship_battle.model.Designs;
+//import com.example.andrea.starship_battle.model.Designs;
 import com.example.andrea.starship_battle.model.Resizer;
 
 import java.util.ArrayList;
