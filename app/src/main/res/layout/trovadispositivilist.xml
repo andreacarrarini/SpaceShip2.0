@@ -12,26 +12,33 @@
     android:background="@drawable/sfondotrovadisp">
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
         tools:ignore="UselessParent">
 
         <TextView
-            android:text="@string/textview"
+            android:id="@+id/txt_bluethootTrovati"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/dimensioneSizePrimaTextView"
             android:gravity="center"
+            android:text="@string/textview"
             android:textColor="@color/colorFontButtonHomeScreen"
-            android:id="@+id/txt_bluethootTrovati"
+            android:textSize="@dimen/dimensioneSizePrimaTextView"
             tools:ignore="SpUsage" />
+
+        <Button
+            android:id="@+id/btnIndietro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:text="@string/back" />
 
         <ListView
             android:id="@+id/listView_bluethoot_trovati"
-            android:layout_marginTop="@dimen/margineAlto_traOggetti"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/margineAlto_traOggetti" />
 
     </LinearLayout>
 

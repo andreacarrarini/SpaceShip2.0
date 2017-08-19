@@ -6,7 +6,7 @@ import android.widget.ImageView;
 import android.widget.TableRow;
 
 /**
- * Created by utente on 31/07/2017.
+ * Created by Diletta on 31/07/2017.
  */
 
 public class OnTouchClass implements View.OnTouchListener{

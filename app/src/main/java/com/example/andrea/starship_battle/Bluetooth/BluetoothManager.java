@@ -16,8 +16,8 @@ import java.net.Socket;
  * Created by andrea on 03/08/17.
  */
 
-public class BluetoothManager {
-    private static final String TAG = "MY_APP_DEBUG_TAG";
+/* public class BluetoothManager {
+   private static final String TAG = "MY_APP_DEBUG_TAG";
     private Handler mHandler; // handler that gets info from Bluetooth service
 
     // Defines several constants used when transmitting messages between the
@@ -111,4 +111,4 @@ public class BluetoothManager {
             }
         }
     }
-}
+}*/

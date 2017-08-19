@@ -19,6 +19,12 @@
     <string name="back">Back</string>
     <string name="play">Play</string>
     <string name="addShips">Please, set up all the ships!</string>
+    <string name="selectedDevice">Select</string>
+    <string name="noSelectableDevices">Couldn\'t find any devices</string>
+    <string name="errorMessage">Would you like to go back?</string>
+
+
+
 
 
 </resources>

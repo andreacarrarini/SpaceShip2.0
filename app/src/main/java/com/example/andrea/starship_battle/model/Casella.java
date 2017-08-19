@@ -8,7 +8,7 @@ import android.os.Parcelable;
 import android.widget.ImageView;
 
 /**
- * Created by utente on 16/07/2017.
+ * Created by Diletta on 16/07/2017.
  */
 
 public class Casella implements Parcelable {

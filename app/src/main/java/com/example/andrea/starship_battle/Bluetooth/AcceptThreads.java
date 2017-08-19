@@ -12,7 +12,7 @@ import java.util.UUID;
  * Created by andrea on 03/08/17.
  */
 
-public class AcceptThreads {
+/*public class AcceptThreads {
     private BluetoothServerSocket mmServerSocket;
 
     private String NAME = "SpaceShip";
@@ -51,7 +51,7 @@ public class AcceptThreads {
                 // A connection was accepted. Perform work associated with
                 // the connection in a separate thread.
                 BluetoothExchanger exchanger = new BluetoothExchanger();
-                exchanger.manageMyConnectedSocket(socket);
+                //exchanger.manageMyConnectedSocket(socket);
                 try {
                     mmServerSocket.close();
                 } catch (IOException e) {
@@ -70,4 +70,4 @@ public class AcceptThreads {
             Log.e(TAG, "Could not close the connect socket", e);
         }
     }
-}
+}*/

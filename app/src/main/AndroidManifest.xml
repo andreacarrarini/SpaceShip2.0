@@ -2,8 +2,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.andrea.starship_battle">
 
+    <uses-feature android:name="androird.hardware.bluethooth"/>
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_PRIVILEGED"/>
+
 
     <application
         android:allowBackup="true"
@@ -21,26 +27,24 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Bluetooth.TrovaDispositiviList"
+            android:name=".Activities.DispositiviTrovatiActivity"
             android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activities.tableActivity2"
+            android:name=".Activities.TableActivity2"
             android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activities.startGameActivity"
-            android:screenOrientation="landscape"></activity>
-        <activity android:name=".Bluetooth.BluetoothExchanger"></activity>
+            android:name=".Activities.StartGameActivity"
+            android:screenOrientation="landscape">
+        </activity>
+        <!--activity android:name=".Bluetooth.BluetoothExchanger"></activity-->
     </application>
 
-</manifest><!--
-<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
---><!-- android:installLocation="preferExternal" :INSERIRE A RIGA 4 -->
+</manifest>

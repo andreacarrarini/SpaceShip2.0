@@ -17,4 +17,7 @@
     <string name="cancel">Annulla</string>
     <string name="back">Indietro</string>
     <string name="addShips">Posiziona tutte le navi!</string>
+    <string name="selectedDevice">Scegli</string>
+    <string name="noSelectableDevices">Nessun dispositivo disponibile</string>
+    <string name="errorMessage">Vuoi tornare indietro?</string>
 </resources>

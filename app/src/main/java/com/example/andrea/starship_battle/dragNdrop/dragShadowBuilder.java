@@ -8,7 +8,7 @@ import android.graphics.drawable.Drawable;
 import android.view.View;
 
 /**
- * Created by utente on 16/07/2017.
+ * Created by Diletta on 16/07/2017.
  */
 
 public class dragShadowBuilder extends View.DragShadowBuilder {

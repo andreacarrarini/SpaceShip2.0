@@ -1,8 +1,12 @@
-package com.example.andrea.starship_battle.Bluetooth;
+package com.example.andrea.starship_battle.Activities;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.bluetooth.*;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Bundle;
 
 import android.view.View;
@@ -14,14 +18,18 @@ import com.example.andrea.starship_battle.R;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 
+import static android.R.style.Theme_Material_Dialog_Alert;
 
-public class TrovaDispositiviList extends Activity {
+
+public class DispositiviTrovatiActivity extends Activity {
 
     public TextView textViewBluethootTrovati;
     public ListView listViewBluethootTrovati;
-    private ArrayList<BluetoothDevice> dispositiviList;
+    private ArrayList<BluetoothDevice> dispositiviList=new ArrayList<>();
 
     public AdapterClass adapter;
+    BluetoothDevice avversarioDevice;
+    AlertDialog.Builder builder;
 
 
     @Override
@@ -29,6 +37,8 @@ public class TrovaDispositiviList extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.trovadispositivilist);
 
+        Button btnBack = (Button) findViewById(R.id.btnIndietro);
+        goBack(btnBack);
 
         textViewBluethootTrovati = (TextView) findViewById(R.id.txt_bluethootTrovati);
         listViewBluethootTrovati = (ListView) findViewById(R.id.listView_bluethoot_trovati);
@@ -36,31 +46,46 @@ public class TrovaDispositiviList extends Activity {
         //Presi i valori dei dispositivi attivi, li mostro nella listView
         adapter = new AdapterClass(this);
         dispositiviList = getIntent().getExtras().getParcelableArrayList("dispositiviDisponibili");
-        adapter.setData(dispositiviList);
-        listViewBluethootTrovati.setAdapter(adapter);
-        listViewBluethootTrovati.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                BluetoothDevice avversario = dispositiviList.get(position);
-                try {
-                    String a = createBond(avversario);
-                    //TEST
-                    Toast.makeText(getApplicationContext(), a, Toast.LENGTH_SHORT).show();
 
-                } catch (Exception e) {
-                    e.printStackTrace();
+        if(dispositiviList==null){ //TODO: NON FUNZIONA
+            builder = new AlertDialog.Builder(getApplicationContext(), android.R.style.TextAppearance_Theme); //Theme_Material_Dialog_Alert
+            builder.setTitle(R.string.noSelectableDevices)
+                    .setMessage(R.string.errorMessage)
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent intent = new Intent(DispositiviTrovatiActivity.this, MainActivity.class);
+                            Bundle b = new Bundle();
+                            b.putBoolean("new_window", true); //sets new window
+                            intent.putExtras(b);
+                            startActivity(intent);
+                        }
+                    })
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .show();
+        }else {
+            adapter.setData(dispositiviList);
+            listViewBluethootTrovati.setAdapter(adapter);
+            listViewBluethootTrovati.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    avversarioDevice = dispositiviList.get(position);
+                    try {
+                        String a = createBond(avversarioDevice);
+                        Toast.makeText(getApplicationContext(), a, Toast.LENGTH_SHORT).show();
+
+                        Intent intent = new Intent(DispositiviTrovatiActivity.this, TableActivity2.class);
+                        intent.putExtra("avversarioDevice", avversarioDevice);
+                        startActivity(intent);
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
-
-
-            }
-        });
-
-
-
-
+            });
+        }
         cambiaFontTextView2(textViewBluethootTrovati);
-
     }
 
 //--------------------------------------------------------------------------------------------------
@@ -79,7 +104,18 @@ public class TrovaDispositiviList extends Activity {
             Method createBondMethod = class1.getMethod("createBond");
             Boolean returnValue = (Boolean) createBondMethod.invoke(btDevice);
         //TEST
-            return "ok";
+            return "OK";
+    }
+
+    public void goBack(Button button) {
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DispositiviTrovatiActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+
+        });
     }
 
 /*

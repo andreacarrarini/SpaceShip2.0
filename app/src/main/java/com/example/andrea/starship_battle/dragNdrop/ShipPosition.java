@@ -10,7 +10,7 @@ import com.example.andrea.starship_battle.model.CasellaPosition;
 import java.util.ArrayList;
 
 /**
- * Created by utente on 15/07/2017.
+ * Created by Diletta on 15/07/2017.
  */
 
 public class ShipPosition{

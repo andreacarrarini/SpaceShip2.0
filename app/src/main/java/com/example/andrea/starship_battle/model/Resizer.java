@@ -7,9 +7,6 @@ import android.view.Display;
 import android.view.View;
 import android.view.ViewGroup;
 
-/**
- * Created by utente on 01/08/2017.
- */
 
 public class Resizer {
 

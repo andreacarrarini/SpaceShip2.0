@@ -9,7 +9,7 @@ import com.example.andrea.starship_battle.model.Casella;
 import java.util.ArrayList;
 
 /**
- * Created by utente on 27/07/2017.
+ * Created by Diletta on 27/07/2017.
  */
 
 public class ShipFence {

@@ -12,7 +12,6 @@ import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.*;
 
-import com.example.andrea.starship_battle.Bluetooth.TrovaDispositiviList;
 import com.example.andrea.starship_battle.R;
 
 import java.util.ArrayList;
@@ -24,8 +23,6 @@ public class MainActivity extends Activity {
     public Button buttonIniziaPartita;
     public TextView textViewSpaceButtle;
     public BluetoothAdapter myBluetoothAdapter;
-    public Button button;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +37,6 @@ public class MainActivity extends Activity {
         textViewSpaceButtle = (TextView) findViewById(R.id.txt_spacebuttle);
         //inizializzo il bluethoot
         myBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-        button = (Button) findViewById(R.id.button);
 
 
         cambiaFontTextView(textViewSpaceButtle);
@@ -53,32 +49,7 @@ public class MainActivity extends Activity {
 
         attivaBluethoot();
 
-        intentATrovaDispositivi();
-        playGame(button);
-
-    }
-
-    //--------------------------------------------------------------------------------------------------
-   /* public void playGame(Button button) {
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, tableActivity.class);
-                startActivity(intent);
-            }
-
-        });
-    }*/
-
-    public void playGame(Button button) {
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, tableActivity2.class);
-                startActivity(intent);
-            }
-
-        });
+        intentTrovaDispositivi();
     }
 
 //--------------------------------------------------------------------------------------------------
@@ -150,7 +121,7 @@ public class MainActivity extends Activity {
   /*  private BluetoothLeScanner mLEScanner;
     private ScanSettings settings;*/
 
-    private void intentATrovaDispositivi() {
+    private void intentTrovaDispositivi() {
         buttonIniziaPartita.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -183,12 +154,11 @@ public class MainActivity extends Activity {
         });
     }
 
-
     private final BroadcastReceiver BrodcastReceiver = new BroadcastReceiver() {
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
 
-            //Una volta partita la scansione svuoto l'arraylist e faccio partire l'indicatore di avanzamento
+            //Una volta partita la scansione svuoto l'arraylist
             if (BluetoothAdapter.ACTION_DISCOVERY_STARTED.equals(action)) {
                 Toast.makeText(getApplicationContext(), R.string.scanning, Toast.LENGTH_SHORT).show();
                 dispositiviList = new ArrayList<>();
@@ -203,15 +173,14 @@ public class MainActivity extends Activity {
 
             }
 
-            //Finita la scansione chiudo l'indicatore avanzamento, e passo alla ListActivity i dispositivi trovati
+            //Finita la scansione passo alla ListActivity dei dispositivi trovati
             else if (BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(action)) {
-                Intent intent1 = new Intent(MainActivity.this, TrovaDispositiviList.class);
+                Intent intent1 = new Intent(MainActivity.this, DispositiviTrovatiActivity.class);
                 intent1.putParcelableArrayListExtra("dispositiviDisponibili", dispositiviList);
                 startActivity(intent1);
             }
         }
     };
-
 
     //viene tolta la registrazione del brodcast receiver
     @Override
