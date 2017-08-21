@@ -34,6 +34,12 @@
             android:layout_gravity="end"
             android:text="@string/back" />
 
+        <Button
+            android:id="@+id/btnAvanti"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:text="Avanti" />
         <ListView
             android:id="@+id/listView_bluethoot_trovati"
             android:layout_width="match_parent"

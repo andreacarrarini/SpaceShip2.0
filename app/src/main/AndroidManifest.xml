@@ -41,7 +41,19 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".Activity_2.TableActivity2_1"
+            android:screenOrientation="landscape">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+            </intent-filter>
+
+        </activity>
+        <activity
             android:name=".Activities.StartGameActivity"
+            android:screenOrientation="landscape">
+        </activity>
+        <activity
+            android:name=".Activity_2.StartGameActivity_1"
             android:screenOrientation="landscape">
         </activity>
         <!--activity android:name=".Bluetooth.BluetoothExchanger"></activity-->

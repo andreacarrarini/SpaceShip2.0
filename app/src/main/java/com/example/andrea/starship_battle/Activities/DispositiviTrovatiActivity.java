@@ -6,19 +6,16 @@ import android.bluetooth.*;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
-import android.net.Uri;
 import android.os.Bundle;
 
 import android.view.View;
 import android.widget.*;
 
-import com.example.andrea.starship_battle.Bluetooth.AdapterClass;
+import com.example.andrea.starship_battle.Activity_2.TableActivity2_1;
+import com.example.andrea.starship_battle.Bluetooth.AdapterTrovaDispositiviClass;
 import com.example.andrea.starship_battle.R;
 
-import java.lang.reflect.Method;
 import java.util.ArrayList;
-
-import static android.R.style.Theme_Material_Dialog_Alert;
 
 
 public class DispositiviTrovatiActivity extends Activity {
@@ -27,7 +24,7 @@ public class DispositiviTrovatiActivity extends Activity {
     public ListView listViewBluethootTrovati;
     private ArrayList<BluetoothDevice> dispositiviList=new ArrayList<>();
 
-    public AdapterClass adapter;
+    public AdapterTrovaDispositiviClass adapter;
     BluetoothDevice avversarioDevice;
     AlertDialog.Builder builder;
 
@@ -39,12 +36,14 @@ public class DispositiviTrovatiActivity extends Activity {
 
         Button btnBack = (Button) findViewById(R.id.btnIndietro);
         goBack(btnBack);
+        Button btnNext = (Button) findViewById(R.id.btnAvanti);
+        goNext(btnNext);
 
         textViewBluethootTrovati = (TextView) findViewById(R.id.txt_bluethootTrovati);
         listViewBluethootTrovati = (ListView) findViewById(R.id.listView_bluethoot_trovati);
 
         //Presi i valori dei dispositivi attivi, li mostro nella listView
-        adapter = new AdapterClass(this);
+        adapter = new AdapterTrovaDispositiviClass(this);
         dispositiviList = getIntent().getExtras().getParcelableArrayList("dispositiviDisponibili");
 
 
@@ -72,8 +71,8 @@ public class DispositiviTrovatiActivity extends Activity {
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     avversarioDevice = dispositiviList.get(position);
                     try {
-                        String a = createBond(avversarioDevice);
-                        Toast.makeText(getApplicationContext(), a, Toast.LENGTH_SHORT).show();
+                        //String a = createBond(avversarioDevice);
+                        Toast.makeText(getApplicationContext(), avversarioDevice.getName(), Toast.LENGTH_SHORT).show();
 
                         Intent intent = new Intent(DispositiviTrovatiActivity.this, TableActivity2.class);
                         intent.putExtra("avversarioDevice", avversarioDevice);
@@ -97,7 +96,7 @@ public class DispositiviTrovatiActivity extends Activity {
 
 //--------------------------------------------------------------------------------------------------
 
-    //accoppiamento device
+    /*accoppiamento device
     public String createBond(BluetoothDevice btDevice) throws Exception{
 
             Class class1 = Class.forName("android.bluetooth.BluetoothDevice");
@@ -105,13 +104,24 @@ public class DispositiviTrovatiActivity extends Activity {
             Boolean returnValue = (Boolean) createBondMethod.invoke(btDevice);
         //TEST
             return "OK";
-    }
+    }*/
 
     public void goBack(Button button) {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(DispositiviTrovatiActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+
+        });
+    }
+
+    public void goNext(Button button) {
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DispositiviTrovatiActivity.this, TableActivity2_1.class);
                 startActivity(intent);
             }
 

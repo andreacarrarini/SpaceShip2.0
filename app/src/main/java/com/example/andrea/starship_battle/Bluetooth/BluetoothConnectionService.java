@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.charset.Charset;
+import java.util.Arrays;
 import java.util.UUID;
 
 /**
@@ -37,7 +38,7 @@ public class BluetoothConnectionService {
 
     private ConnectThread mConnectThread;
     private BluetoothDevice mmDevice;
-    private UUID deviceUUID;
+    private UUID deviceUUID = UUID.fromString("8ce255c0-200a-11e0-ac64-0800200c9a67") ;
     ProgressDialog mProgressDialog;
 
     private ConnectedThread mConnectedThread;
@@ -62,8 +63,7 @@ public class BluetoothConnectionService {
 
         public AcceptThread(){
 
-            // Use a temporary object that is later assigned to mmServerSocket
-            // because mmServerSocket is final.
+            // Use a temporary object that is later assigned to mmServerSocket because mmServerSocket is final.
             BluetoothServerSocket tmp = null;
 
             // Create a new listening server socket
@@ -116,7 +116,7 @@ public class BluetoothConnectionService {
      * with a device. It runs straight through; the connection either
      * succeeds or fails.
      */
-    private class ConnectThread extends Thread {
+    public class ConnectThread extends Thread {
         private BluetoothSocket mmSocket;
 
         public ConnectThread(BluetoothDevice device, UUID uuid) {
@@ -132,8 +132,9 @@ public class BluetoothConnectionService {
             // Get a BluetoothSocket for a connection with the
             // given BluetoothDevice
             try {
-                Log.d(TAG, "ConnectThread: Trying to create InsecureRfcommSocket using UUID: " + MY_UUID_INSECURE );
+                Log.d(TAG, "ConnectThread: Trying to create InsecureRfcommSocket using UUID: " + MY_UUID_INSECURE ); //STOP
                 tmp = mmDevice.createRfcommSocketToServiceRecord(deviceUUID);
+                Log.d(TAG, "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!deviceUUID :" +deviceUUID);
             } catch (IOException e) {
                 Log.e(TAG, "ConnectThread: Could not create InsecureRfcommSocket " + e.getMessage());
             }
@@ -141,12 +142,13 @@ public class BluetoothConnectionService {
             mmSocket = tmp;
 
             // Always cancel discovery because it will slow down a connection
-            mBluetoothAdapter.cancelDiscovery();
+           // mBluetoothAdapter.cancelDiscovery();
 
             // Make a connection to the BluetoothSocket
             try {
                 // This is a blocking call and will only return on a
                 // successful connection or an exception
+                assert mmSocket != null;
                 mmSocket.connect();
 
                 Log.d(TAG, "run: ConnectThread connected.");
@@ -211,7 +213,7 @@ public class BluetoothConnectionService {
      Finally the ConnectedThread which is responsible for maintaining the BTConnection, Sending the data, and
      receiving incoming data through input/output streams respectively.
      **/
-    private class ConnectedThread extends Thread {
+    public class ConnectedThread extends Thread {
         private final BluetoothSocket mmSocket;
         private final InputStream mmInStream;
         private final OutputStream mmOutStream;
@@ -245,7 +247,7 @@ public class BluetoothConnectionService {
         public void run(){
             byte[] buffer = new byte[1024];  // buffer store for the stream
 
-            int bytes; // bytes returned from read()
+            int bytes=0; // bytes returned from read()
 
             // Keep listening to the InputStream until an exception occurs
             while (true) {
@@ -298,16 +300,21 @@ public class BluetoothConnectionService {
      * Write to the ConnectedThread in an unsynchronized manner
      *
      * @param out The bytes to write
-     * @see ConnectedThread#write(byte[])
-     */
-    public void write(byte[] out) {
+     * @see ConnectedThread#write(byte[])*/
+
+   /* public void write(byte[] out) {
         // Create temporary object
         ConnectedThread r;
 
         // Synchronize a copy of the ConnectedThread
         Log.d(TAG, "write: Write Called.");
+        Log.d(TAG, Arrays.toString(out));
         //perform the write
         mConnectedThread.write(out);
-    }
+    }*/
+    //Call this from the StartGameActivity to send data to the remote device
 
+    public void write(byte[] out){
+        mConnectedThread.write(out);
+    }
 }

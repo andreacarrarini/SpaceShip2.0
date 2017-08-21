@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-/*public class BluetoothExchanger extends AppCompatActivity {
+public class BluetoothExchanger extends AppCompatActivity {
 
     public Button btnReceive;
     public Button btnSender;
@@ -147,4 +147,4 @@ import java.io.OutputStream;
             }
         }
     }
-}*/
+}
