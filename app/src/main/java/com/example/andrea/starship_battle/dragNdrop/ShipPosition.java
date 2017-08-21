@@ -39,7 +39,7 @@ public class ShipPosition{
                     if ( (casella.getImageViewId() == cella.getId()) && casellaLibera(casella)) {
 
                         casella.setOccupata(true); //La casella o contiene una barca
-                        casella.setDrawable(context.getResources().getDrawable(R.drawable.tie_dx));
+                        casella.setDrawable(context.getResources().getDrawable(R.drawable.tie_sx));
 
                         //disattiva il drag delle caselle intorno alla ship droppata
                         caselleTableList= fence.setShipFence(view, i, caselleTableList);
@@ -150,10 +150,10 @@ public class ShipPosition{
                 for (int i = 0; i < caselleTableList.size(); i++) {
                     Casella casella = caselleTableList.get(i);
 
-                    if ( (casella.getImageViewId() == cella.getId()) && casellaLibera(casella)) {
+                    if ( (casella.getImageViewId() == cella.getId())) {
 
                         //Andrea: fills another ArrayList in parallel
-                        casellaPositionArrayList.get(i).setImageName("tie_dx");
+                        casellaPositionArrayList.get(i).setImageName("tie_sx");
 
                     }else{
                         view.setVisibility(View.VISIBLE);
@@ -169,15 +169,10 @@ public class ShipPosition{
                     if (casella.getImageViewId() == cella.getId() && ((i+1)%8!=0)) {  // ((i+1)%8!=0): evita il bordo DX della tabella;
                         Casella casellaAccanto = caselleTableList.get(i + 1);
 
-                        if (casellaLibera(casella) && casellaLibera(casellaAccanto)) {
+                        //Andrea: fills another ArrayList in parallel
+                        casellaPositionArrayList.get(i).setImageName("star_destroyer_sx_2");
+                        casellaPositionArrayList.get(i+1).setImageName("star_destroyer_sx_1");
 
-                            //Andrea: fills another ArrayList in parallel
-                            casellaPositionArrayList.get(i).setImageName("star_destroyer_sx_2");
-                            casellaPositionArrayList.get(i+1).setImageName("star_destroyer_sx_1");
-
-                        }else{
-                            view.setVisibility(View.VISIBLE);
-                        }
                     }
                 }
                 break;
@@ -193,18 +188,12 @@ public class ShipPosition{
                         Casella casellaSotto = caselleTableList.get(i + 8);
                         Casella casellaSottoAccanto = caselleTableList.get(i + 9); //seleziona la casella
 
-                        if (casellaLibera(casella) && casellaLibera(casellaAccanto) && casellaLibera(casellaSotto) && casellaLibera(casellaSottoAccanto)
-                                && caselleTableList.contains(casellaSotto) && caselleTableList.contains(casellaSottoAccanto)) {
+                        //Andrea: fills another ArrayList in parallel
+                        casellaPositionArrayList.get(i).setImageName("death_star_sx_3");
+                        casellaPositionArrayList.get(i+1).setImageName("death_star_sx_1");
+                        casellaPositionArrayList.get(i+8).setImageName("death_star_sx_4");
+                        casellaPositionArrayList.get(i+9).setImageName("death_star_sx_2");
 
-                            //Andrea: fills another ArrayList in parallel
-                            casellaPositionArrayList.get(i).setImageName("death_star_sx_3");
-                            casellaPositionArrayList.get(i+1).setImageName("death_star_sx_1");
-                            casellaPositionArrayList.get(i+8).setImageName("death_star_sx_4");
-                            casellaPositionArrayList.get(i+9).setImageName("death_star_sx_2");
-
-                        }else{
-                            view.setVisibility(View.VISIBLE);
-                        }
                     }
                 }
                 break;

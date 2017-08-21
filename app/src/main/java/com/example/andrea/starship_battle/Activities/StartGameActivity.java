@@ -2,11 +2,15 @@ package com.example.andrea.starship_battle.Activities;
 
 import android.app.Activity;
 import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothSocket;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.os.Message;
+import android.os.ParcelUuid;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -16,15 +20,16 @@ import android.widget.TableRow;
 import android.widget.Toast;
 
 import com.example.andrea.starship_battle.Bluetooth.BluetoothConnectionService;
-import com.example.andrea.starship_battle.Bluetooth.BluetoothConnectionService2;
 import com.example.andrea.starship_battle.R;
 import com.example.andrea.starship_battle.model.Casella;
-import com.example.andrea.starship_battle.model.Constants;
+import com.example.andrea.starship_battle.model.CasellaPosition;
 import com.example.andrea.starship_battle.model.Resizer;
 
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.UUID;
-
 
 /**
  * Created by Diletta on 31/07/2017.
@@ -39,84 +44,39 @@ public class StartGameActivity extends Activity {
     BluetoothConnectionService mBluetoothConnection;
     StringBuilder messageRecived;
 
-
-    private BluetoothConnectionService2 mChatService;
-    private StringBuffer mOutStringBuffer = new StringBuffer("");
+    //TODO: Passalo con il bundle da prima!
     private static final UUID MY_UUID_INSECURE =
             UUID.fromString("8ce255c0-200a-11e0-ac64-0800200c9a66");
-
-
-    private final android.os.Handler mHandler = new android.os.Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-
-
-            switch (msg.what) {
-
-                case Constants.MESSAGE_WRITE:
-                    byte[] writeBuf = (byte[]) msg.obj;
-                    // construct a string from the buffer
-                    String writeMessage = new String(writeBuf);
-                    Toast.makeText(getApplicationContext(), "messagetoSend "
-                            + writeMessage, Toast.LENGTH_SHORT).show();
-                    //  mConversationArrayAdapter.add("Me:  " + writeMessage);
-                    break;
-                case Constants.MESSAGE_READ:
-                    byte[] readBuf = (byte[]) msg.obj;
-                    // construct a string from the valid bytes in the buffer
-                    String readMessage = new String(readBuf, 0, msg.arg1);
-                    Toast.makeText(getApplicationContext(), "messageResived "
-                            + readMessage, Toast.LENGTH_SHORT).show();
-
-                    // mConversationArrayAdapter.add(mConnectedDeviceName + ":  " + readMessage);
-                    break;
-                case Constants.MESSAGE_DEVICE_NAME:
-                    // save the connected device's name
-                    //   mConnectedDeviceName = msg.getData().getString(Constants.DEVICE_NAME);
-                    if (null != getApplicationContext()) {
-                        Toast.makeText(getApplicationContext(), "Connected to "
-                                + avversarioDevice.getName(), Toast.LENGTH_SHORT).show();
-                    }
-                    break;
-            }
-        }
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //ArrayList<Casella> caselleTableListSX = savedInstanceState.getParcelableArrayList()
+        ArrayList<CasellaPosition> casellaPositionArrayListSX = savedInstanceState.getParcelableArrayList("casellePositionListSX");
+        avversarioDevice = getIntent().getExtras().getParcelable("avversarioDevice");
+        LocalBroadcastManager.getInstance(this).registerReceiver(mReceiver, new IntentFilter("incomingMessage"));
+
         setContentView(R.layout.start_game);
         Resizer r = new Resizer(this);
 
 
-        avversarioDevice = getIntent().getExtras().getParcelable("avversarioDevice");
-        if (avversarioDevice.getBondState() == BluetoothDevice.BOND_BONDED)
-            Log.i(TAG, "bonded");
-        //BTCONNSERVICE1: LocalBroadcastManager.getInstance(this).registerReceiver(mReceiver, new IntentFilter("incomingMessage"));
-        //BTCONNSERVICE1: mBluetoothConnection = new BluetoothConnectionService(StartGameActivity.this);
-
-
-
-
-
-        //ArrayList<Casella> caselleTableListSX = savedInstanceState.getParcelableArrayList()
-        /*TABLE GAME SX: tablegame con le ships inserite dal giocatore
+        //TABLE GAME SX: tablegame con le ships inserite dal giocatore
         Bundle b = getIntent().getBundleExtra("bundle");
-        ArrayList<Casella> caselleTableListSX = b.getParcelableArrayList("caselleListSX");
+        //ArrayList<Casella> caselleTableListSX = b.getParcelableArrayList("caselleListSX");
 
         TableLayout rowCompletaSX = (TableLayout) findViewById(R.id.idTab);
         for (int i = 1; i < rowCompletaSX.getChildCount(); i++) {
             TableRow row = (TableRow) findViewById(rowCompletaSX.getChildAt(i).getId());
             for (int j = 0; j < row.getChildCount(); j++) {
                 if (row.getChildAt(j) instanceof ImageView) {
-                    if (caselleTableListSX != null) {
-                        ((ImageView) row.getChildAt(j)).setImageDrawable(caselleTableListSX.get(i-1).getDrawable());
+                    if (!casellaPositionArrayListSX.isEmpty()) {
+                        ((ImageView) row.getChildAt(j)).setImageDrawable(getShip(casellaPositionArrayListSX, i, j));
                     }
                     r.resize(row, dim_field_square); //resize delle caselle della scacchiera
 
                 }
             }
-        }*/
+        }
 
         //TABLE GAME DX: tablegame con le ship dell'avversario
         TableLayout rowCompletaRX = (TableLayout) findViewById(R.id.idTabB);
@@ -135,28 +95,24 @@ public class StartGameActivity extends Activity {
             }
         }
 
+        mBluetoothConnection = new BluetoothConnectionService(StartGameActivity.this);
+        Log.d(TAG, "StartGameAct: " + avversarioDevice.getName()); //TEST
+
+
 
         //Confronto delle barche via Bluetooth --> scambio pacchetti
-        for (final Casella c : caselleTableListDX) {
-            c.getImageView().setOnClickListener(new View.OnClickListener() {
+        for (final Casella c : caselleTableListDX){
+            c.getImageView().setOnClickListener( new View.OnClickListener() {
 
                 @Override
                 public void onClick(View v) {
 
-                    //BTCONNSERVICE1: startBTConnection(avversarioDevice,MY_UUID_INSECURE);
-
-                    // Attempt to connect to the device
-                    mChatService = new BluetoothConnectionService2(getApplicationContext(), mHandler, avversarioDevice);
-                    mChatService.connect(avversarioDevice, false); //ensecure connection in socket
-
-                    String messageToSend = String.valueOf(c.getImageView().getId()); //value of ImageView ID
+                    String messageToSend = String.valueOf (c.getImageView().getId()) ; //value of ImageView ID
                     Log.d(TAG, "sending Data: " + messageToSend); //TEST
-                    sendMessage(messageToSend);
+                    startBTConnection(avversarioDevice,MY_UUID_INSECURE);
 
-
-
-                    //byte[] message = messageToSend.getBytes(Charset.defaultCharset());
-                    //mBluetoothConnection.write(message);
+                    byte[] message = messageToSend.getBytes(Charset.defaultCharset());
+                    mBluetoothConnection.write(message);
 
                     v.setVisibility(View.INVISIBLE);
 
@@ -195,36 +151,26 @@ public class StartGameActivity extends Activity {
         });
     }
 
-    public void startBTConnection(BluetoothDevice device, UUID uuid) {
+    public void startBTConnection(BluetoothDevice device, UUID uuid){
         Log.d(TAG, "startBTConnection: Initializing RFCOM Bluetooth Connection.");
 
-        mBluetoothConnection.startClient(device, uuid);
+        mBluetoothConnection.startClient(device,uuid);
     }
 
-
-    private void sendMessage(String message) {
-        // Check that we're actually connected before trying anything
-        if (mChatService.getState() != BluetoothConnectionService2.STATE_CONNECTED) {/*
-            Toast.makeText(StartGameActivity.this, R.string.not_connected, Toast.LENGTH_SHORT).show();
-            Log.d(TAG, "sending data from StartGame " + message);
-            return;
-        }*/
-
-            // Check that there's actually something to send
-            if (message.length() > 0) {
-                // Get the message bytes and tell the BluetoothChatService to write
-                byte[] send = message.getBytes();
-                mChatService.write(send);
-
-                // Reset out string buffer to zero and clear the edit text field
-                mOutStringBuffer.setLength(0);
+    public Drawable getShip(ArrayList<CasellaPosition> casellaPositionArrayList, int row, int column) {
+        if (!casellaPositionArrayList.isEmpty()) {
+            String shipName = casellaPositionArrayList.get(row*8 + column).getImageName();
+            switch (shipName) {
+                case "tie_sx":
+                    return getResources().getDrawable(R.drawable.tie_sx);
+                case "star_destroyer_sx_2":
+                    return getResources().getDrawable(R.drawable.star_destroyer_sx_2);
 
             }
+
         }
+        else return null;
     }
-
-
-
-
 }
+
 

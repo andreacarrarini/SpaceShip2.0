@@ -7,7 +7,6 @@ import com.example.andrea.starship_battle.model.CasellaPosition;
 import com.example.andrea.starship_battle.model.Resizer;
 
 import android.app.Activity;
-import android.bluetooth.BluetoothDevice;
 import android.content.Intent;
 import android.graphics.*;
 import android.os.Bundle;
@@ -17,21 +16,16 @@ import android.widget.*;
 
 import java.util.ArrayList;
 
-/**
- * Created by Diletta on 22/07/2017.
- */
 
 public class TableActivity2 extends Activity implements View.OnTouchListener, View.OnDragListener {
     private static final String LOGCAT = null;
 
     //CONST: Sets the dimension of the field square and the ships
-    int dim_field_square = 10;
+    int dim_field_square = 9;
     int dim_ship = 4;
     static ArrayList<Casella> caselleTableList = new ArrayList<>();
     static ArrayList<CasellaPosition> casellePositionList = new ArrayList<>();
     ShipPosition position;
-
-    BluetoothDevice avversarioDevice;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +34,7 @@ public class TableActivity2 extends Activity implements View.OnTouchListener, Vi
         position = new ShipPosition(this);
         Resizer r = new Resizer(this);
 
-        avversarioDevice = getIntent().getExtras().getParcelable("avversarioDevice");
+//ANDREA
 
         // Sets the activity title
         TextView place_ships = (TextView) findViewById(R.id.id_place_ships);
@@ -79,6 +73,8 @@ public class TableActivity2 extends Activity implements View.OnTouchListener, Vi
                 }
             }
         }
+
+//DILETTA
 
         // ImageView's onTOUCHListener for Drag: se una delle ships viene toccata, inizia il Drag
         tie.setOnTouchListener(this);
@@ -167,8 +163,6 @@ public class TableActivity2 extends Activity implements View.OnTouchListener, Vi
         });
     }
 
-
-
     public void startGameButton(Button button) {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -180,19 +174,15 @@ public class TableActivity2 extends Activity implements View.OnTouchListener, Vi
                     System.out.println("casella: "+c.getImageView().getId()+
                             "  occupata: " +c.getOccupata()+
                             "  drawable: " +c.getImageView().getDrawable());*/
-                    /*TODO: inviare la lista caselleTableList a StartGameActivity*/
+                    /*TODO: inviare la lista caselleTableList a startGameActivity*/
 
-                    /*Bundle extrainBundle = new Bundle();
-                    extrainBundle.putParcelableArrayList("caselleListSX", caselleTableList);
+                    Bundle extrainBundle = new Bundle();
+                    //extrainBundle.putParcelableArrayList("caselleListSX", caselleTableList);
+                    extrainBundle.putParcelableArrayList("casellePositionListSX", casellePositionList);
 
                     Intent intent = new Intent(TableActivity2.this, StartGameActivity.class);
-                    intent.putExtra("bundle", extrainBundle); //Passa la lista alla nuova activity*/
-
-                    //Sending paired device's info to StartGameActivity
-                    Intent intent = new Intent(TableActivity2.this, StartGameActivity.class);
-                    intent.putExtra("avversarioDevice", avversarioDevice);
+                    intent.putExtra("bundle", extrainBundle); //Passa la lista alla nuova activity
                     startActivity(intent);
-
                 }else{
                     Toast.makeText(getApplicationContext(),R.string.addShips , Toast.LENGTH_SHORT).show();
                 }
