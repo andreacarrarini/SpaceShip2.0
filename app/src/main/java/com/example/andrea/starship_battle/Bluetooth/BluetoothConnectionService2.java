@@ -19,6 +19,8 @@ import com.example.andrea.starship_battle.model.Constants;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.nio.charset.Charset;
 import java.util.UUID;
 
@@ -27,6 +29,7 @@ import java.util.UUID;
  */
 
 public class BluetoothConnectionService2 {
+
 
     private static final String TAG = "AcceptThreads";
 
@@ -42,6 +45,8 @@ public class BluetoothConnectionService2 {
 
     // Member fields
     private final BluetoothAdapter mAdapter;
+    private BluetoothDevice device;
+
     private final Handler mHandler;
     private AcceptThread mSecureAcceptThread;
     private AcceptThread mInsecureAcceptThread;
@@ -62,11 +67,12 @@ public class BluetoothConnectionService2 {
      * @param context The UI Activity Context
      * @param handler A Handler to send messages back to the UI Activity
      */
-    public BluetoothConnectionService2(Context context, Handler handler) {
+    public BluetoothConnectionService2(Context context, Handler handler, BluetoothDevice device) {
         mAdapter = BluetoothAdapter.getDefaultAdapter();
         mState = STATE_NONE;
         mNewState = mState;
         mHandler = handler;
+        this.device = device;
     }
 
     /**
@@ -282,15 +288,25 @@ public class BluetoothConnectionService2 {
 
             // Create a new listening server socket
             try {
-                if (secure) {
+
+                BluetoothDevice hxm = BluetoothAdapter.getDefaultAdapter().getRemoteDevice(device.getAddress());
+                Method m;
+                m = hxm.getClass().getMethod("createRfcommSocket", new Class[]{int.class});
+                tmp = (BluetoothServerSocket) m.invoke(hxm, Integer.valueOf(1));
+
+               /* if (secure) {
                     tmp = mAdapter.listenUsingRfcommWithServiceRecord(NAME,   //TODO: NOT WORKING
                             MY_UUID_SECURE);
                 } else {
                     tmp = mAdapter.listenUsingInsecureRfcommWithServiceRecord(
                             NAME, MY_UUID_INSECURE);
-                }
-            } catch (IOException e) {
-                Log.e(TAG, "Socket Type: " + mSocketType + " listen() failed", e);
+                }*/
+            } catch (NoSuchMethodException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            } catch (InvocationTargetException e) {
+                e.printStackTrace();
             }
             mmServerSocket = tmp;
             mState = STATE_LISTEN;

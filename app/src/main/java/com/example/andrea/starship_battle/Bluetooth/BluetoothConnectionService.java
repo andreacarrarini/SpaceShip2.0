@@ -1,6 +1,6 @@
 package com.example.andrea.starship_battle.Bluetooth;
 
-import android.app.ProgressDialog;
+/*import android.app.ProgressDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothServerSocket;
@@ -19,7 +19,7 @@ import java.util.UUID;
 
 /**
  * Created by Diletta on 17/08/2017.
- */
+
 
 public class BluetoothConnectionService {
 
@@ -55,7 +55,6 @@ public class BluetoothConnectionService {
      * This thread runs while listening for incoming connections. It behaves
      * like a server-side client. It runs until a connection is accepted
      * (or until cancelled).
-     */
     private class AcceptThread extends Thread {
 
         // The local server socket
@@ -115,7 +114,7 @@ public class BluetoothConnectionService {
      * This thread runs while attempting to make an outgoing connection
      * with a device. It runs straight through; the connection either
      * succeeds or fails.
-     */
+
     public class ConnectThread extends Thread {
         private BluetoothSocket mmSocket;
 
@@ -179,7 +178,7 @@ public class BluetoothConnectionService {
 
     /* Start the chat service. Specifically start AcceptThread to begin a
      * session in listening (server) mode. Called by the Activity onResume()
-     */
+
     public synchronized void start() {
         Log.d(TAG, "start");
 
@@ -196,7 +195,6 @@ public class BluetoothConnectionService {
 
     /**AcceptThread starts and sits waiting for a connection.
      Then ConnectThread starts and attempts to make a connection with the other devices AcceptThread.
-     **/
 
     public void startClient(BluetoothDevice device, UUID uuid){
         Log.d(TAG, "startClient: Started.");
@@ -212,7 +210,7 @@ public class BluetoothConnectionService {
     /**
      Finally the ConnectedThread which is responsible for maintaining the BTConnection, Sending the data, and
      receiving incoming data through input/output streams respectively.
-     **/
+
     public class ConnectedThread extends Thread {
         private final BluetoothSocket mmSocket;
         private final InputStream mmInStream;
@@ -280,7 +278,7 @@ public class BluetoothConnectionService {
             }
         }
 
-        /* Call this from the main activity to shutdown the connection */
+        /* Call this from the main activity to shutdown the connection
         public void cancel() {
             try {
                 mmSocket.close();
@@ -300,7 +298,7 @@ public class BluetoothConnectionService {
      * Write to the ConnectedThread in an unsynchronized manner
      *
      * @param out The bytes to write
-     * @see ConnectedThread#write(byte[])*/
+     * @see ConnectedThread#write(byte[])
 
    /* public void write(byte[] out) {
         // Create temporary object
@@ -311,10 +309,10 @@ public class BluetoothConnectionService {
         Log.d(TAG, Arrays.toString(out));
         //perform the write
         mConnectedThread.write(out);
-    }*/
+    }
     //Call this from the StartGameActivity to send data to the remote device
 
     public void write(byte[] out){
         mConnectedThread.write(out);
     }
-}
+}*/

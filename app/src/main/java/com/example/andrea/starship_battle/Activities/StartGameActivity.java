@@ -1,21 +1,12 @@
 package com.example.andrea.starship_battle.Activities;
 
-import android.app.ActionBar;
 import android.app.Activity;
-import android.bluetooth.BluetoothAdapter;
-import android.bluetooth.BluetoothClass;
 import android.bluetooth.BluetoothDevice;
-import android.bluetooth.BluetoothSocket;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Message;
-import android.os.ParcelUuid;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -31,14 +22,9 @@ import com.example.andrea.starship_battle.model.Casella;
 import com.example.andrea.starship_battle.model.Constants;
 import com.example.andrea.starship_battle.model.Resizer;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.UUID;
-import java.util.logging.Handler;
-import java.util.logging.LogRecord;
+
 
 /**
  * Created by Diletta on 31/07/2017.
@@ -160,7 +146,7 @@ public class StartGameActivity extends Activity {
                     //BTCONNSERVICE1: startBTConnection(avversarioDevice,MY_UUID_INSECURE);
 
                     // Attempt to connect to the device
-                    mChatService = new BluetoothConnectionService2(getApplicationContext(), mHandler);
+                    mChatService = new BluetoothConnectionService2(getApplicationContext(), mHandler, avversarioDevice);
                     mChatService.connect(avversarioDevice, false); //ensecure connection in socket
 
                     String messageToSend = String.valueOf(c.getImageView().getId()); //value of ImageView ID
