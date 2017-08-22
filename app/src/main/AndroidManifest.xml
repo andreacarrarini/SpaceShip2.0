@@ -2,20 +2,21 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.andrea.starship_battle">
 
-    <uses-feature android:name="androird.hardware.bluethooth"/>
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
 
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <!--uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+        <uses-feature android:name="androird.hardware.bluethooth"/>
+             android:supportsRtl="true"
+
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.BLUETOOTH_PRIVILEGED"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_PRIVILEGED"/-->
 
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:supportsRtl="true"
         android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
         <activity
             android:name=".Activities.MainActivity"
@@ -40,23 +41,16 @@
                 <action android:name="android.intent.action.VIEW" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".Activity_2.TableActivity2_1"
-            android:screenOrientation="landscape">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-            </intent-filter>
 
-        </activity>
         <activity
             android:name=".Activities.StartGameActivity"
             android:screenOrientation="landscape">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+             </intent-filter>
+
         </activity>
-        <activity
-            android:name=".Activity_2.StartGameActivity_1"
-            android:screenOrientation="landscape">
-        </activity>
-        <!--activity android:name=".Bluetooth.BluetoothExchanger"></activity-->
+
     </application>
 
 </manifest>
