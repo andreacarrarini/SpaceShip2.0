@@ -17,16 +17,20 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
+import android.widget.Toast;
 
 //import com.example.andrea.starship_battle.Bluetooth.BluetoothConnectionService;
+import com.example.andrea.starship_battle.Bluetooth.BluetoothConnectionService;
 import com.example.andrea.starship_battle.R;
 import com.example.andrea.starship_battle.dragNdrop.ShipPosition;
 import com.example.andrea.starship_battle.model.Casella;
 import com.example.andrea.starship_battle.model.CasellaPosition;
+import com.example.andrea.starship_battle.model.Constants;
 import com.example.andrea.starship_battle.model.Resizer;
 
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.UUID;
 
 /**
  * Created by Diletta on 31/07/2017.
@@ -41,6 +45,8 @@ public class StartGameActivity extends Activity {
     BluetoothConnectionService mBluetoothConnection;
     StringBuffer mOutStringBuffer;
     BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+    BluetoothDevice avversarioDevice;
+
     private static final UUID MY_UUID_INSECURE =
             UUID.fromString("8ce255c0-200a-11e0-ac64-0800200c9a66");
 
@@ -95,7 +101,7 @@ public class StartGameActivity extends Activity {
         avversarioDevice = getIntent().getExtras().getParcelable("avversarioDevice");
         if (avversarioDevice.getBondState() == BluetoothDevice.BOND_BONDED)
             Log.i(TAG, "bonded");
-        mBluetoothConnection  = new BluetoothConnectionService(StartGameActivity.this);
+        mBluetoothConnection = new BluetoothConnectionService(StartGameActivity.this);
 
         //TABLE GAME SX: tablegame con le ships inserite dal giocatore
         Bundle b = getIntent().getBundleExtra("bundle");
@@ -110,7 +116,7 @@ public class StartGameActivity extends Activity {
                     if (!casellaPositionArrayListSX.isEmpty()) {
                         //first row are always labels
                         (row.getChildAt(j)).setBackground(getResources().getDrawable(R.drawable.ic_galactic_space));
-                        ((ImageView) row.getChildAt(j)).setImageDrawable(getShip(casellaPositionArrayListSX, i-1, j-1));
+                        ((ImageView) row.getChildAt(j)).setImageDrawable(getShip(casellaPositionArrayListSX, i - 1, j - 1));
                     }
                     r.resize(row, dim_field_square); //resize delle caselle della scacchiera
 
@@ -118,7 +124,7 @@ public class StartGameActivity extends Activity {
             }
         }
 
-        //TABLE GAME DX: tablegame con le ship dell'avversario
+        //TABLE GAME DX: tablegame per la ricerca delle ship dell'avversario
         TableLayout rowCompletaRX = (TableLayout) findViewById(R.id.idTabB);
         //rowCompletaRX.setBackground(getResources().getDrawable(R.drawable.sfondotrovadisp));
         for (int i = 1; i < rowCompletaRX.getChildCount(); i++) {
@@ -126,7 +132,7 @@ public class StartGameActivity extends Activity {
             for (int j = 1; j < row.getChildCount(); j++) {
                 if (row.getChildAt(j) instanceof ImageView) {
                     if (!casellaPositionListDX.isEmpty()) {
-                        ((ImageView) row.getChildAt(j)).setImageDrawable(getShip(casellaPositionListDX, i-1, j-1));
+                        ((ImageView) row.getChildAt(j)).setImageDrawable(getShip(casellaPositionListDX, i - 1, j - 1));
                     }
                     r.resize(row, dim_field_square); //resize delle caselle della scacchiera
 
@@ -142,23 +148,25 @@ public class StartGameActivity extends Activity {
         for (int i = 1; i < rowCompletaRX.getChildCount(); i++) {
             TableRow row = (TableRow) findViewById(rowCompletaRX.getChildAt(i).getId());
             for (int j = 0; j < row.getChildCount(); j++) {
+
+                final View c = row.getChildAt(j);
                 row.getChildAt(j).setOnClickListener(new View.OnClickListener() {
 
                     @Override
                     public void onClick(View v) {
 
-                    startBTConnection(avversarioDevice,MY_UUID_INSECURE);
+                        startBTConnection(avversarioDevice, MY_UUID_INSECURE);
 
-                    String messageToSend = String.valueOf(c.getImageView().getId()); //value of ImageView ID
-                    Log.d(TAG, "messaggio inviato MAINACTIVY: "+ messageToSend);
-                    byte[] bytes = messageToSend.getBytes(Charset.defaultCharset());
-                    if(mBluetoothConnection != null) {
-                        mBluetoothConnection.write(bytes);
-                    }else{
-                        Log.d(TAG,"mbt null");
-                    }
+                        String messageToSend = String.valueOf(c.getId()); //value of ImageView ID
+                        Log.d(TAG, "messaggio inviato MAINACTIVY: " + messageToSend);
+                        byte[] bytes = messageToSend.getBytes(Charset.defaultCharset());
+                        if (mBluetoothConnection != null) {
+                            mBluetoothConnection.write(bytes);
+                        } else {
+                            Log.d(TAG, "mbt null");
+                        }
 
-                    v.setVisibility(View.INVISIBLE);
+                        v.setVisibility(View.INVISIBLE);
 
 
 
@@ -178,12 +186,12 @@ public class StartGameActivity extends Activity {
     BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            text= intent.getStringExtra("message");
-            System.out.println("testo: "+ text);
-            Log.d(TAG, "messaggio ricevuto MAINACTIVY: "+ text);
+            text = intent.getStringExtra("message");
+            System.out.println("testo: " + text);
+            Log.d(TAG, "messaggio ricevuto MAINACTIVY: " + text);
 
         }
-    };*/
+    };
 
 
     // starting chat service method
@@ -198,23 +206,23 @@ public class StartGameActivity extends Activity {
         });
     }
 
-    public void startBTConnection(BluetoothDevice device, UUID uuid){
+    public void startBTConnection(BluetoothDevice device, UUID uuid) {
         Log.d(TAG, "startBTConnection: Initializing RFCOM Bluetooth Connection.");
 
         Log.d(TAG, "Trying to pair with " + device.getName());
         //device.createBond(); //API>= 19
-        mBluetoothConnection.startClient(device,uuid);
+        mBluetoothConnection.startClient(device, uuid);
 
         //mBluetoothConnection = new BluetoothConnectionService(StartGameActivity.this);
 
     }
 
-}
+
     public Drawable getShip(ArrayList<CasellaPosition> casellaPositionArrayList, int row, int column) {
 
         Drawable drawable = null;
         if (!casellaPositionArrayList.isEmpty()) {
-            String shipName = casellaPositionArrayList.get(row*8 + column).getImageName();
+            String shipName = casellaPositionArrayList.get(row * 8 + column).getImageName();
             switch (shipName) {
                 case "tie_sx":
                     drawable = getResources().getDrawable(R.drawable.tie_sx);
@@ -222,24 +230,29 @@ public class StartGameActivity extends Activity {
                 case "star_destroyer_sx_2":
                     drawable = getResources().getDrawable(R.drawable.star_destroyer_sx_2);
                     return drawable;
-                case "star_destroyer_sx_1" :
+                case "star_destroyer_sx_1":
                     drawable = getResources().getDrawable(R.drawable.star_destroyer_sx_1);
                     return drawable;
-                case "death_star_sx_3" :
+                case "death_star_sx_3":
                     drawable = getResources().getDrawable(R.drawable.death_star_sx_3);
                     return drawable;
-                case "death_star_sx_1" :
+                case "death_star_sx_1":
                     drawable = getResources().getDrawable(R.drawable.death_star_sx_1);
                     return drawable;
-                case "death_star_sx_4" :
+                case "death_star_sx_4":
                     drawable = getResources().getDrawable(R.drawable.death_star_sx_4);
                     return drawable;
-                case "death_star_sx_2" :
+                case "death_star_sx_2":
                     drawable = getResources().getDrawable(R.drawable.death_star_sx_2);
                     return drawable;
-                case "space" :
+                case "space":
                     drawable = getResources().getDrawable(R.drawable.ic_galactic_space);
                     return drawable;
+            }
+        }
+        return drawable;
+    }
+}
 
 
 

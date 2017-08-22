@@ -7,6 +7,7 @@ import com.example.andrea.starship_battle.model.CasellaPosition;
 import com.example.andrea.starship_battle.model.Resizer;
 
 import android.app.Activity;
+import android.bluetooth.BluetoothDevice;
 import android.content.Intent;
 import android.graphics.*;
 import android.os.Bundle;
@@ -27,6 +28,8 @@ public class TableActivity2 extends Activity implements View.OnTouchListener, Vi
     static ArrayList<CasellaPosition> casellePositionList = new ArrayList<>();
     ShipPosition position;
 
+    BluetoothDevice avversarioDevice;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +37,7 @@ public class TableActivity2 extends Activity implements View.OnTouchListener, Vi
         position = new ShipPosition(this);
         Resizer r = new Resizer(this);
 
+        avversarioDevice = getIntent().getExtras().getParcelable("avversarioDevice");
 //ANDREA
 
         // Sets the activity title
@@ -176,12 +180,13 @@ public class TableActivity2 extends Activity implements View.OnTouchListener, Vi
                             "  drawable: " +c.getImageView().getDrawable());*/
                     /*TODO: inviare la lista caselleTableList a startGameActivity*/
 
+
                     Bundle extrainBundle = new Bundle();
-                    //extrainBundle.putParcelableArrayList("caselleListSX", caselleTableList);
                     extrainBundle.putParcelableArrayList("casellePositionListSX", casellePositionList);
 
                     Intent intent = new Intent(TableActivity2.this, StartGameActivity.class);
                     intent.putExtra("bundle", extrainBundle); //Passa la lista alla nuova activity
+                    intent.putExtra("avversarioDevice", avversarioDevice); //Sending paired device's info to StartGameActivity
                     startActivity(intent);
                 }else{
                     Toast.makeText(getApplicationContext(),R.string.addShips , Toast.LENGTH_SHORT).show();
