@@ -1,5 +1,6 @@
 package com.example.andrea.starship_battle.Activity_2;
 
+/*
 import android.app.Activity;
 import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
@@ -26,9 +27,11 @@ import com.example.andrea.starship_battle.model.Resizer;
 import java.util.ArrayList;
 import java.util.UUID;
 
+*/
 /**
  * Created by Diletta on 31/07/2017.
- */
+ *//*
+
 
 public class StartGameActivity_1 extends Activity {
 
@@ -91,7 +94,8 @@ public class StartGameActivity_1 extends Activity {
 
 
         //ArrayList<Casella> caselleTableListSX = savedInstanceState.getParcelableArrayList()
-        /*TABLE GAME SX: tablegame con le ships inserite dal giocatore
+        */
+/*TABLE GAME SX: tablegame con le ships inserite dal giocatore
         Bundle b = getIntent().getBundleExtra("bundle");
         ArrayList<Casella> caselleTableListSX = b.getParcelableArrayList("caselleListSX");
 
@@ -107,7 +111,8 @@ public class StartGameActivity_1 extends Activity {
 
                 }
             }
-        }*/
+        }*//*
+
 
         //TABLE GAME DX: tablegame con le ship dell'avversario
         TableLayout rowCompletaRX = (TableLayout) findViewById(R.id.idTabB);
@@ -153,10 +158,12 @@ public class StartGameActivity_1 extends Activity {
 
 
 
-                    /*TODO: casella.occupata corrispondente o casella.posizione forse serve un altro medoto per il thread parallelo
+                    */
+/*TODO: casella.occupata corrispondente o casella.posizione forse serve un altro medoto per il thread parallelo
                     * TODO: se la casella che ho selezionato (dalla lista via bluethoot) è vuota (boolean)
                     * allora prendi la drawable corrispongente e disegnala
-                    * TODO: altrimenti colorala di rosso*/
+                    * TODO: altrimenti colorala di rosso*//*
+
                 }
 
             });
@@ -195,11 +202,13 @@ public class StartGameActivity_1 extends Activity {
 
     private void sendMessage(String message) {
         // Check that we're actually connected before trying anything
-        if (mChatService.getState() != BluetoothConnectionService2.STATE_CONNECTED) {/*
+        if (mChatService.getState() != BluetoothConnectionService2.STATE_CONNECTED) {*/
+/*
             Toast.makeText(StartGameActivity.this, R.string.not_connected, Toast.LENGTH_SHORT).show();
             Log.d(TAG, "sending data from StartGame " + message);
             return;
-        }*/
+        }*//*
+
 
             // Check that there's actually something to send
             if (message.length() > 0) {
@@ -219,3 +228,4 @@ public class StartGameActivity_1 extends Activity {
 
 }
 
+*/

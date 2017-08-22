@@ -201,6 +201,18 @@ public class ShipPosition{
         return casellaPositionArrayList;
     }
 
+    public ArrayList<CasellaPosition> createEnemyBattlefield(ArrayList<CasellaPosition> casellaPositionArrayList) {
+        for (int row = 0; row < 8; row++) {
+            for (int column = 0; column < 8; column++) {
+                CasellaPosition casellaPosition= new CasellaPosition();
+                casellaPosition.setImageName("space");
+                casellaPosition.setAffondata(false);
+                casellaPosition.setUtilizzata(false);
+            }
+        }
+        return casellaPositionArrayList;
+    }
+
     private boolean casellaLibera(Casella c){
         if (c.getOccupata()){
            // TODO: QUESTO NON FUNGE --> Toast.makeText(context, "There is another ship here", Toast.LENGTH_SHORT).show();

@@ -196,8 +196,8 @@ public class TableActivity2_1 extends Activity implements View.OnTouchListener, 
                     Intent intent = new Intent(TableActivity2.this, StartGameActivity.class);
                     intent.putExtra("bundle", extrainBundle); //Passa la lista alla nuova activity*/
 
-                    Intent intent = new Intent(TableActivity2_1.this, StartGameActivity_1.class);
-                    startActivity(intent);
+                    //Intent intent = new Intent(TableActivity2_1.this, StartGameActivity_1.class);
+                    //startActivity(intent);
 
 
                 }else{
