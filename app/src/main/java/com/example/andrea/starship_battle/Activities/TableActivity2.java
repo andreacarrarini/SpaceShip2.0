@@ -22,7 +22,7 @@ public class TableActivity2 extends Activity implements View.OnTouchListener, Vi
     private static final String LOGCAT = null;
 
     //CONST: Sets the dimension of the field square and the ships
-    int dim_field_square = 9;
+    int dim_field_square = 11;
     int dim_ship = 4;
     static ArrayList<Casella> caselleTableList = new ArrayList<>();
     static ArrayList<CasellaPosition> casellePositionList = new ArrayList<>();
@@ -158,10 +158,11 @@ public class TableActivity2 extends Activity implements View.OnTouchListener, Vi
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(TableActivity2.this, TableActivity2.class);
-                startActivity(intent);
+
                 caselleTableList = new ArrayList<>();
                 casellePositionList = new ArrayList<CasellaPosition>();
+                Intent intent = new Intent(TableActivity2.this, TableActivity2.class);
+                startActivity(intent);
             }
 
         });

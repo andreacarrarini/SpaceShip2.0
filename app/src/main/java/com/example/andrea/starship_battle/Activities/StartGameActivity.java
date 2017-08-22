@@ -169,7 +169,6 @@ public class StartGameActivity extends Activity {
                         v.setVisibility(View.INVISIBLE);
 
 
-
                     /*TODO: casella.occupata corrispondente o casella.posizione forse serve un altro medoto per il thread parallelo
                     * TODO: se la casella che ho selezionato (dalla lista via bluethoot) è vuota (boolean)
                     * allora prendi la drawable corrispongente e disegnala

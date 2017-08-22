@@ -266,11 +266,11 @@ public class BluetoothConnectionService {
         }
 
         //Call this from the main activity to send data to the remote device
-        public void write(byte[] bytes) {
-            String text = new String(bytes, Charset.defaultCharset());
+        public void write(byte[] b) {
+            String text = new String(b, Charset.defaultCharset());
             Log.d(TAG, "write: Writing to outputstream: " + text);
             try {
-                mmOutStream.write(bytes);
+                mmOutStream.write(b);
             } catch (IOException e) {
                 Log.e(TAG, "write: Error writing to output stream. " + e.getMessage() );
             }

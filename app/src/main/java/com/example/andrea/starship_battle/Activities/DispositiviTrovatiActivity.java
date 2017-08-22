@@ -96,12 +96,12 @@ public class DispositiviTrovatiActivity extends Activity {
 
     //accoppiamento device
     public String createBond(BluetoothDevice btDevice) throws Exception{
-
-            Class class1 = Class.forName("android.bluetooth.BluetoothDevice");
+            btDevice.createBond();
+            /*Class class1 = Class.forName("android.bluetooth.BluetoothDevice");
             Method createBondMethod = class1.getMethod("createBond");
-            Boolean returnValue = (Boolean) createBondMethod.invoke(btDevice);
+            Boolean returnValue = (Boolean) createBondMethod.invoke(btDevice);*/
         //TEST
-            return btDevice.getName();
+            return btDevice.getName()+ ": "+ String.valueOf(btDevice.getBondState());
     }
 
     public void goBack(Button button) {
