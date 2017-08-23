@@ -20,4 +20,5 @@
     <string name="selectedDevice">Scegli</string>
     <string name="noSelectableDevices">Nessun dispositivo disponibile</string>
     <string name="errorMessage">Vuoi tornare indietro?</string>
+    <string name="start">Start</string>
 </resources>

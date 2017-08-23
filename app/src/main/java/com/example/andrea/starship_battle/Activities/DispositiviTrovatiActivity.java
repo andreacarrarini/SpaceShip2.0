@@ -6,8 +6,10 @@ import android.bluetooth.*;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.os.Build;
 import android.os.Bundle;
 
+import android.support.annotation.RequiresApi;
 import android.view.View;
 import android.widget.*;
 
@@ -26,8 +28,6 @@ public class DispositiviTrovatiActivity extends Activity {
 
     public AdapterTrovaDispositiviClass adapter;
     BluetoothDevice avversarioDevice;
-    AlertDialog.Builder builder;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +46,8 @@ public class DispositiviTrovatiActivity extends Activity {
 
 
         if (dispositiviList == null) { //TODO: NON FUNZIONA
-            builder = new AlertDialog.Builder(getApplicationContext(), android.R.style.TextAppearance_Theme); //Theme_Material_Dialog_Alert
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(DispositiviTrovatiActivity.this); //, android.R.style.Theme_Material_Dialog
             builder.setTitle(R.string.noSelectableDevices)
                     .setMessage(R.string.errorMessage)
                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
@@ -60,6 +61,8 @@ public class DispositiviTrovatiActivity extends Activity {
                     })
                     .setIcon(android.R.drawable.ic_dialog_alert)
                     .show();
+            AlertDialog alertDialog = builder.create();
+            alertDialog.show();
         } else {
             adapter.setData(dispositiviList);
             listViewBluethootTrovati.setAdapter(adapter);
@@ -74,6 +77,7 @@ public class DispositiviTrovatiActivity extends Activity {
 
                         Intent intent = new Intent(DispositiviTrovatiActivity.this, TableActivity2.class);
                         intent.putExtra("avversarioDevice", avversarioDevice);
+                        finish();
                         startActivity(intent);
 
                     } catch (Exception e) {
@@ -82,6 +86,7 @@ public class DispositiviTrovatiActivity extends Activity {
                 }
             });
         }
+
         cambiaFontTextView2(textViewBluethootTrovati);
     }
 
@@ -96,12 +101,14 @@ public class DispositiviTrovatiActivity extends Activity {
 
     //accoppiamento device
     public String createBond(BluetoothDevice btDevice) throws Exception{
-            btDevice.createBond();
+        btDevice.createBond();
             /*Class class1 = Class.forName("android.bluetooth.BluetoothDevice");
             Method createBondMethod = class1.getMethod("createBond");
             Boolean returnValue = (Boolean) createBondMethod.invoke(btDevice);*/
         //TEST
-            return btDevice.getName()+ ": "+ String.valueOf(btDevice.getBondState());
+        if(btDevice.getBondState()==BluetoothDevice.BOND_BONDED)
+            return btDevice.getName()+ ": bonded "+ String.valueOf(btDevice.getBondState()); //TODO: string value
+        return "error";
     }
 
     public void goBack(Button button) {
