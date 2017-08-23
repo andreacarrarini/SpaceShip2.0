@@ -26,7 +26,7 @@ public class TableActivity2 extends Activity implements View.OnTouchListener, Vi
     int dim_ship = 4;
     static ArrayList<Casella> caselleTableList = new ArrayList<>();
     static ArrayList<CasellaPosition> casellePositionList = new ArrayList<>();
-    ShipPosition position;
+    ShipPosition position = null;
 
     BluetoothDevice avversarioDevice;
 
@@ -175,19 +175,13 @@ public class TableActivity2 extends Activity implements View.OnTouchListener, Vi
 
                 if( ((LinearLayout) findViewById(R.id.ship_deposit)).getChildCount() == 0  ) { //non ci sono più navi
 
-                   /* for (Casella c: caselleTableList)
-                    System.out.println("casella: "+c.getImageView().getId()+
-                            "  occupata: " +c.getOccupata()+
-                            "  drawable: " +c.getImageView().getDrawable());*/
-                    /*TODO: inviare la lista caselleTableList a startGameActivity*/
-
-
                     Bundle extrainBundle = new Bundle();
                     extrainBundle.putParcelableArrayList("casellePositionListSX", casellePositionList);
 
                     Intent intent = new Intent(TableActivity2.this, StartGameActivity.class);
                     intent.putExtra("bundle", extrainBundle); //Passa la lista alla nuova activity
                     intent.putExtra("avversarioDevice", avversarioDevice); //Sending paired device's info to StartGameActivity
+                    finish();
                     startActivity(intent);
                 }else{
                     Toast.makeText(getApplicationContext(),R.string.addShips , Toast.LENGTH_SHORT).show();

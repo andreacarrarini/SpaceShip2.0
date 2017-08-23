@@ -9,6 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
         <TableLayout
             android:id="@+id/idTab"
             android:layout_width="wrap_content"
@@ -1109,8 +1110,16 @@
         android:id="@+id/btnBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/back"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
+        android:text="@string/back" />
+
+    <Button
+        android:id="@+id/btnStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/start"
+        android:layout_toLeftOf="@+id/btnBack"
         android:layout_alignParentBottom="true"/>
 
 

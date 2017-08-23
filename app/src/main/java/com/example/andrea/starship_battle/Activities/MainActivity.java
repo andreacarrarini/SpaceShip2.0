@@ -191,6 +191,7 @@ public class MainActivity extends Activity {
             else if (BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(action)) {
                 Intent intent1 = new Intent(MainActivity.this, DispositiviTrovatiActivity.class);
                 intent1.putParcelableArrayListExtra("dispositiviDisponibili", dispositiviList);
+                finish();
                 startActivity(intent1);
             }
         }
