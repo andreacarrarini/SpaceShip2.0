@@ -45,7 +45,7 @@ public class DispositiviTrovatiActivity extends Activity {
         dispositiviList = getIntent().getExtras().getParcelableArrayList("dispositiviDisponibili");
 
 
-        if (dispositiviList == null) { //TODO: NON FUNZIONA
+        if (dispositiviList == null) {
 
             AlertDialog.Builder builder = new AlertDialog.Builder(DispositiviTrovatiActivity.this); //, android.R.style.Theme_Material_Dialog
             builder.setTitle(R.string.noSelectableDevices)
@@ -102,9 +102,6 @@ public class DispositiviTrovatiActivity extends Activity {
     //accoppiamento device
     public String createBond(BluetoothDevice btDevice) throws Exception{
         btDevice.createBond();
-            /*Class class1 = Class.forName("android.bluetooth.BluetoothDevice");
-            Method createBondMethod = class1.getMethod("createBond");
-            Boolean returnValue = (Boolean) createBondMethod.invoke(btDevice);*/
         //TEST
         if(btDevice.getBondState()==BluetoothDevice.BOND_BONDED)
             return btDevice.getName()+ ": bonded "+ String.valueOf(btDevice.getBondState()); //TODO: string value

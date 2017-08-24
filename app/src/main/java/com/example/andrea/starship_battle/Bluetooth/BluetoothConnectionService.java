@@ -1,6 +1,5 @@
 package com.example.andrea.starship_battle.Bluetooth;
 
-import android.app.ProgressDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothServerSocket;
@@ -10,22 +9,16 @@ import android.content.Intent;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 import java.nio.charset.Charset;
 import java.util.Arrays;
 import java.util.UUID;
 
-import static java.lang.System.in;
-import static java.lang.System.out;
 
 /**
- * Created by User on 12/21/2016.
+ * Created by Diletta on 18/08/2017.
  */
 
 
@@ -38,10 +31,9 @@ public class BluetoothConnectionService {
     private static final UUID MY_UUID_INSECURE = UUID.fromString("8ce255c0-200a-11e0-ac64-0800200c9a66");
 
     private final BluetoothAdapter mBluetoothAdapter;
-    Context mContext;
+    private Context mContext;
 
     private AcceptThread mInsecureAcceptThread;
-
     private ConnectThread mConnectThread;
     private BluetoothDevice mmDevice;
     private UUID deviceUUID =  UUID.fromString("8ce255c0-200a-11e0-ac64-0800200c9a66");
