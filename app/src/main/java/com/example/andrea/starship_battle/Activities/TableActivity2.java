@@ -25,13 +25,10 @@ public class TableActivity2 extends Activity implements View.OnTouchListener, Vi
     int dim_field_square = 11;
     int dim_ship = 4;
     static ArrayList<Casella> caselleTableList = new ArrayList<>();
-
-  //  static ArrayList<ArrayList<CasellaPosition>> casellePositionMatrix = new ArrayList<>();
     static ArrayList<CasellaPosition> casellePositionList = new ArrayList<>();
-
     ShipPosition position = null;
 
-    BluetoothDevice avversarioDevice;
+/*    BluetoothDevice avversarioDevice;*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +37,9 @@ public class TableActivity2 extends Activity implements View.OnTouchListener, Vi
         position = new ShipPosition(this);
         Resizer r = new Resizer(this);
 
-        avversarioDevice = getIntent().getExtras().getParcelable("avversarioDevice");
+        /*avversarioDevice = getIntent().getExtras().getParcelable("avversarioDevice");
+        */
+        //ANDREA
 
         // Sets the activity title
         TextView place_ships = (TextView) findViewById(R.id.id_place_ships);
@@ -56,12 +55,12 @@ public class TableActivity2 extends Activity implements View.OnTouchListener, Vi
         ImageView star_destroyer = (ImageView) findViewById(R.id.id_star_dest);
         ImageView death_star = (ImageView) findViewById(R.id.id_death_star);
 
-//Creo una matrice di ImageView che rappresenta la tabella e setto ogni ImageView onDRAGListener
+        //Creo una matrice di ImageView che rappresenta la tabella e setto ogni ImageView onDRAGListener
         TableLayout rowCompleta = (TableLayout) findViewById(R.id.idTab);
         rowCompleta.setBackground(getResources().getDrawable(R.drawable.sfondotrovadisp));
         for (int i = 1; i < rowCompleta.getChildCount(); i++) {
             TableRow row = (TableRow) findViewById(rowCompleta.getChildAt(i).getId());
-            for (int j = 1; j < row.getChildCount(); j++) {
+            for (int j = 0; j < row.getChildCount(); j++) {
                 if(row.getChildAt(j) instanceof ImageView) {
                     //InvisibileView:((ImageView) row.getChildAt(j)).setImageDrawable(null);
                     row.getChildAt(j).setOnDragListener(this);
@@ -78,8 +77,9 @@ public class TableActivity2 extends Activity implements View.OnTouchListener, Vi
                     r.resize(row, dim_field_square); //resize delle textView
                 }
             }
-        //    casellePositionMatrix.add(casellePositionList);
         }
+
+        //DILETTA
 
         // ImageView's onTOUCHListener for Drag: se una delle ships viene toccata, inizia il Drag
         tie.setOnTouchListener(this);
@@ -181,8 +181,8 @@ public class TableActivity2 extends Activity implements View.OnTouchListener, Vi
 
                     Intent intent = new Intent(TableActivity2.this, StartGameActivity.class);
                     intent.putExtra("bundle", extrainBundle); //Passa la lista alla nuova activity
-                    intent.putExtra("avversarioDevice", avversarioDevice); //Sending paired device's info to StartGameActivity
-                    finish();
+                    /*intent.putExtra("avversarioDevice", avversarioDevice); //Sending paired device's info to StartGameActivity
+                    */finish();
                     startActivity(intent);
                 }else{
                     Toast.makeText(getApplicationContext(),R.string.addShips , Toast.LENGTH_SHORT).show();
