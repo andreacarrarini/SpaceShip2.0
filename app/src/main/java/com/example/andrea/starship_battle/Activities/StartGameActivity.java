@@ -8,6 +8,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.content.IntentFilter;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Message;
 import android.support.v4.content.LocalBroadcastManager;
@@ -28,6 +30,7 @@ import com.example.andrea.starship_battle.model.CasellaPosition;
 import com.example.andrea.starship_battle.model.Constants;
 import com.example.andrea.starship_battle.model.Resizer;
 
+import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.UUID;
@@ -46,6 +49,7 @@ public class StartGameActivity extends Activity {
     StringBuffer mOutStringBuffer;
     BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
     BluetoothDevice avversarioDevice;
+    MediaPlayer shipFiringMediaPlayer = new MediaPlayer();
 
     private static final UUID MY_UUID_INSECURE =
             UUID.fromString("8ce255c0-200a-11e0-ac64-0800200c9a66");
@@ -102,6 +106,27 @@ public class StartGameActivity extends Activity {
         if (avversarioDevice.getBondState() == BluetoothDevice.BOND_BONDED)
             Log.i(TAG, "bonded");
         mBluetoothConnection = new BluetoothConnectionService(StartGameActivity.this);
+
+        //AUDIO-------------------------------------------------------------------------------------
+
+        shipFiringMediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            @Override
+            public void onPrepared(MediaPlayer mediaPlayer) {
+                Log.d(TAG, "File audio prepared");
+                return;
+            }
+        });
+
+        try {
+            shipFiringMediaPlayer.setDataSource(getApplicationContext(), Uri.parse("android.resource://com.example.andrea.starship_battle/" + R.raw.tie_fighter_fire2));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        //prepares the file audio asynchrously
+        shipFiringMediaPlayer.prepareAsync();
+
+        //------------------------------------------------------------------------------------------
+
 
         //TABLE GAME SX: tablegame con le ships inserite dal giocatore
         Bundle b = getIntent().getBundleExtra("bundle");
@@ -165,9 +190,11 @@ public class StartGameActivity extends Activity {
                         } else {
                             Log.d(TAG, "mbt null");
                         }
-
+                        //plays the file audio
+                        shipFiringMediaPlayer.start();
                         v.setVisibility(View.INVISIBLE);
-
+                        //seeks the file audio to 0 msec
+                        shipFiringMediaPlayer.seekTo(0);
 
                     /*TODO: casella.occupata corrispondente o casella.posizione forse serve un altro medoto per il thread parallelo
                     * TODO: se la casella che ho selezionato (dalla lista via bluethoot) è vuota (boolean)
@@ -192,6 +219,13 @@ public class StartGameActivity extends Activity {
         }
     };
 
+    @Override
+    protected void onStop() {
+        //to avoid memory leak
+        shipFiringMediaPlayer.release();
+        shipFiringMediaPlayer = null;
+        super.onStop();
+    }
 
     // starting chat service method
     public void goBack(Button button) {
