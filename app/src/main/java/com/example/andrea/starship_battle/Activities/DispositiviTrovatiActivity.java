@@ -45,25 +45,29 @@ public class DispositiviTrovatiActivity extends Activity {
         dispositiviList = getIntent().getExtras().getParcelableArrayList("dispositiviDisponibili");
 
 
-        if (dispositiviList == null) {
 
-            AlertDialog.Builder builder = new AlertDialog.Builder(DispositiviTrovatiActivity.this); //, android.R.style.Theme_Material_Dialog
-            builder.setTitle(R.string.noSelectableDevices)
-                    .setMessage(R.string.errorMessage)
-                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            Intent intent = new Intent(DispositiviTrovatiActivity.this, MainActivity.class);
-                            Bundle b = new Bundle();
-                            b.putBoolean("new_window", true); //sets new window
-                            intent.putExtras(b);
-                            startActivity(intent);
-                        }
-                    })
-                    .setIcon(android.R.drawable.ic_dialog_alert)
-                    .show();
+        if (dispositiviList.size()==0) {
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);//, android.R.style.Theme_Material_Dialog
+            builder.setTitle(R.string.noSelectableDevices);
+            builder.setMessage(R.string.errorMessage);
+            builder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Intent intent = new Intent(DispositiviTrovatiActivity.this, MainActivity.class);
+                    Bundle b = new Bundle();
+                    b.putBoolean("new_window", true); //sets new window
+                    intent.putExtras(b);
+                    startActivity(intent);
+                }
+                    });
+
+
             AlertDialog alertDialog = builder.create();
             alertDialog.show();
-        } else {
+
+        }
+        else {
             adapter.setData(dispositiviList);
             listViewBluethootTrovati.setAdapter(adapter);
             listViewBluethootTrovati.setOnItemClickListener(new AdapterView.OnItemClickListener() {

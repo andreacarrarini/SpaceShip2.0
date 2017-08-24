@@ -71,7 +71,7 @@ public class StartGameActivity extends Activity {
             @Override
             public void onPrepared(MediaPlayer mediaPlayer) {
                 Log.d(TAG, "File audio prepared");
-                mediaPlayer.start();
+
                 return;
             }
         });
