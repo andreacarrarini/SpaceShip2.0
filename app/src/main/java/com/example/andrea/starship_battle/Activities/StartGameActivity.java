@@ -15,11 +15,7 @@ import android.support.annotation.RequiresApi;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TableLayout;
-import android.widget.TableRow;
-import android.widget.Toast;
+import android.widget.*;
 
 import com.example.andrea.starship_battle.Bluetooth.BluetoothConnectionService;
 import com.example.andrea.starship_battle.R;
@@ -41,13 +37,17 @@ public class StartGameActivity extends Activity {
     private static final String TAG = "StartGameActivity";
     int dim_field_square = 11;
     ArrayList<CasellaPosition> casellaPositionListDX = new ArrayList<>();
+    ArrayList<CasellaPosition> casellaPositionListSX;
     ShipPosition position;
-    /*BluetoothConnectionService mBluetoothConnection;
-    BluetoothDevice avversarioDevice;*/
-    MediaPlayer shipFiringMediaPlayer = new MediaPlayer();
+
+    String draw;
+
+    BluetoothConnectionService mBluetoothConnection;
+    BluetoothDevice avversarioDevice;
     private static final UUID MY_UUID_INSECURE = UUID.fromString("8ce255c0-200a-11e0-ac64-0800200c9a66");
     String text;
 
+    MediaPlayer shipFiringMediaPlayer = new MediaPlayer();
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
@@ -60,9 +60,9 @@ public class StartGameActivity extends Activity {
 
         casellaPositionListDX = position.createEnemyBattlefield(casellaPositionListDX);
 
-        /*avversarioDevice = getIntent().getExtras().getParcelable("avversarioDevice");
+        avversarioDevice = getIntent().getExtras().getParcelable("avversarioDevice");
         if (avversarioDevice.getBondState() == BluetoothDevice.BOND_BONDED)
-            Log.i(TAG, "bonded");*/
+            Log.i(TAG, "bonded");
 
 
         //AUDIO-------------------------------------------------------------------------------------
@@ -71,6 +71,7 @@ public class StartGameActivity extends Activity {
             @Override
             public void onPrepared(MediaPlayer mediaPlayer) {
                 Log.d(TAG, "File audio prepared");
+
                 return;
             }
         });
@@ -87,17 +88,17 @@ public class StartGameActivity extends Activity {
 
         //TABLE GAME SX: tablegame con le ships inserite dal giocatore
         Bundle b = getIntent().getBundleExtra("bundle");
-        ArrayList<CasellaPosition> casellaPositionArrayListSX = b.getParcelableArrayList("casellePositionListSX");
+        casellaPositionListSX = b.getParcelableArrayList("casellePositionListSX");
 
         TableLayout rowCompletaSX = (TableLayout) findViewById(R.id.idTab);
         for (int i = 1; i < rowCompletaSX.getChildCount(); i++) {
             TableRow row = (TableRow) findViewById(rowCompletaSX.getChildAt(i).getId());
             for (int j = 1; j < row.getChildCount(); j++) {
                 if (row.getChildAt(j) instanceof ImageView) {
-                    if (!casellaPositionArrayListSX.isEmpty()) {
+                    if (!casellaPositionListSX.isEmpty()) {
                         //first row are always labels
                         (row.getChildAt(j)).setBackground(getResources().getDrawable(R.drawable.ic_galactic_space));
-                        ((ImageView) row.getChildAt(j)).setImageDrawable(getShip(casellaPositionArrayListSX, i - 1, j - 1));
+                        ((ImageView) row.getChildAt(j)).setImageDrawable(getShip(casellaPositionListSX, i - 1, j - 1));
                     }
                     r.resize(row, dim_field_square); //resize delle caselle della scacchiera
 
@@ -109,75 +110,90 @@ public class StartGameActivity extends Activity {
         TableLayout rowCompletaRX = (TableLayout) findViewById(R.id.idTabB);
         rowCompletaRX.setBackground(getResources().getDrawable(R.drawable.sfondotrovadisp));
         for (int i = 1; i < rowCompletaRX.getChildCount(); i++) {
-            TableRow row = (TableRow) findViewById(rowCompletaRX.getChildAt(i).getId());
+            final TableRow row = (TableRow) findViewById(rowCompletaRX.getChildAt(i).getId());
             for (int j = 1; j < row.getChildCount(); j++) {
                 if (row.getChildAt(j) instanceof ImageView) {
+                    final int  imageID = (i-1) * 8 + (j-1); // Numero della casella toccata
+
                     if (!casellaPositionListDX.isEmpty()) {
                         ((ImageView) row.getChildAt(j)).setImageDrawable(getShip(casellaPositionListDX, i - 1, j - 1));
                     }
-                    r.resize(row, dim_field_square); //resize delle caselle della scacchiera
+                    ((ImageView) row.getChildAt(j)).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                      /*TODO: casella.occupata corrispondente o casella.posizione forse serve un altro medoto per il thread parallelo
+                    * TODO: se la casella che ho selezionato (dalla lista via bluethoot) è vuota (boolean)
+                    * allora prendi la drawable corrispongente e disegnala
+                    * TODO: altrimenti colorala di rosso*/
 
+                            //plays the file audio
+                            shipFiringMediaPlayer.start();
+
+                            String messageToSend = String.valueOf(imageID); //value of ImageView ID
+                            sendMessage(messageToSend);
+
+                            Log.d(TAG, "colore image view: " + draw);
+                             //v.setBackground(position.setDesign(StartGameActivity.this , draw));
+                            v.setVisibility(View.INVISIBLE);
+
+                            //seeks the file audio to 0 msec
+                            shipFiringMediaPlayer.seekTo(0);
+                        }
+                    });
+                    r.resize(row, dim_field_square); //resize delle caselle della scacchiera
                 }
             }
         }
 
+
         //Message receiver
         LocalBroadcastManager.getInstance(this).registerReceiver(mReceiver, new IntentFilter("incomingMessage"));
         //Confronto delle barche via Bluetooth --> scambio pacchetti
-        Button startConnectionGame = (Button) findViewById(R.id.btnStart);
-        startConnectionGame.setOnClickListener(new Button.OnClickListener() {
+        Button startBTconnession= (Button) findViewById(R.id.btnStart);
+        startBTconnession.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
-                /*mBluetoothConnection = new BluetoothConnectionService(StartGameActivity.this);
+
+                mBluetoothConnection = BluetoothConnectionService.getInstance();
+
                 Log.d(TAG, "startBTConnection: Initializing RFCOM Bluetooth Connection.");
                 Log.d(TAG, "Trying to pair with " + avversarioDevice.getName());
-                mBluetoothConnection.startClient(avversarioDevice, MY_UUID_INSECURE);*/
+                mBluetoothConnection.startClient(avversarioDevice, MY_UUID_INSECURE);
+                //TODO: un timer di 4-5sec per la syncr dei thread
+                Toast.makeText(StartGameActivity.this, "LET'S GO!", Toast.LENGTH_SHORT).show();
             }
         });
 
-        for (int i = 1; i < rowCompletaRX.getChildCount(); i++) {
-            TableRow row = (TableRow) findViewById(rowCompletaRX.getChildAt(i).getId());
-            for (int j = 0; j < row.getChildCount(); j++) {
 
-                final View c = row.getChildAt(j);
-                row.getChildAt(j).setOnClickListener(new View.OnClickListener() {
-
-                    @Override
-                    public void onClick(View v) {
-
-                        String messageToSend = String.valueOf(c.getId()); //value of ImageView ID
-                        Log.d(TAG, "messaggio inviato MAINACTIVY: " + messageToSend);
-                        byte[] bytes = messageToSend.getBytes(Charset.defaultCharset());
-                        /*if (mBluetoothConnection != null) {
-                            mBluetoothConnection.write(bytes);
-                        } else {
-                            Log.d(TAG, "mbt null");
-                        }*/
-                        //plays the file audio
-                        shipFiringMediaPlayer.start();
-                        Log.d(TAG, "file audio played");
-                        v.setVisibility(View.INVISIBLE);
-                        //seeks the file audio to 0 msec
-                        shipFiringMediaPlayer.seekTo(0);
-
-                    /*TODO: casella.occupata corrispondente o casella.posizione forse serve un altro medoto per il thread parallelo
-                    * TODO: se la casella che ho selezionato (dalla lista via bluethoot) è vuota (boolean)
-                    * allora prendi la drawable corrispongente e disegnala
-                    * TODO: altrimenti colorala di rosso*/
-                    }
-
-                });
-            }
-        }
         goBack((Button) findViewById(R.id.btnBack));
     }
 
+
     BroadcastReceiver mReceiver = new BroadcastReceiver() {
+
         @Override
         public void onReceive(Context context, Intent intent) {
             text = intent.getStringExtra("message");
             System.out.println("testo: " + text);
             Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG).show();
             Log.d(TAG, "messaggio ricevuto MAINACTIVY: " + text);
+            Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG).show();
+
+            if(isInteger(text)){
+                int imageID = Integer.parseInt(text);
+
+                CasellaPosition casellaSelected = casellaPositionListSX.get(imageID);
+                if (!casellaSelected.getImageName().equals("space")) {
+                    casellaSelected.setAffondata(true);
+                    sendMessage(casellaSelected.getImageName());
+                    //TODO: suono affondata
+                }
+            }else {
+
+                Log.d(TAG, "messaggio ricevuto MAINACTIVY2: " + text);
+                draw = text;
+                //setDrawValue (text);
+                //TODO: suono flop
+            }
 
         }
     };
@@ -189,6 +205,7 @@ public class StartGameActivity extends Activity {
         shipFiringMediaPlayer = null;
         super.onStop();
     }
+
 
     // starting chat service method
     public void goBack(Button button) {
@@ -202,6 +219,27 @@ public class StartGameActivity extends Activity {
         });
     }
 
+    private void sendMessage(String messageToSend) {
+        Log.d(TAG, "messaggio inviato MAINACTIVY: " + messageToSend);
+        byte[] bytes = messageToSend.getBytes(Charset.defaultCharset());
+        if (mBluetoothConnection != null) {
+            mBluetoothConnection.write(bytes);
+        }
+
+    }
+
+    public static boolean isInteger(String s ){
+        try{
+            Integer.parseInt(s);
+        }catch (NumberFormatException e){
+            e.printStackTrace();
+            return false;
+        }catch (NullPointerException e1){
+            e1.printStackTrace();
+            return false;
+        }
+        return true;
+    }
 
     public Drawable getShip(ArrayList<CasellaPosition> casellaPositionArrayList, int row, int column) {
 
