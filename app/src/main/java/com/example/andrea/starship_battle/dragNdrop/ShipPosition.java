@@ -1,6 +1,7 @@
 package com.example.andrea.starship_battle.dragNdrop;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.ViewGroup;
 import com.example.andrea.starship_battle.R;
@@ -219,5 +220,38 @@ public class ShipPosition{
             return false;
         }
         return true;
+    }
+
+
+    public Drawable setDesign(Context context, String designName) {
+        Drawable drawable = null;
+
+        switch (designName) {
+            case "tie_sx":
+                drawable = context.getResources().getDrawable(R.drawable.tie_sx);
+                return drawable;
+            case "star_destroyer_sx_2":
+                drawable = context.getResources().getDrawable(R.drawable.star_destroyer_sx_2);
+                return drawable;
+            case "star_destroyer_sx_1":
+                drawable = context.getResources().getDrawable(R.drawable.star_destroyer_sx_1);
+                return drawable;
+            case "death_star_sx_3":
+                drawable = context.getResources().getDrawable(R.drawable.death_star_sx_3);
+                return drawable;
+            case "death_star_sx_1":
+                drawable = context.getResources().getDrawable(R.drawable.death_star_sx_1);
+                return drawable;
+            case "death_star_sx_4":
+                drawable = context.getResources().getDrawable(R.drawable.death_star_sx_4);
+                return drawable;
+            case "death_star_sx_2":
+                drawable = context.getResources().getDrawable(R.drawable.death_star_sx_2);
+                return drawable;
+            case "space":
+                drawable = context.getResources().getDrawable(R.drawable.ic_galactic_space);
+        }
+        return drawable;
+
     }
 }

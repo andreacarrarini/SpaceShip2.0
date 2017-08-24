@@ -40,7 +40,6 @@ public class MainActivity extends Activity {
         //inizializzo il bluethoot
         myBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 
-
         cambiaFontTextView(textViewSpaceButtle);
         cambiaFontButton(buttonProfilo);
         muoviBottone(buttonProfilo);
@@ -123,8 +122,7 @@ public class MainActivity extends Activity {
                                                        buttonBluethoot.setText(R.string.disabled_bluethoot);
                                                        Toast.makeText(getApplicationContext(), R.string.disabled_bluethoot, Toast.LENGTH_SHORT).show();
                                                    }
-                                               }
-                                           }
+                                               }}
         );
     }
 
@@ -161,9 +159,7 @@ public class MainActivity extends Activity {
                     filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_FINISHED);
 
                     registerReceiver(BrodcastReceiver, filter);
-
                 }
-
             }
         });
     }
@@ -184,7 +180,6 @@ public class MainActivity extends Activity {
                 if (!dispositiviList.contains(device)) {
                     dispositiviList.add(device);
                 }
-
             }
 
             //Finita la scansione passo alla ListActivity dei dispositivi trovati

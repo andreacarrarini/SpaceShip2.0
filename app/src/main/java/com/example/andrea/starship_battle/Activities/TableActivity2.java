@@ -25,7 +25,10 @@ public class TableActivity2 extends Activity implements View.OnTouchListener, Vi
     int dim_field_square = 11;
     int dim_ship = 4;
     static ArrayList<Casella> caselleTableList = new ArrayList<>();
+
+  //  static ArrayList<ArrayList<CasellaPosition>> casellePositionMatrix = new ArrayList<>();
     static ArrayList<CasellaPosition> casellePositionList = new ArrayList<>();
+
     ShipPosition position = null;
 
     BluetoothDevice avversarioDevice;
@@ -38,7 +41,6 @@ public class TableActivity2 extends Activity implements View.OnTouchListener, Vi
         Resizer r = new Resizer(this);
 
         avversarioDevice = getIntent().getExtras().getParcelable("avversarioDevice");
-//ANDREA
 
         // Sets the activity title
         TextView place_ships = (TextView) findViewById(R.id.id_place_ships);
@@ -59,7 +61,7 @@ public class TableActivity2 extends Activity implements View.OnTouchListener, Vi
         rowCompleta.setBackground(getResources().getDrawable(R.drawable.sfondotrovadisp));
         for (int i = 1; i < rowCompleta.getChildCount(); i++) {
             TableRow row = (TableRow) findViewById(rowCompleta.getChildAt(i).getId());
-            for (int j = 0; j < row.getChildCount(); j++) {
+            for (int j = 1; j < row.getChildCount(); j++) {
                 if(row.getChildAt(j) instanceof ImageView) {
                     //InvisibileView:((ImageView) row.getChildAt(j)).setImageDrawable(null);
                     row.getChildAt(j).setOnDragListener(this);
@@ -76,9 +78,8 @@ public class TableActivity2 extends Activity implements View.OnTouchListener, Vi
                     r.resize(row, dim_field_square); //resize delle textView
                 }
             }
+        //    casellePositionMatrix.add(casellePositionList);
         }
-
-//DILETTA
 
         // ImageView's onTOUCHListener for Drag: se una delle ships viene toccata, inizia il Drag
         tie.setOnTouchListener(this);
