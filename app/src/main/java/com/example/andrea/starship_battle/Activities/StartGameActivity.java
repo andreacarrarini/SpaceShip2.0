@@ -12,6 +12,7 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.content.IntentFilter;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
@@ -26,6 +27,7 @@ import com.example.andrea.starship_battle.dragNdrop.ShipPosition;
 import com.example.andrea.starship_battle.model.CasellaPosition;
 import com.example.andrea.starship_battle.model.Resizer;
 
+import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.UUID;
@@ -101,7 +103,7 @@ public class StartGameActivity extends Activity {
         alertDialogFAIL = builder.create();
 
 
-        /*AUDIO-------------------------------------------------------------------------------------
+        //AUDIO-------------------------------------------------------------------------------------
 
         shipFiringMediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
@@ -112,12 +114,12 @@ public class StartGameActivity extends Activity {
         });
 
         try {
-            shipFiringMediaPlayer.setDataSource(getApplicationContext(), Uri.parse("android.resource://com.example.andrea.starship_battle/" + R.raw.tie_fighter_fire2));
+            shipFiringMediaPlayer.setDataSource(getApplicationContext(), Uri.parse("android.resource://com.example.andrea.starship_battle/" + R.raw.tie_fire_2));
         } catch (IOException e) {
             e.printStackTrace();
         }
         //prepares the file audio asynchrously
-        shipFiringMediaPlayer.prepareAsync();*/
+        shipFiringMediaPlayer.prepareAsync();
 
         //------------------------------------------------------------------------------------------
 
@@ -160,14 +162,14 @@ public class StartGameActivity extends Activity {
                         public void onClick(View v) {
                             imageTouchedId = v.getId();
 
-                            /*plays the file audio
-                            shipFiringMediaPlayer.start();*/
+                            //plays the file audio
+                            shipFiringMediaPlayer.start();
 
                             String messageToSend = String.valueOf(imageID); //value of ImageView ID
                             sendMessage(messageToSend);
 
-                            /*seeks the file audio to 0 msec
-                            shipFiringMediaPlayer.seekTo(0);*/
+                            //seeks the file audio to 0 msec
+                            shipFiringMediaPlayer.seekTo(0);
                         }
                     });
                     r.resize(row, dim_field_square); //resize delle caselle della scacchiera
