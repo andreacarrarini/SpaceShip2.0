@@ -99,7 +99,7 @@ public class ShipPosition{
                 for (int i =0; i < caselleTableList.size(); i++) {
                     Casella casella = caselleTableList.get(i);
 
-                    if (casella.getImageViewId() == cella.getId() && ((i+1)%8!=0)&&(i<39)) { // ((i+1)%8!=0): evita il bordo DX della tabella
+                    if (casella.getImageViewId() == cella.getId() && ((i+1)%8!=0)&&(i<55)) { // ((i+1)%8!=0): evita il bordo DX della tabella
                         //(i<39): evita il bordo in basso della tabella
                         Casella casellaAccanto = caselleTableList.get(i + 1);
                         Casella casellaSotto = caselleTableList.get(i + 8);
@@ -183,7 +183,7 @@ public class ShipPosition{
                 for (int i =0; i < caselleTableList.size(); i++) {
                     Casella casella = caselleTableList.get(i);
 
-                    if (casella.getImageViewId() == cella.getId() && ((i+1)%8!=0)&&(i<39)) { // ((i+1)%8!=0): evita il bordo DX della tabella
+                    if (casella.getImageViewId() == cella.getId() && ((i+1)%8!=0)&&(i<55)) { // ((i+1)%8!=0): evita il bordo DX della tabella
                         //(i<39): evita il bordo in basso della tabella
                         Casella casellaAccanto = caselleTableList.get(i + 1);
                         Casella casellaSotto = caselleTableList.get(i + 8);
@@ -216,42 +216,8 @@ public class ShipPosition{
 
     private boolean casellaLibera(Casella c){
         if (c.getOccupata()){
-           // TODO: QUESTO NON FUNGE --> Toast.makeText(context, "There is another ship here", Toast.LENGTH_SHORT).show();
             return false;
         }
         return true;
-    }
-
-
-    public Drawable setDesign(Context context, String designName) {
-        Drawable drawable = null;
-
-        switch (designName) {
-            case "tie_sx":
-                drawable = context.getResources().getDrawable(R.drawable.tie_sx);
-                return drawable;
-            case "star_destroyer_sx_2":
-                drawable = context.getResources().getDrawable(R.drawable.star_destroyer_sx_2);
-                return drawable;
-            case "star_destroyer_sx_1":
-                drawable = context.getResources().getDrawable(R.drawable.star_destroyer_sx_1);
-                return drawable;
-            case "death_star_sx_3":
-                drawable = context.getResources().getDrawable(R.drawable.death_star_sx_3);
-                return drawable;
-            case "death_star_sx_1":
-                drawable = context.getResources().getDrawable(R.drawable.death_star_sx_1);
-                return drawable;
-            case "death_star_sx_4":
-                drawable = context.getResources().getDrawable(R.drawable.death_star_sx_4);
-                return drawable;
-            case "death_star_sx_2":
-                drawable = context.getResources().getDrawable(R.drawable.death_star_sx_2);
-                return drawable;
-            case "space":
-                drawable = context.getResources().getDrawable(R.drawable.ic_galactic_space);
-        }
-        return drawable;
-
     }
 }

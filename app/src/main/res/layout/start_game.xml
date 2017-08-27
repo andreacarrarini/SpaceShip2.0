@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:id="@+id/starGameSfondo">
 
 
     <LinearLayout
@@ -24,55 +25,55 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text=" "
-                    android:textSize="20dp" />
+                    android:textSize="@dimen/dim_20sp" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="1"
-                    android:textSize="20dp" />
+                    android:textSize="@dimen/dim_20sp" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="2"
-                    android:textSize="20dp" />
+                    android:textSize="@dimen/dim_20sp" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="3"
-                    android:textSize="20dp" />
+                    android:textSize="@dimen/dim_20sp" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="4"
-                    android:textSize="20dp" />
+                    android:textSize="@dimen/dim_20sp" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="5"
-                    android:textSize="20dp" />
+                    android:textSize="@dimen/dim_20sp" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="6"
-                    android:textSize="20dp" />
+                    android:textSize="@dimen/dim_20sp" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="7"
-                    android:textSize="20dp" />
+                    android:textSize="@dimen/dim_20sp" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="8"
-                    android:textSize="20dp" />
+                    android:textSize="@dimen/dim_20sp" />
             </TableRow>
 
             <TableRow
@@ -84,52 +85,60 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="A"
-                    android:textSize="20dp" />
+                    android:textSize="@dimen/dim_20sp" />
 
                 <ImageView
                     android:id="@+id/row1col1"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row1col2"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row1col3"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row1col4"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row1col5"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row1col6"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row1col7"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row1col8"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
@@ -144,52 +153,60 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="B"
-                    android:textSize="20dp" />
+                    android:textSize="@dimen/dim_20sp" />
 
                 <ImageView
                     android:id="@+id/row2col1"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row2col2"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row2col3"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row2col4"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row2col5"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row2col6"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row2col7"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row2col8"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
@@ -204,52 +221,60 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="C"
-                    android:textSize="20dp" />
+                    android:textSize="@dimen/dim_20sp" />
 
                 <ImageView
                     android:id="@+id/row3col1"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row3col2"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row3col3"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row3col4"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row3col5"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row3col6"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row3col7"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row3col8"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
@@ -264,52 +289,60 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="D"
-                    android:textSize="20dp" />
+                    android:textSize="@dimen/dim_20sp" />
 
                 <ImageView
                     android:id="@+id/row4col1"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row4col2"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row4col3"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row4col4"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row4col5"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row4col6"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row4col7"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row4col8"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
@@ -324,52 +357,60 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="E"
-                    android:textSize="20dp" />
+                    android:textSize="@dimen/dim_20sp" />
 
                 <ImageView
                     android:id="@+id/row5col1"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row5col2"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row5col3"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row5col4"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row5col5"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row5col6"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row5col7"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row5col8"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
@@ -384,52 +425,60 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="F"
-                    android:textSize="20dp" />
+                    android:textSize="@dimen/dim_20sp" />
 
                 <ImageView
                     android:id="@+id/row6col1"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row6col2"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row6col3"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row6col4"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row6col5"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row6col6"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row6col7"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row6col8"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
@@ -444,52 +493,60 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="G"
-                    android:textSize="20dp" />
+                    android:textSize="@dimen/dim_20sp" />
 
                 <ImageView
                     android:id="@+id/row7col1"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row7col2"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row7col3"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row7col4"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row7col5"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row7col6"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row7col7"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row7col8"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
@@ -504,52 +561,60 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="H"
-                    android:textSize="20dp" />
+                    android:textSize="@dimen/dim_20sp" />
 
                 <ImageView
                     android:id="@+id/row8col1"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row8col2"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row8col3"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row8col4"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row8col5"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row8col6"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row8col7"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row8col8"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
@@ -571,55 +636,55 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text=" "
-                    android:textSize="20dp" />
+                    android:textSize="@dimen/dim_20sp" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="1"
-                    android:textSize="20dp" />
+                    android:textSize="@dimen/dim_20sp" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="2"
-                    android:textSize="20dp" />
+                    android:textSize="@dimen/dim_20sp" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="3"
-                    android:textSize="20dp" />
+                    android:textSize="@dimen/dim_20sp" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="4"
-                    android:textSize="20dp" />
+                    android:textSize="@dimen/dim_20sp" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="5"
-                    android:textSize="20dp" />
+                    android:textSize="@dimen/dim_20sp" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="6"
-                    android:textSize="20dp" />
+                    android:textSize="@dimen/dim_20sp" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="7"
-                    android:textSize="20dp" />
+                    android:textSize="@dimen/dim_20sp" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="8"
-                    android:textSize="20dp" />
+                    android:textSize="@dimen/dim_20sp" />
             </TableRow>
 
             <TableRow
@@ -631,52 +696,60 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="A"
-                    android:textSize="20dp" />
+                    android:textSize="@dimen/dim_20sp" />
 
                 <ImageView
                     android:id="@+id/row1col1B"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row1col2B"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row1col3B"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row1col4B"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row1col5B"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row1col6B"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row1col7B"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row1col8B"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
@@ -691,52 +764,60 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="B"
-                    android:textSize="20dp" />
+                    android:textSize="@dimen/dim_20sp" />
 
                 <ImageView
                     android:id="@+id/row2col1B"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row2col2B"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row2col3B"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row2col4B"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row2col5B"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row2col6B"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row2col7B"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row2col8B"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
@@ -751,52 +832,60 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="C"
-                    android:textSize="20dp" />
+                    android:textSize="@dimen/dim_20sp" />
 
                 <ImageView
                     android:id="@+id/row3col1B"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row3col2B"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row3col3B"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row3col4B"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row3col5B"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row3col6B"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row3col7B"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row3col8B"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
@@ -811,52 +900,60 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="D"
-                    android:textSize="20dp" />
+                    android:textSize="@dimen/dim_20sp" />
 
                 <ImageView
                     android:id="@+id/row4col1B"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row4col2B"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row4col3B"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row4col4B"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row4col5B"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row4col6B"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row4col7B"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row4col8B"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
@@ -871,52 +968,60 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="E"
-                    android:textSize="20dp" />
+                    android:textSize="@dimen/dim_20sp" />
 
                 <ImageView
                     android:id="@+id/row5col1B"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row5col2B"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row5col3B"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row5col4B"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row5col5B"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row5col6B"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row5col7B"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row5col8B"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
@@ -931,52 +1036,60 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="F"
-                    android:textSize="20dp" />
+                    android:textSize="@dimen/dim_20sp" />
 
                 <ImageView
                     android:id="@+id/row6col1B"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row6col2B"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row6col3B"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row6col4B"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row6col5B"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row6col6B"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row6col7B"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row6col8B"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
@@ -991,52 +1104,60 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="G"
-                    android:textSize="20dp" />
+                    android:textSize="@dimen/dim_20sp" />
 
                 <ImageView
                     android:id="@+id/row7col1B"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row7col2B"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row7col3B"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row7col4B"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row7col5B"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row7col6B"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row7col7B"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row7col8B"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
@@ -1051,52 +1172,60 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="H"
-                    android:textSize="20dp" />
+                    android:textSize="@dimen/dim_20sp" />
 
                 <ImageView
                     android:id="@+id/row8col1B"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row8col2B"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row8col3B"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row8col4B"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row8col5B"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row8col6B"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row8col7B"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
 
                 <ImageView
                     android:id="@+id/row8col8B"
+                    android:contentDescription="@string/casella"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_galactic_space" />
@@ -1111,7 +1240,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:text="@string/back" />
 
     <Button
@@ -1119,7 +1248,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/start"
-        android:layout_toLeftOf="@+id/btnBack"
+        android:layout_toStartOf="@+id/btnBack"
         android:layout_alignParentBottom="true"/>
 
 

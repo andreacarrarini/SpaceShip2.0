@@ -6,17 +6,14 @@ import android.bluetooth.*;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
-import android.os.Build;
 import android.os.Bundle;
 
-import android.support.annotation.RequiresApi;
 import android.view.View;
 import android.widget.*;
 
 import com.example.andrea.starship_battle.Bluetooth.AdapterTrovaDispositiviClass;
 import com.example.andrea.starship_battle.R;
 
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 
 
@@ -48,7 +45,7 @@ public class DispositiviTrovatiActivity extends Activity {
 
         if (dispositiviList.size()==0) {
 
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);//, android.R.style.Theme_Material_Dialog
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);// TODO: android.R.style.Theme_Material_Dialog
             builder.setTitle(R.string.noSelectableDevices);
             builder.setMessage(R.string.errorMessage);
             builder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
@@ -60,7 +57,7 @@ public class DispositiviTrovatiActivity extends Activity {
                     intent.putExtras(b);
                     startActivity(intent);
                 }
-                    });
+            });
 
 
             AlertDialog alertDialog = builder.create();
@@ -76,10 +73,11 @@ public class DispositiviTrovatiActivity extends Activity {
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     avversarioDevice = dispositiviList.get(position);
                     try {
-                        String deviceName = createBond(avversarioDevice);
-                        Toast.makeText(getApplicationContext(), deviceName, Toast.LENGTH_SHORT).show();
+                        avversarioDevice.createBond();
+                        String bondedText = getResources().getString(R.string.bonded) + " " + avversarioDevice.getName();
+                        Toast.makeText(getApplicationContext(),  bondedText , Toast.LENGTH_SHORT).show();
 
-                        Intent intent = new Intent(DispositiviTrovatiActivity.this, TableActivity2.class);
+                        Intent intent = new Intent(DispositiviTrovatiActivity.this, SetupShiptableActivity.class);
                         intent.putExtra("avversarioDevice", avversarioDevice);
                         finish();
                         startActivity(intent);
@@ -97,20 +95,11 @@ public class DispositiviTrovatiActivity extends Activity {
 //--------------------------------------------------------------------------------------------------
 
     public void cambiaFontTextView2(TextView textView) {
-        Typeface face = Typeface.createFromAsset(getAssets(), "fonts/Blanche de la Fontaine.ttf");
+        Typeface face = Typeface.createFromAsset(getAssets(), "fonts/Starjedi.ttf");
         textView.setTypeface(face);
     }
 
 //--------------------------------------------------------------------------------------------------
-
-    //accoppiamento device
-    public String createBond(BluetoothDevice btDevice) throws Exception{
-        btDevice.createBond();
-        //TEST
-        if(btDevice.getBondState()==BluetoothDevice.BOND_BONDED)
-            return btDevice.getName()+ ": bonded "+ String.valueOf(btDevice.getBondState()); //TODO: string value
-        return "error";
-    }
 
     public void goBack(Button button) {
         button.setOnClickListener(new View.OnClickListener() {

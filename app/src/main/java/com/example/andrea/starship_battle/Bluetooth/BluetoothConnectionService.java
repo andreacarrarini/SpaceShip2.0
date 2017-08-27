@@ -1,5 +1,6 @@
 package com.example.andrea.starship_battle.Bluetooth;
 
+import android.app.ProgressDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothServerSocket;
@@ -36,18 +37,13 @@ public class BluetoothConnectionService {
     private BluetoothDevice mmDevice;
     private UUID deviceUUID = UUID.fromString("8ce255c0-200a-11e0-ac64-0800200c9a66");
 
-    private ConnectedThread mConnectedThread;
+    public ConnectedThread mConnectedThread;
+    ProgressDialog connectionDialog;
 
-    private BluetoothConnectionService() {
+    public BluetoothConnectionService(Context context) {
+        mContext = context;
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         start();
-    }
-
-    private static BluetoothConnectionService instance = null;
-    public static BluetoothConnectionService getInstance() {
-        if (instance == null)
-            instance = new BluetoothConnectionService();
-        return instance;
     }
 
     /**
@@ -114,8 +110,9 @@ public class BluetoothConnectionService {
      * with a device. It runs straight through; the connection either
      * succeeds or fails.
      */
+    public BluetoothSocket mmSocket;
     private class ConnectThread extends Thread {
-        private BluetoothSocket mmSocket;
+
 
         public ConnectThread(BluetoothDevice device, UUID uuid) {
             Log.d(TAG, "ConnectThread: started.");
@@ -200,6 +197,8 @@ public class BluetoothConnectionService {
 
     public void startClient(BluetoothDevice device, UUID uuid) {
         Log.d(TAG, "startClient: Started.");
+        connectionDialog = ProgressDialog.show(mContext,"Connecting Bluetooth" ,"Please Wait...",true);
+
         //initprogress dialog
         mConnectThread = new ConnectThread(device, uuid);
         mConnectThread.start();
@@ -222,6 +221,12 @@ public class BluetoothConnectionService {
             OutputStream tmpOut = null;
 
             //dismiss the progressdialog when connection is established
+            try{
+                connectionDialog.dismiss();
+            }catch (NullPointerException e){
+                e.printStackTrace();
+            }
+
             try {
                 tmpIn = mmSocket.getInputStream();
                 tmpOut = mmSocket.getOutputStream();
@@ -282,7 +287,6 @@ public class BluetoothConnectionService {
     private synchronized void connected(BluetoothSocket mmSocket, BluetoothDevice mmDevice) {
         Log.d(TAG, "connected: Starting.");
         Log.d(TAG, "connect to: " + mmDevice.getName());
-
 
         // Start the thread to manage the connection and perform transmissions
         mConnectedThread = new ConnectedThread(mmSocket);

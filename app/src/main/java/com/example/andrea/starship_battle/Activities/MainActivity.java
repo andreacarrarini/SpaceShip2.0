@@ -24,6 +24,7 @@ public class MainActivity extends Activity {
     public TextView textViewSpaceButtle;
     public BluetoothAdapter myBluetoothAdapter;
     public Button playGameButton;
+    private ProgressDialog scanningDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +50,17 @@ public class MainActivity extends Activity {
         muoviBottone(buttonIniziaPartita);
         playGame(playGameButton);
 
+        scanningDialog = new ProgressDialog(this);
+        scanningDialog.setMessage(getResources().getString(R.string.scanning));
+        scanningDialog.setCanceledOnTouchOutside(false);
+        scanningDialog.setButton(DialogInterface.BUTTON_NEGATIVE, getResources().getString(R.string.cancel), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                myBluetoothAdapter.cancelDiscovery();
+            }
+        });
+
         attivaBluethoot();
 
         intentTrovaDispositivi();
@@ -58,7 +70,7 @@ public class MainActivity extends Activity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, TableActivity2.class);
+                Intent intent = new Intent(MainActivity.this, SetupShiptableActivity.class);
                 startActivity(intent);
             }
 
@@ -73,7 +85,7 @@ public class MainActivity extends Activity {
     }
 
     public void cambiaFontTextView(TextView textView) {
-        Typeface face = Typeface.createFromAsset(getAssets(), "fonts/Blanche de la Fontaine.ttf");
+        Typeface face = Typeface.createFromAsset(getAssets(), "fonts/Starjedi.ttf");
         textView.setTypeface(face);
     }
 
@@ -83,7 +95,7 @@ public class MainActivity extends Activity {
         //imposta la posizione TranslateAnimation(float fromXDelta, float toXDelta, float fromYDelta, float toYDelta)
         final Animation animation = new TranslateAnimation(0, 0, 200, 0);
         // imposta l'Animazione per 2,5 sec
-        animation.setDuration(3000);
+        animation.setDuration(2000);
         //per fermare il bottone nella nuova posizione
         animation.setFillAfter(true);
         button.startAnimation(animation);
@@ -170,7 +182,7 @@ public class MainActivity extends Activity {
 
             //Una volta partita la scansione svuoto l'arraylist
             if (BluetoothAdapter.ACTION_DISCOVERY_STARTED.equals(action)) {
-                Toast.makeText(getApplicationContext(), R.string.scanning, Toast.LENGTH_SHORT).show();
+                scanningDialog.show();
                 dispositiviList = new ArrayList<>();
             }
 
@@ -184,6 +196,7 @@ public class MainActivity extends Activity {
 
             //Finita la scansione passo alla ListActivity dei dispositivi trovati
             else if (BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(action)) {
+                scanningDialog.dismiss();
                 Intent intent1 = new Intent(MainActivity.this, DispositiviTrovatiActivity.class);
                 intent1.putParcelableArrayListExtra("dispositiviDisponibili", dispositiviList);
                 finish();

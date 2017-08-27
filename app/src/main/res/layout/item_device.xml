@@ -3,8 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" 
-    android:paddingTop="5dp"
-    android:paddingBottom="5dp"
+    android:paddingTop="@dimen/padding1"
+    android:paddingBottom="@dimen/padding1"
     android:background="@android:color/transparent">
 
 
@@ -16,20 +16,17 @@
         android:textColor="@color/colorFontButtonHomeScreen"
         android:layout_alignParentTop="true"
         android:layout_toEndOf="@+id/txtName"
-        android:layout_marginStart="148dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginLeft="148dp"
-        android:layout_toRightOf="@+id/txtName" />
+        android:layout_marginStart="@dimen/larghezza_bottone"
+        android:layout_marginTop="@dimen/padding2"/>
 
     <TextView
         android:id="@+id/txtName"
         android:layout_width="@dimen/larghezza_listview"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
+        android:textSize="@dimen/dim_20sp"
         android:textColor="@color/colorFontButtonHomeScreen"
         android:text="@string/name_disp"
         android:layout_alignTop="@+id/txtAdress"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true" />
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>
