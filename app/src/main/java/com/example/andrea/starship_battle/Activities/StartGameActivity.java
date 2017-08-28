@@ -45,7 +45,7 @@ public class StartGameActivity extends Activity {
     private static final String TAG = "StartGameActivity";
     int dim_field_square = 11;
     ArrayList<CasellaPosition> casellaPositionListDX = new ArrayList<>();
-    ArrayList<CasellaPosition> casellaPositionListSX;
+    ArrayList<CasellaPosition> casellaPositionListSX = new ArrayList<>();
     RelativeLayout layout;
     ShipPosition position;
     TableLayout rowCompletaRX;

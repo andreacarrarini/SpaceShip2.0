@@ -187,6 +187,13 @@ public class SetupShiptableActivity extends Activity implements View.OnTouchList
         });
     }
 
+    public void releaseMediaPlayer(MediaPlayer mediaPlayer) {
+        mediaPlayer.stop();
+        mediaPlayer.release();
+        mediaPlayer = null;
+        return;
+    }
+
     public void startGameButton(Button button) {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -200,6 +207,7 @@ public class SetupShiptableActivity extends Activity implements View.OnTouchList
                     Intent intent = new Intent(SetupShiptableActivity.this, StartGameActivity.class);
                     intent.putExtra("bundle", extrainBundle); //Passa la lista alla nuova activity
                     intent.putExtra("avversarioDevice", avversarioDevice); //Sending paired device's info to StartGameActivity
+                    releaseMediaPlayer(mediaPlayer);
                     finish();
                     startActivity(intent);
                 }else{
