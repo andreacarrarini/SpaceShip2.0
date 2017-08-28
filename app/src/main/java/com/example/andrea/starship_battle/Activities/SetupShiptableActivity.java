@@ -41,7 +41,7 @@ public class SetupShiptableActivity extends Activity implements View.OnTouchList
         position = new ShipPosition(this);
         Resizer r = new Resizer(this);
 
-        mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+      /*TODO  mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
             public void onPrepared(MediaPlayer mediaPlayer) {
                 Log.d(LOGCAT, "File audio prepared");
@@ -56,7 +56,7 @@ public class SetupShiptableActivity extends Activity implements View.OnTouchList
             e.printStackTrace();
         }
         //prepares the file audio asynchrously
-        mediaPlayer.prepareAsync();
+        mediaPlayer.prepareAsync();*/
 
         avversarioDevice = getIntent().getExtras().getParcelable("avversarioDevice");
 

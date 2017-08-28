@@ -29,6 +29,7 @@ import com.example.andrea.starship_battle.model.Resizer;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.UUID;
 
 
@@ -49,7 +50,7 @@ public class StartGameActivity extends Activity {
     ShipPosition position;
     TableLayout rowCompletaRX;
     TableLayout rowCompletaSX;
-    int  imageTouchedId;
+    int imageTouchedId;
 
     BluetoothConnectionService mBluetoothConnection;
     BluetoothDevice avversarioDevice;
@@ -62,6 +63,9 @@ public class StartGameActivity extends Activity {
     static int tie_count = 2;
     static int stardest_count = 4;
     static int stardeath_count = 4;
+
+    ArrayList<Integer> stardesPosArray = new ArrayList<>();
+    ArrayList<Integer> stardeathPosArray = new ArrayList<>();
 
     final int avversario = 1;
     final int giocatore = 0;
@@ -106,6 +110,7 @@ public class StartGameActivity extends Activity {
 
         //AUDIO-------------------------------------------------------------------------------------
 
+        // TODO
         shipFiringMediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
             public void onPrepared(MediaPlayer mediaPlayer) {
@@ -129,6 +134,7 @@ public class StartGameActivity extends Activity {
         casellaPositionListSX = b.getParcelableArrayList("casellePositionListSX");
 
         rowCompletaSX = (TableLayout) findViewById(R.id.idTab);
+        //rowCompletaSX.setBackground(getResources().getDrawable(R.drawable.sfondotrovadisp));
         for (int i = 1; i < rowCompletaSX.getChildCount(); i++) {
             TableRow row = (TableRow) findViewById(rowCompletaSX.getChildAt(i).getId());
             for (int j = 1; j < row.getChildCount(); j++) {
@@ -162,13 +168,13 @@ public class StartGameActivity extends Activity {
                         public void onClick(View v) {
                             imageTouchedId = v.getId();
 
-                            //plays the file audio
+                            //TODO:plays the file audio
                             shipFiringMediaPlayer.start();
 
                             String messageToSend = String.valueOf(imageID); //value of ImageView ID
                             sendMessage(messageToSend);
 
-                            //seeks the file audio to 0 msec
+                            //TODO:seeks the file audio to 0 msec
                             shipFiringMediaPlayer.seekTo(0);
                         }
                     });
@@ -214,9 +220,13 @@ public class StartGameActivity extends Activity {
                 CasellaPosition casellaSelected = casellaPositionListSX.get(imageID);
 
                 TableRow row = (TableRow) findViewById(rowCompletaSX.getChildAt( (imageID)/8 +1 ).getId());
-                ImageView image = (ImageView) row.getChildAt( (imageID+1)%8 );
+                ImageView image;
+                if ( (row.getChildAt( (imageID+1)%8 )) instanceof ImageView)
+                    image = (ImageView) row.getChildAt( (imageID+1)%8 );
+                else
+                    image = (ImageView) row.getChildAt( (imageID+1)%8-2 );
                 if (casellaSelected.getImageName().equals("space"))
-                    image.setImageDrawable(getResources().getDrawable(R.drawable.ic_water));
+                    image.setImageDrawable(getResources().getDrawable(R .drawable.ic_water));
                 else
                     image.setImageDrawable(getResources().getDrawable(R .drawable.ic_boom));
                 sendMessage(casellaSelected.getImageName());
@@ -224,8 +234,7 @@ public class StartGameActivity extends Activity {
             }else if(!isInteger(text)){
                 switch (text) {
                     case "perso":
-
-                        //LOSE SOUND
+                        //TODO LOSE SOUND
                         shipResponseMediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                             @Override
                             public void onPrepared(MediaPlayer mediaPlayer) {
@@ -242,17 +251,21 @@ public class StartGameActivity extends Activity {
                         }
                         //prepares the file audio asynchrously
                         shipResponseMediaPlayer.prepareAsync();
+
                         alertDialogFAIL.show();
                         break;
+
                     case "finish":
                         Toast.makeText(StartGameActivity.this, R.string.disconnected_avversario, Toast.LENGTH_SHORT).show();
                         Intent i = new Intent(StartGameActivity.this, MainActivity.class);
                         startActivity(i);
                         break;
+
                     default:
                         Log.d(TAG, "messaggio ricevuto MAINACTIVY2: " + text);
                         setDrawValue(text);
                         setTurno(false);
+
                         break;
                 }
             }
@@ -261,7 +274,8 @@ public class StartGameActivity extends Activity {
 
 
     private void setDrawValue(String s){
-        Drawable d = getDrawableFromString(avversario,s);
+
+        // Drawable d = getDrawableFromString(avversario,s);
 
         for (int i = 1; i < rowCompletaRX.getChildCount(); i++) {
             TableRow row = (TableRow) findViewById(rowCompletaRX.getChildAt(i).getId());
@@ -271,8 +285,13 @@ public class StartGameActivity extends Activity {
                         (row.getChildAt(j)).setVisibility(View.INVISIBLE);
                         //TODO: suono flop
                     else {
-                        ((ImageView) row.getChildAt(j)).setImageDrawable(d);
-                        //HIT SOUND
+                        if(s.contains("tie"))
+                            ((ImageView) row.getChildAt(j)).setImageDrawable(getDrawableFromString(avversario, s)); //navi da 1 mostrate subito
+                            //TODO: suono distrutta nave completa
+                        else {
+                            ((ImageView) row.getChildAt(j)).setImageDrawable(getResources().getDrawable(R.drawable.ic_boom)); //altre navi mostrate quando sono tutte colpite
+                        }
+                        //TODO HIT SOUND
                         shipResponseMediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                             @Override
                             public void onPrepared(MediaPlayer mediaPlayer) {
@@ -284,7 +303,7 @@ public class StartGameActivity extends Activity {
                         });
 
                         try {
-                           shipResponseMediaPlayer.setDataSource(getApplicationContext(), Uri.parse("android.resource://com.example.andrea.starship_battle/" + R.raw.xwing_explode));
+                            shipResponseMediaPlayer.setDataSource(getApplicationContext(), Uri.parse("android.resource://com.example.andrea.starship_battle/" + R.raw.xwing_explode));
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
@@ -298,6 +317,8 @@ public class StartGameActivity extends Activity {
         //contatore per le navi dell'avversario trovate
         shipFoundCounter(s);
     }
+
+
 
     @Override
     public void onResume() {
@@ -317,7 +338,6 @@ public class StartGameActivity extends Activity {
             mBluetoothConnection.stop();
         }
     }
-
 
     @Override
     protected void onStop() {
@@ -434,17 +454,55 @@ public class StartGameActivity extends Activity {
         return drawable;
     }
 
+    private void naviColpite(ArrayList<Integer> array, int i, String s ) {
+        switch (s){
+            case "star_destroyer":
+                if (array.contains(i-1)) {
+                    ((ImageView) findViewById(imageTouchedId-1)).setImageDrawable(getDrawableFromString(avversario, "star_destroyer_sx_2"));
+                    ((ImageView) findViewById(imageTouchedId)).setImageDrawable(getDrawableFromString(avversario, "star_destroyer_sx_1"));
+                }
+                if (array.contains(i+1)) {
+                    ((ImageView) findViewById(imageTouchedId)).setImageDrawable(getDrawableFromString(avversario, "star_destroyer_sx_2"));
+                    ((ImageView) findViewById(imageTouchedId+1)).setImageDrawable(getDrawableFromString(avversario, "star_destroyer_sx_1"));
+                }
+                break;
+            case "death_star":
+                Collections.sort(array);
+                ((ImageView) findViewById(array.get(0))).setImageDrawable(getDrawableFromString(avversario, "death_star_sx_3"));
+                ((ImageView) findViewById(array.get(1))).setImageDrawable(getDrawableFromString(avversario, "death_star_sx_1"));
+                ((ImageView) findViewById(array.get(2))).setImageDrawable(getDrawableFromString(avversario, "death_star_sx_4"));
+                ((ImageView) findViewById(array.get(3))).setImageDrawable(getDrawableFromString(avversario, "death_star_sx_2"));
+
+        }
+        //TODO: suono distrutta nave completa
+
+
+    }
+
+
     private void shipFoundCounter(String s){
 
-        if (s.contains("tie"))
+        if (s.contains("tie")) {
             tie_count = tie_count - 1;
-        if (s.contains("star_destroyer"))
+        }
+        if (s.contains("star_destroyer")){
             stardest_count = stardest_count - 1;
-        if (s.contains("death_star"))
+            stardesPosArray.add(imageTouchedId);
+            if(stardest_count<=4){
+                naviColpite(stardesPosArray, imageTouchedId, "star_destroyer");
+            }
+        }
+
+        if (s.contains("death_star")){
             stardeath_count = stardeath_count - 1;
+            stardeathPosArray.add(imageTouchedId);
+            if(stardeath_count == 0)
+                naviColpite(stardeathPosArray,0, "death_star");
+        }
+
         if (tie_count==0 && stardeath_count==0 && stardest_count==0){
 
-            //WIN SOUND
+            //TODO WIN SOUND
             shipResponseMediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                 @Override
                 public void onPrepared(MediaPlayer mediaPlayer) {
@@ -487,6 +545,7 @@ public class StartGameActivity extends Activity {
             alertDialog.show();
         }
     }
+
     private void setTurno (boolean b){
         turno = b;
 

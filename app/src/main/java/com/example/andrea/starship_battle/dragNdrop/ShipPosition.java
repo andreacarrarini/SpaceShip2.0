@@ -207,8 +207,8 @@ public class ShipPosition{
             for (int column = 0; column < 8; column++) {
                 CasellaPosition casellaPosition= new CasellaPosition();
                 casellaPosition.setImageName("space");
-                casellaPosition.setAffondata(false);
-                casellaPosition.setUtilizzata(false);
+             //   casellaPosition.setAffondata(false);
+               // casellaPosition.setUtilizzata(false);
             }
         }
         return casellaPositionArrayList;
