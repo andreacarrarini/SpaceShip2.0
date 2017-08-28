@@ -121,11 +121,11 @@ public class StartGameActivity extends Activity {
 
         try {
             shipFiringMediaPlayer.setDataSource(getApplicationContext(), Uri.parse("android.resource://com.example.andrea.starship_battle/" + R.raw.tie_fire_2));
+            //prepares the file audio synchrously
+            shipFiringMediaPlayer.prepare();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        //prepares the file audio asynchrously
-        shipFiringMediaPlayer.prepareAsync();
 
         //------------------------------------------------------------------------------------------
 
@@ -235,6 +235,7 @@ public class StartGameActivity extends Activity {
                 switch (text) {
                     case "perso":
                         //TODO LOSE SOUND
+                        shipResponseMediaPlayer.reset();
                         shipResponseMediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                             @Override
                             public void onPrepared(MediaPlayer mediaPlayer) {
@@ -243,15 +244,13 @@ public class StartGameActivity extends Activity {
                                 return;
                             }
                         });
-
                         try {
                             shipResponseMediaPlayer.setDataSource(getApplicationContext(), Uri.parse("android.resource://com.example.andrea.starship_battle/" + R.raw.star_wars_theme_song));
+                            //prepares the file audio asynchrously
+                            shipResponseMediaPlayer.prepare();
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
-                        //prepares the file audio asynchrously
-                        shipResponseMediaPlayer.prepareAsync();
-
                         alertDialogFAIL.show();
                         break;
 
@@ -292,6 +291,7 @@ public class StartGameActivity extends Activity {
                             ((ImageView) row.getChildAt(j)).setImageDrawable(getResources().getDrawable(R.drawable.ic_boom)); //altre navi mostrate quando sono tutte colpite
                         }
                         //TODO HIT SOUND
+                        shipResponseMediaPlayer.reset();
                         shipResponseMediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                             @Override
                             public void onPrepared(MediaPlayer mediaPlayer) {
@@ -304,11 +304,11 @@ public class StartGameActivity extends Activity {
 
                         try {
                             shipResponseMediaPlayer.setDataSource(getApplicationContext(), Uri.parse("android.resource://com.example.andrea.starship_battle/" + R.raw.xwing_explode));
+                            //prepares the file audio asynchrously
+                            shipResponseMediaPlayer.prepare();
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
-                        //prepares the file audio asynchrously
-                        shipResponseMediaPlayer.prepareAsync();
                     }
                     break;
                 }
@@ -337,15 +337,20 @@ public class StartGameActivity extends Activity {
         if (mBluetoothConnection != null) {
             mBluetoothConnection.stop();
         }
+        //to avoid memory leak
+        shipFiringMediaPlayer.release();
+        shipFiringMediaPlayer = null;
+        shipResponseMediaPlayer.release();
+        shipResponseMediaPlayer = null;
     }
 
     @Override
     protected void onStop() {
         sendMessage("finish");
         resume = true;
-        //to avoid memory leak
+        /*//to avoid memory leak
         shipFiringMediaPlayer.release();
-        shipFiringMediaPlayer = null;
+        shipFiringMediaPlayer = null;*/
         super.onStop();
     }
 
