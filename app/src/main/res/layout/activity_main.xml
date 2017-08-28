@@ -27,7 +27,7 @@
 
 
         <TextView
-            android:text="@string/space_buttle"
+            android:text="@string/space_battle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"

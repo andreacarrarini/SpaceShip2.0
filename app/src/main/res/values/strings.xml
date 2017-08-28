@@ -1,8 +1,8 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="app_name" translatable="false">SpaceButtle</string>
+    <string name="app_name" translatable="false">SpaceBattle</string>
     <string name="inizia_partita">Starts the match</string>
     <string name="profilo">My profile</string>
-    <string name="space_battle" translatable="false">Space Battle</string>
+    <string name="space_battle" translatable="false">SpaceBattle</string>
     <string name="no_Bluethoot_Default">Your device does not support bluetooth</string>
     <string name="activated_bluethoot">Enabled bluetooth</string>
     <string name="disabled_bluethoot">Disabled bluetooth</string>
