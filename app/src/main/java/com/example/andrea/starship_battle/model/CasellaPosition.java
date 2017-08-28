@@ -14,12 +14,6 @@ public class CasellaPosition implements Parcelable{
     //to know which drawable is
     private String imageName;
 
-    //you can attack a spot 1 time per game
-    private boolean utilizzata;
-
-    //to know if you hit an enemy ship
-    private boolean affondata;
-
     public CasellaPosition() {}
 
     protected CasellaPosition(Parcel in) {
@@ -44,22 +38,6 @@ public class CasellaPosition implements Parcelable{
 
     public void setImageName(String imageName) {
         this.imageName = imageName;
-    }
-
-    public boolean isUtilizzata() {
-        return utilizzata;
-    }
-
-    public void setUtilizzata(boolean utilizzata) {
-        this.utilizzata = utilizzata;
-    }
-
-    public boolean isAffondata() {
-        return affondata;
-    }
-
-    public void setAffondata(boolean affondata) {
-        this.affondata = affondata;
     }
 
     @Override

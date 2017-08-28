@@ -10,16 +10,19 @@ import android.app.Activity;
 import android.bluetooth.BluetoothDevice;
 import android.content.Intent;
 import android.graphics.*;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.*;
 import android.widget.*;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 
 public class SetupShiptableActivity extends Activity implements View.OnTouchListener, View.OnDragListener {
-    private static final String LOGCAT = null;
+    private static final String LOGCAT = "SetupShiptableActivity";
 
     //CONST: Sets the dimension of the field square and the ships
     int dim_field_square = 11;
@@ -28,6 +31,7 @@ public class SetupShiptableActivity extends Activity implements View.OnTouchList
     static ArrayList<CasellaPosition> casellePositionList = new ArrayList<>();
     ShipPosition position = null;
     BluetoothDevice avversarioDevice;
+    MediaPlayer mediaPlayer = new MediaPlayer();
 
 
     @Override
@@ -36,6 +40,23 @@ public class SetupShiptableActivity extends Activity implements View.OnTouchList
         setContentView(R.layout.activity_table);
         position = new ShipPosition(this);
         Resizer r = new Resizer(this);
+
+        mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            @Override
+            public void onPrepared(MediaPlayer mediaPlayer) {
+                Log.d(LOGCAT, "File audio prepared");
+                mediaPlayer.start();
+                return;
+            }
+        });
+
+        try {
+            mediaPlayer.setDataSource(getApplicationContext(), Uri.parse("android.resource://com.example.andrea.starship_battle/" + R.raw.star_wars_cantina_song));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        //prepares the file audio asynchrously
+        mediaPlayer.prepareAsync();
 
         avversarioDevice = getIntent().getExtras().getParcelable("avversarioDevice");
 
