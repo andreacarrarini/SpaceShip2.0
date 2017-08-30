@@ -99,6 +99,7 @@ public class StartGameActivity extends Activity {
                 Bundle b = new Bundle();
                 b.putBoolean("new_window", true); //sets new window
                 intent.putExtras(b);
+                shipFiringMediaPlayer.stop();
                 finish();
                 startActivity(intent);
             }
@@ -170,7 +171,7 @@ public class StartGameActivity extends Activity {
                         public void onClick(View v) {
                             imageTouchedId = v.getId();
 
-                            //plays the file audio
+                            //TODO:plays the file audio
                             shipFiringMediaPlayer.start();
 
                             String messageToSend = String.valueOf(imageID); //value of ImageView ID
@@ -244,7 +245,7 @@ public class StartGameActivity extends Activity {
                     case "perso":
                         alertDialogFAIL.show();
 
-                        //LOSE SOUND
+                        //TODO:LOSE SOUND
                         shipResponseMediaPlayer.reset();
                         shipResponseMediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                             @Override
@@ -266,6 +267,7 @@ public class StartGameActivity extends Activity {
                     case "finish":
                         Toast.makeText(StartGameActivity.this, R.string.disconnected_avversario, Toast.LENGTH_SHORT).show();
                         Intent i = new Intent(StartGameActivity.this, MainActivity.class);
+                        finish();
                         startActivity(i);
                         break;
 
@@ -283,15 +285,14 @@ public class StartGameActivity extends Activity {
 
     private void setDrawValue(String s){
 
-        // Drawable d = getDrawableFromString(avversario,s);
-
         for (int i = 1; i < rowCompletaRX.getChildCount(); i++) {
             TableRow row = (TableRow) findViewById(rowCompletaRX.getChildAt(i).getId());
             for (int j = 1; j < row.getChildCount(); j++) {
                 if (row.getChildAt(j) instanceof ImageView && row.getChildAt(j).getId()==imageTouchedId) {
                     if (s.equals("space")) {
                         (row.getChildAt(j)).setVisibility(View.INVISIBLE);
-                        //TODO: suono flop
+
+                        //TODO:FLOP SOUND
                         shipResponseMediaPlayer.reset();
                         shipResponseMediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                             @Override
@@ -314,7 +315,8 @@ public class StartGameActivity extends Activity {
                     else {
                         if(s.contains("tie")) {
                             ((ImageView) row.getChildAt(j)).setImageDrawable(getDrawableFromString(avversario, s)); //navi da 1 mostrate subito
-                            //TODO: suono distrutta nave completa
+
+                            //TODO:SUNK SHIP SOUND
                             shipResponseMediaPlayer.reset();
                             shipResponseMediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                                 @Override
@@ -337,7 +339,7 @@ public class StartGameActivity extends Activity {
                         else {
                             ((ImageView) row.getChildAt(j)).setImageDrawable(getResources().getDrawable(R.drawable.ic_boom)); //altre navi mostrate quando sono tutte colpite
                         }
-                        //HIT SOUND
+                        //TODO:HIT SOUND
                         shipResponseMediaPlayer.reset();
                         shipResponseMediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                             @Override
@@ -384,18 +386,16 @@ public class StartGameActivity extends Activity {
         if (mBluetoothConnection != null) {
             mBluetoothConnection.stop();
         }
-        //to avoid memory leak
+        //TODO:to avoid memory leak
         shipFiringMediaPlayer.release();
         shipFiringMediaPlayer = null;
-        shipResponseMediaPlayer.release();
-        shipResponseMediaPlayer = null;
     }
 
     @Override
     protected void onStop() {
         sendMessage("finish");
         resume = true;
-        //to avoid memory leak
+        //TODO:to avoid memory leak
         shipFiringMediaPlayer.release();
         shipFiringMediaPlayer = null;
         super.onStop();
@@ -516,9 +516,9 @@ public class StartGameActivity extends Activity {
                 ((ImageView) findViewById(array.get(1))).setImageDrawable(getDrawableFromString(avversario, "death_star_sx_1"));
                 ((ImageView) findViewById(array.get(2))).setImageDrawable(getDrawableFromString(avversario, "death_star_sx_4"));
                 ((ImageView) findViewById(array.get(3))).setImageDrawable(getDrawableFromString(avversario, "death_star_sx_2"));
-
+                break;
         }
-        //TODO: suono distrutta nave completa
+        // TODO:SUNK SHIP SOUND
         shipResponseMediaPlayer.reset();
         shipResponseMediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
@@ -537,8 +537,6 @@ public class StartGameActivity extends Activity {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
     }
 
 
@@ -560,12 +558,12 @@ public class StartGameActivity extends Activity {
                 naviColpite(stardeathPosArray,0, "death_star");
         }
 
-        if (tie_count==0 && stardeath_count==0 && stardest_count==0){
+        if (tie_count <= 0 && stardeath_count <= 0 && stardest_count <= 0){
 
             //notifica all'avversario la fine della partita
             sendMessage("perso");
 
-            //WIN SOUND
+            //TODO:WIN SOUND
             shipResponseMediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                 @Override
                 public void onPrepared(MediaPlayer mediaPlayer) {
@@ -595,6 +593,7 @@ public class StartGameActivity extends Activity {
                     Bundle b = new Bundle();
                     b.putBoolean("new_window", true); //sets new window
                     intent.putExtras(b);
+                    finish();
                     startActivity(intent);
                 }
             });
