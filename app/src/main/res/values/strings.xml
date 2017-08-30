@@ -33,7 +33,7 @@
 
     <string name="casella" translatable="false">casellaView</string>
     <string name="wait">Wait for the enimy\'s move</string>
-    <string name="disconnected_avversario">Enemy disconnected, that loser…</string>
+    <string name="disconnected_avversario">Enemy disconnected</string>
 
 
 </resources>

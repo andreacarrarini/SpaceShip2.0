@@ -38,6 +38,8 @@ public class SetupShiptableActivity extends Activity implements View.OnTouchList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_table);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
         position = new ShipPosition(this);
         Resizer r = new Resizer(this);
 
@@ -180,6 +182,7 @@ public class SetupShiptableActivity extends Activity implements View.OnTouchList
                 casellePositionList = new ArrayList<>();
                 Intent intent = new Intent(SetupShiptableActivity.this, SetupShiptableActivity.class);
                 intent.putExtra("avversarioDevice", avversarioDevice); //Sending paired device's info to StartGameActivity
+                finish();
 
                 startActivity(intent);
             }

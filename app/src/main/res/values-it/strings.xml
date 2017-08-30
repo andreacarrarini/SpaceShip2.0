@@ -23,5 +23,5 @@
     <string name="bonded">Connesso con</string>
     <string name="restartAll">Vuoi giocare ancora?</string>
     <string name="wait">Attendi la mossa del nemico</string>
-    <string name="disconnected_avversario">Avversario disconnesso, quello sfigato…</string>
+    <string name="disconnected_avversario">Avversario disconnesso</string>
 </resources>
