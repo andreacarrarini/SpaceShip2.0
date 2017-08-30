@@ -569,6 +569,7 @@ public class StartGameActivity extends Activity {
                 public void onPrepared(MediaPlayer mediaPlayer) {
                     Log.d(TAG, "File audio prepared");
                     shipResponseMediaPlayer.start();
+                    shipResponseMediaPlayer.stop();
                     return;
                 }
             });
