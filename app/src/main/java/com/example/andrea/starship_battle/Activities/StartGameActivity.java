@@ -100,6 +100,7 @@ public class StartGameActivity extends Activity {
                 b.putBoolean("new_window", true); //sets new window
                 intent.putExtras(b);
                 shipFiringMediaPlayer.stop();
+                shipResponseMediaPlayer.stop();
                 finish();
                 startActivity(intent);
             }
@@ -569,7 +570,6 @@ public class StartGameActivity extends Activity {
                 public void onPrepared(MediaPlayer mediaPlayer) {
                     Log.d(TAG, "File audio prepared");
                     shipResponseMediaPlayer.start();
-                    shipResponseMediaPlayer.stop();
                     return;
                 }
             });
@@ -593,6 +593,8 @@ public class StartGameActivity extends Activity {
                     Bundle b = new Bundle();
                     b.putBoolean("new_window", true); //sets new window
                     intent.putExtras(b);
+                    shipFiringMediaPlayer.stop();
+                    shipResponseMediaPlayer.stop();
                     finish();
                     startActivity(intent);
                 }
