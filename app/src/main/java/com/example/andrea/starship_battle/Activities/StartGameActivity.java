@@ -18,6 +18,7 @@ import android.support.annotation.RequiresApi;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.*;
 
 import com.example.andrea.starship_battle.Bluetooth.BluetoothConnectionService;
@@ -76,6 +77,7 @@ public class StartGameActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         setContentView(R.layout.start_game);
         Resizer r = new Resizer(this);
@@ -87,7 +89,7 @@ public class StartGameActivity extends Activity {
         if (avversarioDevice.getBondState() == BluetoothDevice.BOND_BONDED)
             Log.i(TAG, "devices are bonded");
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(StartGameActivity.this);// TODO: android.R.style.Theme_Material_Dialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(StartGameActivity.this);//android.R.style.Theme_Material_Dialog
         builder.setTitle(R.string.loser);
         builder.setMessage(R.string.restartAll);
         builder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
@@ -97,6 +99,7 @@ public class StartGameActivity extends Activity {
                 Bundle b = new Bundle();
                 b.putBoolean("new_window", true); //sets new window
                 intent.putExtras(b);
+                finish();
                 startActivity(intent);
             }
         });
@@ -110,7 +113,6 @@ public class StartGameActivity extends Activity {
 
         //AUDIO-------------------------------------------------------------------------------------
 
-        // TODO
         shipFiringMediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
             public void onPrepared(MediaPlayer mediaPlayer) {
@@ -168,14 +170,16 @@ public class StartGameActivity extends Activity {
                         public void onClick(View v) {
                             imageTouchedId = v.getId();
 
-                            //TODO:plays the file audio
+                            //plays the file audio
                             shipFiringMediaPlayer.start();
 
                             String messageToSend = String.valueOf(imageID); //value of ImageView ID
                             sendMessage(messageToSend);
 
-                            //TODO:seeks the file audio to 0 msec
+                            //seeks the file audio to 0 msec
                             shipFiringMediaPlayer.seekTo(0);
+
+                            v.invalidate();
                         }
                     });
                     r.resize(row, dim_field_square); //resize delle caselle della scacchiera
@@ -218,23 +222,29 @@ public class StartGameActivity extends Activity {
                 setTurno (true);
 
                 CasellaPosition casellaSelected = casellaPositionListSX.get(imageID);
+                TableRow row = null;
 
-                TableRow row = (TableRow) findViewById(rowCompletaSX.getChildAt( (imageID)/8 +1 ).getId());
-                ImageView image;
+                row= (TableRow) findViewById(rowCompletaSX.getChildAt( (imageID)/8 +1 ).getId());
+                ImageView image = null;
                 if ( (row.getChildAt( (imageID+1)%8 )) instanceof ImageView)
                     image = (ImageView) row.getChildAt( (imageID+1)%8 );
-                else
-                    image = (ImageView) row.getChildAt( (imageID+1)%8-2 );
+                else{
+                    image = (ImageView) row.getChildAt((imageID % 8)+1);
+                }
+                assert image != null;
                 if (casellaSelected.getImageName().equals("space"))
                     image.setImageDrawable(getResources().getDrawable(R .drawable.ic_water));
                 else
                     image.setImageDrawable(getResources().getDrawable(R .drawable.ic_boom));
+
                 sendMessage(casellaSelected.getImageName());
 
             }else if(!isInteger(text)){
                 switch (text) {
                     case "perso":
-                        //TODO LOSE SOUND
+                        alertDialogFAIL.show();
+
+                        //LOSE SOUND
                         shipResponseMediaPlayer.reset();
                         shipResponseMediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                             @Override
@@ -251,7 +261,6 @@ public class StartGameActivity extends Activity {
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
-                        alertDialogFAIL.show();
                         break;
 
                     case "finish":
@@ -328,7 +337,7 @@ public class StartGameActivity extends Activity {
                         else {
                             ((ImageView) row.getChildAt(j)).setImageDrawable(getResources().getDrawable(R.drawable.ic_boom)); //altre navi mostrate quando sono tutte colpite
                         }
-                        //TODO HIT SOUND
+                        //HIT SOUND
                         shipResponseMediaPlayer.reset();
                         shipResponseMediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                             @Override
@@ -386,9 +395,9 @@ public class StartGameActivity extends Activity {
     protected void onStop() {
         sendMessage("finish");
         resume = true;
-        /*//to avoid memory leak
+        //to avoid memory leak
         shipFiringMediaPlayer.release();
-        shipFiringMediaPlayer = null;*/
+        shipFiringMediaPlayer = null;
         super.onStop();
     }
 
@@ -398,6 +407,7 @@ public class StartGameActivity extends Activity {
             public void onClick(View v) {
                 Intent intent = new Intent(StartGameActivity.this, SetupShiptableActivity.class);
                 intent.putExtra("avversarioDevice", avversarioDevice);
+                finish();
                 startActivity(intent);
             }
 
@@ -412,16 +422,7 @@ public class StartGameActivity extends Activity {
         }
     }
 
-    public static boolean isInteger(String s ){
-        try{
-            Integer.parseInt(s);
-        }catch (NumberFormatException e){
-            return false;
-        }catch (NullPointerException e1){
-            return false;
-        }
-        return true;
-    }
+
 
     public Drawable getShip(ArrayList<CasellaPosition> casellaPositionArrayList, int row, int column) {
 
@@ -549,9 +550,7 @@ public class StartGameActivity extends Activity {
         if (s.contains("star_destroyer")){
             stardest_count = stardest_count - 1;
             stardesPosArray.add(imageTouchedId);
-            if(stardest_count<=4){
-                naviColpite(stardesPosArray, imageTouchedId, "star_destroyer");
-            }
+            naviColpite(stardesPosArray, imageTouchedId, "star_destroyer");
         }
 
         if (s.contains("death_star")){
@@ -563,7 +562,10 @@ public class StartGameActivity extends Activity {
 
         if (tie_count==0 && stardeath_count==0 && stardest_count==0){
 
-            //TODO WIN SOUND
+            //notifica all'avversario la fine della partita
+            sendMessage("perso");
+
+            //WIN SOUND
             shipResponseMediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                 @Override
                 public void onPrepared(MediaPlayer mediaPlayer) {
@@ -581,9 +583,8 @@ public class StartGameActivity extends Activity {
             //prepares the file audio asynchrously
             shipResponseMediaPlayer.prepareAsync();
 
-            sendMessage("perso");
 
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);// TODO: android.R.style.Theme_Material_Dialog
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);//android.R.style.Theme_Material_Dialog
             builder.setTitle(R.string.winner);
             builder.setMessage(R.string.restartAll);
             builder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
@@ -615,5 +616,16 @@ public class StartGameActivity extends Activity {
             layout.setBackgroundColor(Color.RED);
         }else
             layout.setBackgroundColor(Color.BLACK);
+    }
+
+    public static boolean isInteger(String s ){
+        try{
+            Integer.parseInt(s);
+        }catch (NumberFormatException e){
+            return false;
+        }catch (NullPointerException e1){
+            return false;
+        }
+        return true;
     }
 }
