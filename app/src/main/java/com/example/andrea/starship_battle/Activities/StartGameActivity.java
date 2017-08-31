@@ -386,7 +386,7 @@ public class StartGameActivity extends Activity {
         }
         //TODO:to avoid memory leak
         shipFiringMediaPlayer.release();
-        shipFiringMediaPlayer = null;
+        /*shipFiringMediaPlayer = null;*/
     }
 
     @Override
@@ -395,7 +395,7 @@ public class StartGameActivity extends Activity {
         resume = true;
         //TODO:to avoid memory leak
         shipFiringMediaPlayer.release();
-        shipFiringMediaPlayer = null;
+        /*shipFiringMediaPlayer = null;*/
         super.onStop();
     }
 
@@ -597,7 +597,7 @@ public class StartGameActivity extends Activity {
         }
     }
 
-    /*public void playSound(MediaPlayer mediaPlayer, String caseID) {
+/*    public void playSound(MediaPlayer mediaPlayer, String caseID) {
         switch (caseID) {
             case "LOSE":
                 mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
@@ -609,14 +609,80 @@ public class StartGameActivity extends Activity {
                     }
                 });
                 try {
-                    shipResponseMediaPlayer.setDataSource(getApplicationContext(), Uri.parse("android.resource://com.example.andrea.starship_battle/" + R.raw.star_wars_theme_song));
+                    mediaPlayer.setDataSource(getApplicationContext(), Uri.parse("android.resource://com.example.andrea.starship_battle/" + R.raw.star_wars_theme_song));
                     //prepares the file audio asynchrously
-                    shipResponseMediaPlayer.prepareAsync();
+                    mediaPlayer.prepareAsync();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
                 break;
+
+            case "WIN":
+                mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                    @Override
+                    public void onPrepared(MediaPlayer mediaPlayer) {
+                        Log.d(TAG, "File audio prepared");
+                        mediaPlayer.start();
+                        return;
+                    }
                 });
+                try {
+                    mediaPlayer.setDataSource(getApplicationContext(), Uri.parse("android.resource://com.example.andrea.starship_battle/" + R.raw.imperial_march));
+                    //prepares the file audio asynchrously
+                    mediaPlayer.prepareAsync();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                break;
+
+            case "SHIP SUNK":
+                mediaPlayer.reset();
+                mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                    @Override
+                    public void onPrepared(MediaPlayer mediaPlayer) {
+                        Log.d(TAG, "File audio prepared");
+                        mediaPlayer.start();
+                        mediaPlayer.seekTo(0);
+                        return;
+                    }
+                });
+
+                try {
+                    mediaPlayer.setDataSource(getApplicationContext(), Uri.parse("android.resource://com.example.andrea.starship_battle/" + R.raw.tie_fighter_explode));
+                    //prepares the file audio synchrously
+                    mediaPlayer.prepare();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                mediaPlayer.reset();
+                break;
+
+            case "SHIP HIT":
+                mediaPlayer.reset();
+                mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                    @Override
+                    public void onPrepared(MediaPlayer mediaPlayer) {
+                        Log.d(TAG, "File audio prepared");
+                        mediaPlayer.start();
+                        mediaPlayer.seekTo(0);
+                        return;
+                    }
+                });
+
+                try {
+                    mediaPlayer.setDataSource(getApplicationContext(), Uri.parse("android.resource://com.example.andrea.starship_battle/" + R.raw.xwing_explode));
+                    //prepares the file audio synchrously
+                    mediaPlayer.prepare();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                break;
+
+            case "FLOP":
+
+
+
+
         }
     }*/
 
