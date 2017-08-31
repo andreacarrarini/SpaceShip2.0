@@ -584,7 +584,9 @@ public class StartGameActivity extends Activity {
                     b.putBoolean("new_window", true); //sets new window
                     intent.putExtras(b);
                     shipFiringMediaPlayer.stop();
+                    shipFiringMediaPlayer.release();
                     shipResponseMediaPlayer.stop();
+                    shipResponseMediaPlayer.release();
                     finish();
                     startActivity(intent);
                 }
