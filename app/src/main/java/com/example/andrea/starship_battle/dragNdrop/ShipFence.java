@@ -1,7 +1,6 @@
 package com.example.andrea.starship_battle.dragNdrop;
 
 import android.view.View;
-import android.widget.ImageView;
 
 import com.example.andrea.starship_battle.R;
 import com.example.andrea.starship_battle.model.Casella;
@@ -148,7 +147,7 @@ public class ShipFence {
 
     private void drawFench(int x, ArrayList<Casella> c){
         c.get(x).getImageView().setOnDragListener(null);
-        c.get(x).getImageView().setColorFilter(R.color.colorNotShipAllowed); //setVisibility(View.INVISIBLE);*/
+        c.get(x).getImageView().setColorFilter(R.color.colorNotShipAllowed);
 
     }
 }

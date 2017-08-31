@@ -23,7 +23,6 @@ public class MainActivity extends Activity {
     public Button buttonIniziaPartita;
     public TextView textViewSpaceButtle;
     public BluetoothAdapter myBluetoothAdapter;
-    public Button playGameButton;
     private ProgressDialog scanningDialog;
 
     @Override
@@ -35,7 +34,6 @@ public class MainActivity extends Activity {
         buttonProfilo = (Button) findViewById(R.id.btn_profilo);
         buttonBluethoot = (Button) findViewById(R.id.btn_bluethoot);
         buttonIniziaPartita = (Button) findViewById(R.id.btn_iniziapartita);
-        playGameButton = (Button) findViewById(R.id.playGameButton);
         //inizializzo le textView
         textViewSpaceButtle = (TextView) findViewById(R.id.txt_spacebuttle);
         //inizializzo il bluethoot
@@ -48,7 +46,7 @@ public class MainActivity extends Activity {
         muoviBottone(buttonBluethoot);
         cambiaFontButton(buttonIniziaPartita);
         muoviBottone(buttonIniziaPartita);
-        playGame(playGameButton);
+
 
         scanningDialog = new ProgressDialog(this);
         scanningDialog.setMessage(getResources().getString(R.string.scanning));

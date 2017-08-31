@@ -1236,20 +1236,13 @@
 
 
     <Button
-        android:id="@+id/btnBack"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:text="@string/back" />
-
-    <Button
         android:id="@+id/btnStart"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/altezza_bottone"
+        android:textColor="@color/colorFontButtonHomeScreen"
         android:text="@string/start"
-        android:layout_toStartOf="@+id/btnBack"
-        android:layout_alignParentBottom="true"/>
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/shape" />
 
 
 </RelativeLayout>

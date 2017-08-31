@@ -1,7 +1,5 @@
 package com.example.andrea.starship_battle.model;
 
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Parcel;
 import android.os.Parcelable;
 

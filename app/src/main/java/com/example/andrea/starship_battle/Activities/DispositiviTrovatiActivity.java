@@ -32,6 +32,7 @@ public class DispositiviTrovatiActivity extends Activity {
         setContentView(R.layout.trovadispositivilist);
 
         Button btnBack = (Button) findViewById(R.id.btnIndietro);
+        cambiaFontButton(btnBack);
         goBack(btnBack);
 
         textViewBluethootTrovati = (TextView) findViewById(R.id.txt_bluethootTrovati);
@@ -41,8 +42,7 @@ public class DispositiviTrovatiActivity extends Activity {
         adapter = new AdapterTrovaDispositiviClass(this);
         dispositiviList = getIntent().getExtras().getParcelableArrayList("dispositiviDisponibili");
 
-
-
+        //Se non ci sono dispositivi disponibili a giocare nelle vicinanze
         if (dispositiviList.size()==0) {
 
             AlertDialog.Builder builder = new AlertDialog.Builder(this);// TODO: android.R.style.Theme_Material_Dialog
@@ -96,6 +96,11 @@ public class DispositiviTrovatiActivity extends Activity {
     public void cambiaFontTextView2(TextView textView) {
         Typeface face = Typeface.createFromAsset(getAssets(), "fonts/Starjedi.ttf");
         textView.setTypeface(face);
+    }
+
+    public void cambiaFontButton(Button button) {
+        Typeface face = Typeface.createFromAsset(getAssets(), "fonts/Shadded South Personal Use.ttf");
+        button.setTypeface(face);
     }
 
 //--------------------------------------------------------------------------------------------------

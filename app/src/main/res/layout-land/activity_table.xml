@@ -700,17 +700,21 @@
 
         <Button
             android:id="@+id/btnAnnulla"
-            android:layout_width="@dimen/larghezza_bottone"
+            android:layout_width="wrap_content"
             android:layout_height="@dimen/altezza_bottone"
+            android:textColor="@color/colorFontButtonHomeScreen"
             android:layout_weight="1"
-            android:text="@string/cancel" />
+            android:text="@string/cancel"
+            android:background="@drawable/shape" />
 
         <Button
             android:id="@+id/btnStart"
-            android:layout_width="@dimen/larghezza_bottone"
+            android:layout_width="wrap_content"
             android:layout_height="@dimen/altezza_bottone"
+            android:textColor="@color/colorFontButtonHomeScreen"
             android:layout_weight="1"
-            android:text="@string/play" />
+            android:text="@string/play"
+            android:background="@drawable/shape" />
     </LinearLayout>
 
 

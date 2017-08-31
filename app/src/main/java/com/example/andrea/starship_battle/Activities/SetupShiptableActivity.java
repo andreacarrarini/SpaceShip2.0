@@ -32,6 +32,8 @@ public class SetupShiptableActivity extends Activity implements View.OnTouchList
     ShipPosition position = null;
     BluetoothDevice avversarioDevice;
     MediaPlayer mediaPlayer = new MediaPlayer();
+    Button btnAnnulla = (Button) findViewById(R.id.btnAnnulla);
+    Button btnStartGame = (Button) findViewById(R.id.btnStart);
 
 
     @Override
@@ -105,8 +107,11 @@ public class SetupShiptableActivity extends Activity implements View.OnTouchList
         death_star.setOnTouchListener(this);
 
         //Annulla tutta la disposizione delle navi
-        restartShiptable((Button) findViewById(R.id.btnAnnulla));
-        startGameButton((Button) findViewById(R.id.btnStart));
+        restartShiptable(btnAnnulla);
+        cambiaFontButton(btnAnnulla);
+
+        startGameButton(btnStartGame);
+        cambiaFontButton(btnStartGame);
     }
 
     @Override
@@ -219,5 +224,11 @@ public class SetupShiptableActivity extends Activity implements View.OnTouchList
             }
         });
     }
+
+    public void cambiaFontButton(Button button) {
+        Typeface face = Typeface.createFromAsset(getAssets(), "fonts/Shadded South Personal Use.ttf");
+        button.setTypeface(face);
+    }
+
 
 }

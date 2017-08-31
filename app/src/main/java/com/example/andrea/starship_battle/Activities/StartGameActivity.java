@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.content.IntentFilter;
 import android.media.MediaPlayer;
@@ -53,6 +54,7 @@ public class StartGameActivity extends Activity {
     TableLayout rowCompletaSX;
     int imageTouchedId;
 
+    Button startBTconnession = (Button) findViewById(R.id.btnStart);
     BluetoothConnectionService mBluetoothConnection;
     BluetoothDevice avversarioDevice;
     private static final UUID MY_UUID_INSECURE = UUID.fromString("8ce255c0-200a-11e0-ac64-0800200c9a66");
@@ -138,7 +140,6 @@ public class StartGameActivity extends Activity {
         casellaPositionListSX = b.getParcelableArrayList("casellePositionListSX");
 
         rowCompletaSX = (TableLayout) findViewById(R.id.idTab);
-        //rowCompletaSX.setBackground(getResources().getDrawable(R.drawable.sfondotrovadisp));
         for (int i = 1; i < rowCompletaSX.getChildCount(); i++) {
             TableRow row = (TableRow) findViewById(rowCompletaSX.getChildAt(i).getId());
             for (int j = 1; j < row.getChildCount(); j++) {
@@ -181,7 +182,7 @@ public class StartGameActivity extends Activity {
                             //seeks the file audio to 0 msec
                             shipFiringMediaPlayer.seekTo(0);
 
-                            v.invalidate();
+                            v.postInvalidate();
                         }
                     });
                     r.resize(row, dim_field_square); //resize delle caselle della scacchiera
@@ -193,7 +194,7 @@ public class StartGameActivity extends Activity {
         LocalBroadcastManager.getInstance(this).registerReceiver(mReceiver, new IntentFilter("incomingMessage"));
 
         //Sincronizzazione dispositivi sui thread di connessione BT
-        Button startBTconnession = (Button) findViewById(R.id.btnStart);
+        cambiaFontButton(startBTconnession);
         startBTconnession.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
 
@@ -205,7 +206,6 @@ public class StartGameActivity extends Activity {
                 turno = true;
             }
         });
-        goBack((Button) findViewById(R.id.btnBack));
     }
 
     //scambio pacchetti via BT
@@ -402,19 +402,6 @@ public class StartGameActivity extends Activity {
         super.onStop();
     }
 
-    public void goBack(Button button) {
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(StartGameActivity.this, SetupShiptableActivity.class);
-                intent.putExtra("avversarioDevice", avversarioDevice);
-                finish();
-                startActivity(intent);
-            }
-
-        });
-    }
-
     private void sendMessage(String messageToSend) {
         Log.d(TAG, "messaggio inviato MAINACTIVY: " + messageToSend);
         byte[] bytes = messageToSend.getBytes(Charset.defaultCharset());
@@ -423,7 +410,10 @@ public class StartGameActivity extends Activity {
         }
     }
 
-
+    public void cambiaFontButton(Button button) {
+        Typeface face = Typeface.createFromAsset(getAssets(), "fonts/Shadded South Personal Use.ttf");
+        button.setTypeface(face);
+    }
 
     public Drawable getShip(ArrayList<CasellaPosition> casellaPositionArrayList, int row, int column) {
 

@@ -1,7 +1,6 @@
 package com.example.andrea.starship_battle.dragNdrop;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.ViewGroup;
 import com.example.andrea.starship_battle.R;
@@ -21,9 +20,9 @@ public class ShipPosition{
         this.context = currentContext;
     }
 
-    int numTie=0;
-    int numStarDest=0;
-    int numStarDeath=0;
+    private int numTie=0;
+    private int numStarDest=0;
+    private int numStarDeath=0;
 
 
     public  ArrayList<Casella> setPositionShip(View view, View cella, ArrayList<Casella> caselleTableList) {
@@ -96,11 +95,11 @@ public class ShipPosition{
 
             case R.id.id_death_star:
 
-                for (int i =0; i < caselleTableList.size(); i++) {
+                for (int i = 0; i < caselleTableList.size(); i++) {
                     Casella casella = caselleTableList.get(i);
 
                     if (casella.getImageViewId() == cella.getId() && ((i+1)%8!=0)&&(i<55)) { // ((i+1)%8!=0): evita il bordo DX della tabella
-                        //(i<39): evita il bordo in basso della tabella
+                        //(i<55): evita il bordo in basso della tabella
                         Casella casellaAccanto = caselleTableList.get(i + 1);
                         Casella casellaSotto = caselleTableList.get(i + 8);
                         Casella casellaSottoAccanto = caselleTableList.get(i + 9); //seleziona la casella
@@ -168,7 +167,6 @@ public class ShipPosition{
                     Casella casella = caselleTableList.get(i);//seleziona la casella
 
                     if (casella.getImageViewId() == cella.getId() && ((i+1)%8!=0)) {  // ((i+1)%8!=0): evita il bordo DX della tabella;
-                        Casella casellaAccanto = caselleTableList.get(i + 1);
 
                         //Andrea: fills another ArrayList in parallel
                         casellaPositionArrayList.get(i).setImageName("star_destroyer_sx_2");
@@ -184,10 +182,7 @@ public class ShipPosition{
                     Casella casella = caselleTableList.get(i);
 
                     if (casella.getImageViewId() == cella.getId() && ((i+1)%8!=0)&&(i<55)) { // ((i+1)%8!=0): evita il bordo DX della tabella
-                        //(i<39): evita il bordo in basso della tabella
-                        Casella casellaAccanto = caselleTableList.get(i + 1);
-                        Casella casellaSotto = caselleTableList.get(i + 8);
-                        Casella casellaSottoAccanto = caselleTableList.get(i + 9); //seleziona la casella
+                        //(i<55): evita il bordo in basso della tabella
 
                         //Andrea: fills another ArrayList in parallel
                         casellaPositionArrayList.get(i).setImageName("death_star_sx_3");
@@ -207,8 +202,6 @@ public class ShipPosition{
             for (int column = 0; column < 8; column++) {
                 CasellaPosition casellaPosition= new CasellaPosition();
                 casellaPosition.setImageName("space");
-             //   casellaPosition.setAffondata(false);
-               // casellaPosition.setUtilizzata(false);
             }
         }
         return casellaPositionArrayList;
