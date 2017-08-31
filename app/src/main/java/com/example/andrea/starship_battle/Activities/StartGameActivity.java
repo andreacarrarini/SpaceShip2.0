@@ -381,7 +381,7 @@ public class StartGameActivity extends Activity {
 
     }
 
-/*    @Override
+    @Override
     public void onDestroy() {
         super.onDestroy();
         if (mBluetoothConnection != null) {
@@ -390,9 +390,9 @@ public class StartGameActivity extends Activity {
         //TODO:to avoid memory leak
         shipFiringMediaPlayer.release();
         shipFiringMediaPlayer = null;
-    }*/
+    }
 
-/*    @Override
+    @Override
     protected void onStop() {
         sendMessage("finish");
         resume = true;
@@ -400,7 +400,7 @@ public class StartGameActivity extends Activity {
         shipFiringMediaPlayer.release();
         shipFiringMediaPlayer = null;
         super.onStop();
-    }*/
+    }
 
     private void sendMessage(String messageToSend) {
         Log.d(TAG, "messaggio inviato MAINACTIVY: " + messageToSend);
@@ -584,12 +584,12 @@ public class StartGameActivity extends Activity {
                     Bundle b = new Bundle();
                     b.putBoolean("new_window", true); //sets new window
                     intent.putExtras(b);
-                    shipFiringMediaPlayer.stop();
+                    /*shipFiringMediaPlayer.stop();
                     shipFiringMediaPlayer.release();
                     shipFiringMediaPlayer = null;
                     shipResponseMediaPlayer.stop();
                     shipResponseMediaPlayer.release();
-                    shipResponseMediaPlayer = null;
+                    shipResponseMediaPlayer = null;*/
                     finish();
                     startActivity(intent);
                 }
@@ -604,6 +604,29 @@ public class StartGameActivity extends Activity {
             alertDialog.show();
         }
     }
+
+    /*public void playSound(MediaPlayer mediaPlayer, String caseID) {
+        switch (caseID) {
+            case "LOSE":
+                mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                    @Override
+                    public void onPrepared(MediaPlayer mediaPlayer) {
+                        Log.d(TAG, "File audio prepared");
+                        mediaPlayer.start();
+                        return;
+                    }
+                });
+                try {
+                    shipResponseMediaPlayer.setDataSource(getApplicationContext(), Uri.parse("android.resource://com.example.andrea.starship_battle/" + R.raw.star_wars_theme_song));
+                    //prepares the file audio asynchrously
+                    shipResponseMediaPlayer.prepareAsync();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                break;
+                });
+        }
+    }*/
 
     private void setTurno (boolean b){
         turno = b;

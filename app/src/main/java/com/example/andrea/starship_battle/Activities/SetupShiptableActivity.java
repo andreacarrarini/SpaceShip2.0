@@ -27,8 +27,8 @@ public class SetupShiptableActivity extends Activity implements View.OnTouchList
     //CONST: Sets the dimension of the field square and the ships
     int dim_field_square = 11;
     int dim_ship = 4;
-    static ArrayList<Casella> caselleTableList = new ArrayList<>();
-    static ArrayList<CasellaPosition> casellePositionList = new ArrayList<>();
+    static ArrayList<Casella> caselleTableList;
+    static ArrayList<CasellaPosition> casellePositionList;
     ShipPosition position = null;
     BluetoothDevice avversarioDevice;
     MediaPlayer mediaPlayer = new MediaPlayer();
@@ -41,6 +41,9 @@ public class SetupShiptableActivity extends Activity implements View.OnTouchList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_table);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
+        caselleTableList = new ArrayList<Casella>();
+        casellePositionList = new ArrayList<CasellaPosition>();
 
         position = new ShipPosition(this);
         Resizer r = new Resizer(this);
