@@ -113,21 +113,8 @@ public class StartGameActivity extends Activity {
 
         //AUDIO-------------------------------------------------------------------------------------
 
-        shipFiringMediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-            @Override
-            public void onPrepared(MediaPlayer mediaPlayer) {
-                Log.d(TAG, "File audio prepared");
-                return;
-            }
-        });
-
-        try {
-            shipFiringMediaPlayer.setDataSource(getApplicationContext(), Uri.parse("android.resource://com.example.andrea.starship_battle/" + R.raw.tie_fire_2));
-            //prepares the file audio synchrously
-            shipFiringMediaPlayer.prepare();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        //prepares the tie fire sound
+        playSound(shipFiringMediaPlayer, "FIRE_PREP");
 
         //------------------------------------------------------------------------------------------
 
@@ -168,17 +155,11 @@ public class StartGameActivity extends Activity {
                         @Override
                         public void onClick(View v) {
                             imageTouchedId = v.getId();
-
                             //TODO:plays the file audio
-                            shipFiringMediaPlayer.start();
-
+                            playSound(shipFiringMediaPlayer, "FIRE_EXEC");
                             String messageToSend = String.valueOf(imageID); //value of ImageView ID
                             sendMessage(messageToSend);
-
-                            //seeks the file audio to 0 msec
-                            shipFiringMediaPlayer.seekTo(0);
-
-                            v.postInvalidate();
+                            v.invalidate();
                         }
                     });
                     r.resize(row, dim_field_square); //resize delle caselle della scacchiera
@@ -244,22 +225,7 @@ public class StartGameActivity extends Activity {
                         alertDialogFAIL.show();
 
                         //TODO:LOSE SOUND
-                        shipResponseMediaPlayer.reset();
-                        shipResponseMediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-                            @Override
-                            public void onPrepared(MediaPlayer mediaPlayer) {
-                                Log.d(TAG, "File audio prepared");
-                                shipResponseMediaPlayer.start();
-                                return;
-                            }
-                        });
-                        try {
-                            shipResponseMediaPlayer.setDataSource(getApplicationContext(), Uri.parse("android.resource://com.example.andrea.starship_battle/" + R.raw.star_wars_theme_song));
-                            //prepares the file audio asynchrously
-                            shipResponseMediaPlayer.prepareAsync();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
+                        playSound(shipResponseMediaPlayer, "LOSE");
                         break;
 
                     case "finish":
@@ -291,71 +257,20 @@ public class StartGameActivity extends Activity {
                         (row.getChildAt(j)).setVisibility(View.INVISIBLE);
 
                         //TODO:FLOP SOUND
-                        shipResponseMediaPlayer.reset();
-                        shipResponseMediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-                            @Override
-                            public void onPrepared(MediaPlayer mediaPlayer) {
-                                Log.d(TAG, "File audio prepared");
-                                shipResponseMediaPlayer.start();
-                                shipResponseMediaPlayer.seekTo(0);
-                                return;
-                            }
-                        });
-
-                        try {
-                            shipResponseMediaPlayer.setDataSource(getApplicationContext(), Uri.parse("android.resource://com.example.andrea.starship_battle/" + R.raw.flop));
-                            //prepares the file audio synchrously
-                            shipResponseMediaPlayer.prepare();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
+                        playSound(shipResponseMediaPlayer, "FLOP");
                     }
                     else {
                         if(s.contains("tie")) {
                             ((ImageView) row.getChildAt(j)).setImageDrawable(getDrawableFromString(avversario, s)); //navi da 1 mostrate subito
 
                             //TODO:SUNK SHIP SOUND
-                            shipResponseMediaPlayer.reset();
-                            shipResponseMediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-                                @Override
-                                public void onPrepared(MediaPlayer mediaPlayer) {
-                                    Log.d(TAG, "File audio prepared");
-                                    shipResponseMediaPlayer.start();
-                                    shipResponseMediaPlayer.seekTo(0);
-                                    return;
-                                }
-                            });
-
-                            try {
-                                shipResponseMediaPlayer.setDataSource(getApplicationContext(), Uri.parse("android.resource://com.example.andrea.starship_battle/" + R.raw.tie_fighter_explode));
-                                //prepares the file audio synchrously
-                                shipResponseMediaPlayer.prepare();
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
+                            playSound(shipResponseMediaPlayer, "SHIP_SUNK");
                         }
                         else {
                             ((ImageView) row.getChildAt(j)).setImageDrawable(getResources().getDrawable(R.drawable.ic_boom)); //altre navi mostrate quando sono tutte colpite
                         }
                         //TODO:HIT SOUND
-                        shipResponseMediaPlayer.reset();
-                        shipResponseMediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-                            @Override
-                            public void onPrepared(MediaPlayer mediaPlayer) {
-                                Log.d(TAG, "File audio prepared");
-                                shipResponseMediaPlayer.start();
-                                shipResponseMediaPlayer.seekTo(0);
-                                return;
-                            }
-                        });
-
-                        try {
-                            shipResponseMediaPlayer.setDataSource(getApplicationContext(), Uri.parse("android.resource://com.example.andrea.starship_battle/" + R.raw.xwing_explode));
-                            //prepares the file audio synchrously
-                            shipResponseMediaPlayer.prepare();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
+                        playSound(shipResponseMediaPlayer, "SHIP_HIT");
                     }
                     break;
                 }
@@ -509,25 +424,7 @@ public class StartGameActivity extends Activity {
                 break;
         }
         // TODO:SUNK SHIP SOUND
-        shipResponseMediaPlayer.reset();
-        shipResponseMediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-            @Override
-            public void onPrepared(MediaPlayer mediaPlayer) {
-                Log.d(TAG, "File audio prepared");
-                shipResponseMediaPlayer.start();
-                shipResponseMediaPlayer.seekTo(0);
-                return;
-            }
-        });
-
-        try {
-            shipResponseMediaPlayer.setDataSource(getApplicationContext(), Uri.parse("android.resource://com.example.andrea.starship_battle/" + R.raw.tie_fighter_explode));
-            //prepares the file audio asynchrously
-            shipResponseMediaPlayer.prepare();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        shipResponseMediaPlayer.reset();
+        playSound(shipResponseMediaPlayer, "SHIP_SUNK");
     }
 
 
@@ -555,23 +452,7 @@ public class StartGameActivity extends Activity {
             sendMessage("perso");
 
             //TODO:WIN SOUND
-            shipResponseMediaPlayer.reset();
-            shipResponseMediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-                @Override
-                public void onPrepared(MediaPlayer mediaPlayer) {
-                    Log.d(TAG, "File audio prepared");
-                    shipResponseMediaPlayer.start();
-                    return;
-                }
-            });
-
-            try {
-                shipResponseMediaPlayer.setDataSource(getApplicationContext(), Uri.parse("android.resource://com.example.andrea.starship_battle/" + R.raw.imperial_march));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            //prepares the file audio asynchrously
-            shipResponseMediaPlayer.prepareAsync();
+            playSound(shipResponseMediaPlayer, "WIN");
 
 
             AlertDialog.Builder builder = new AlertDialog.Builder(this);//android.R.style.Theme_Material_Dialog
