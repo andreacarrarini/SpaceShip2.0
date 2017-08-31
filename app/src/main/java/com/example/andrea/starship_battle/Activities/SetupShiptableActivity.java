@@ -32,8 +32,8 @@ public class SetupShiptableActivity extends Activity implements View.OnTouchList
     ShipPosition position = null;
     BluetoothDevice avversarioDevice;
     MediaPlayer mediaPlayer = new MediaPlayer();
-    Button btnAnnulla = (Button) findViewById(R.id.btnAnnulla);
-    Button btnStartGame = (Button) findViewById(R.id.btnStart);
+    Button btnAnnulla;
+    Button btnStartGame;
 
 
     @Override
@@ -45,6 +45,8 @@ public class SetupShiptableActivity extends Activity implements View.OnTouchList
         caselleTableList = new ArrayList<Casella>();
         casellePositionList = new ArrayList<CasellaPosition>();
 
+        btnAnnulla = (Button) findViewById(R.id.btnAnnulla);
+        btnStartGame = (Button) findViewById(R.id.btnStart);
         position = new ShipPosition(this);
         Resizer r = new Resizer(this);
 

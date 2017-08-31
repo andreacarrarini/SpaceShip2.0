@@ -54,7 +54,7 @@ public class StartGameActivity extends Activity {
     TableLayout rowCompletaSX;
     int imageTouchedId;
 
-    Button startBTconnession = (Button) findViewById(R.id.btnStart);
+    Button startBTconnession;
     BluetoothConnectionService mBluetoothConnection;
     BluetoothDevice avversarioDevice;
     private static final UUID MY_UUID_INSECURE = UUID.fromString("8ce255c0-200a-11e0-ac64-0800200c9a66");
@@ -107,11 +107,7 @@ public class StartGameActivity extends Activity {
                 startActivity(intent);
             }
         });
-        builder.setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
+
         alertDialogFAIL = builder.create();
 
 
@@ -194,6 +190,7 @@ public class StartGameActivity extends Activity {
         LocalBroadcastManager.getInstance(this).registerReceiver(mReceiver, new IntentFilter("incomingMessage"));
 
         //Sincronizzazione dispositivi sui thread di connessione BT
+        startBTconnession = (Button) findViewById(R.id.btnStart);
         cambiaFontButton(startBTconnession);
         startBTconnession.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
@@ -594,12 +591,7 @@ public class StartGameActivity extends Activity {
                     startActivity(intent);
                 }
             });
-            builder.setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.dismiss();
-                }
-            });
+
             AlertDialog alertDialog = builder.create();
             alertDialog.show();
         }

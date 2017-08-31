@@ -24,6 +24,7 @@
             android:text="@string/space_battle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/colorFontButtonHomeScreen"
             android:gravity="center"
             android:textSize="@dimen/dimensioneSizePrimaTextView"
             android:id="@+id/txt_spacebuttle"
