@@ -381,7 +381,7 @@ public class StartGameActivity extends Activity {
 
     }
 
-    @Override
+/*    @Override
     public void onDestroy() {
         super.onDestroy();
         if (mBluetoothConnection != null) {
@@ -390,9 +390,9 @@ public class StartGameActivity extends Activity {
         //TODO:to avoid memory leak
         shipFiringMediaPlayer.release();
         shipFiringMediaPlayer = null;
-    }
+    }*/
 
-    @Override
+/*    @Override
     protected void onStop() {
         sendMessage("finish");
         resume = true;
@@ -400,7 +400,7 @@ public class StartGameActivity extends Activity {
         shipFiringMediaPlayer.release();
         shipFiringMediaPlayer = null;
         super.onStop();
-    }
+    }*/
 
     private void sendMessage(String messageToSend) {
         Log.d(TAG, "messaggio inviato MAINACTIVY: " + messageToSend);
@@ -585,8 +585,10 @@ public class StartGameActivity extends Activity {
                     intent.putExtras(b);
                     shipFiringMediaPlayer.stop();
                     shipFiringMediaPlayer.release();
+                    shipFiringMediaPlayer = null;
                     shipResponseMediaPlayer.stop();
                     shipResponseMediaPlayer.release();
+                    shipResponseMediaPlayer = null;
                     finish();
                     startActivity(intent);
                 }
