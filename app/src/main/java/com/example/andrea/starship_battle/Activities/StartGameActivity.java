@@ -555,6 +555,7 @@ public class StartGameActivity extends Activity {
             sendMessage("perso");
 
             //TODO:WIN SOUND
+            shipResponseMediaPlayer.reset();
             shipResponseMediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                 @Override
                 public void onPrepared(MediaPlayer mediaPlayer) {
@@ -637,7 +638,7 @@ public class StartGameActivity extends Activity {
                 }
                 break;
 
-            case "SHIP SUNK":
+            case "SHIP_SUNK":
                 mediaPlayer.reset();
                 mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                     @Override
@@ -658,8 +659,7 @@ public class StartGameActivity extends Activity {
                 }
                 mediaPlayer.reset();
                 break;
-
-            case "SHIP HIT":
+            case "SHIP_HIT":
                 mediaPlayer.reset();
                 mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                     @Override
@@ -699,9 +699,30 @@ public class StartGameActivity extends Activity {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+                break;
 
+            case "FIRE_PREP":
+                mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                    @Override
+                    public void onPrepared(MediaPlayer mediaPlayer) {
+                        Log.d(TAG, "File audio prepared");
+                        return;
+                    }
+                });
 
+                try {
+                    mediaPlayer.setDataSource(getApplicationContext(), Uri.parse("android.resource://com.example.andrea.starship_battle/" + R.raw.tie_fire_2));
+                    //prepares the file audio synchrously
+                    mediaPlayer.prepare();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                break;
 
+            case "FIRE_EXEC":
+                mediaPlayer.start();
+                mediaPlayer.seekTo(0);
+                break;
         }
     }
 
