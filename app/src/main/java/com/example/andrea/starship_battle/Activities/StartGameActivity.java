@@ -528,6 +528,7 @@ public class StartGameActivity extends Activity {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        shipResponseMediaPlayer.reset();
     }
 
 
