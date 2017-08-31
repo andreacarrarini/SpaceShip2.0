@@ -380,13 +380,14 @@ public class StartGameActivity extends Activity {
 
     @Override
     public void onDestroy() {
-        super.onDestroy();
         if (mBluetoothConnection != null) {
             mBluetoothConnection.stop();
         }
         //TODO:to avoid memory leak
-        shipFiringMediaPlayer.release();
+        /*shipFiringMediaPlayer.release();
+        shipResponseMediaPlayer.release();*/
         /*shipFiringMediaPlayer = null;*/
+        super.onDestroy();
     }
 
     @Override
@@ -394,7 +395,8 @@ public class StartGameActivity extends Activity {
         sendMessage("finish");
         resume = true;
         //TODO:to avoid memory leak
-        shipFiringMediaPlayer.release();
+        /*shipFiringMediaPlayer.release();
+        shipResponseMediaPlayer.release();*/
         /*shipFiringMediaPlayer = null;*/
         super.onStop();
     }
@@ -597,7 +599,7 @@ public class StartGameActivity extends Activity {
         }
     }
 
-/*    public void playSound(MediaPlayer mediaPlayer, String caseID) {
+    public void playSound(MediaPlayer mediaPlayer, String caseID) {
         switch (caseID) {
             case "LOSE":
                 mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
@@ -679,12 +681,29 @@ public class StartGameActivity extends Activity {
                 break;
 
             case "FLOP":
+                mediaPlayer.reset();
+                mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                    @Override
+                    public void onPrepared(MediaPlayer mediaPlayer) {
+                        Log.d(TAG, "File audio prepared");
+                        mediaPlayer.start();
+                        mediaPlayer.seekTo(0);
+                        return;
+                    }
+                });
 
+                try {
+                    mediaPlayer.setDataSource(getApplicationContext(), Uri.parse("android.resource://com.example.andrea.starship_battle/" + R.raw.flop));
+                    //prepares the file audio synchrously
+                    mediaPlayer.prepare();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
 
 
 
         }
-    }*/
+    }
 
     private void setTurno (boolean b){
         turno = b;
