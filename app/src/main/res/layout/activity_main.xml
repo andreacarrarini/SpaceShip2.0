@@ -40,7 +40,7 @@
             android:id="@+id/btn_profilo" />
 
         <Button
-            android:text="@string/attiva_bluethoot"
+            android:text="@string/attiva_bluetooth"
             android:textColor="@color/colorFontButtonHomeScreen"
             android:layout_width="match_parent"
             android:layout_height="@dimen/altezza_bottone"

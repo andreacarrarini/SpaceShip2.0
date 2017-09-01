@@ -64,7 +64,7 @@ public class MainActivity extends Activity {
         intentTrovaDispositivi();
     }
 
-    public void playGame(Button button) {
+   /* public void playGame(Button button) {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -73,7 +73,7 @@ public class MainActivity extends Activity {
             }
 
         });
-    }
+    }*/
 
 //--------------------------------------------------------------------------------------------------
 
@@ -105,10 +105,10 @@ public class MainActivity extends Activity {
 
         //mostra toast se il dispositivo non sopporta il bluetooth
         if (myBluetoothAdapter == null) {
-            Toast.makeText(getApplicationContext(), R.string.no_Bluethoot_Default, Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), R.string.no_Bluetooth_Default, Toast.LENGTH_SHORT).show();
         }
         if (myBluetoothAdapter.isEnabled()) {
-            buttonBluethoot.setText(R.string.bluethoot_attivo);
+            buttonBluethoot.setText(R.string.bluetooth_attivo);
         }
         //accensione e spegnimento del bluethoot
         buttonBluethoot.setOnClickListener(new View.OnClickListener() {
@@ -120,8 +120,8 @@ public class MainActivity extends Activity {
                                                        //chiamo la startActivityForResult per acendere il bluethoot attraverso
                                                        //le impostazioni del sistema senza uscire dall'app
                                                        startActivityForResult(intent, 10);
-                                                       buttonBluethoot.setText(R.string.activated_bluethoot);
-                                                       Toast.makeText(getApplicationContext(), R.string.activated_bluethoot, Toast.LENGTH_SHORT).show();
+                                                       buttonBluethoot.setText(R.string.activated_bluetooth);
+                                                       Toast.makeText(getApplicationContext(), R.string.activated_bluetooth, Toast.LENGTH_SHORT).show();
                                                        //attivo la visibilita del bluethoot sul mio dispositivo
                                                        Intent discoverableIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
                                                        discoverableIntent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 300);
@@ -129,8 +129,8 @@ public class MainActivity extends Activity {
 
                                                    } else {
                                                        myBluetoothAdapter.disable();
-                                                       buttonBluethoot.setText(R.string.disabled_bluethoot);
-                                                       Toast.makeText(getApplicationContext(), R.string.disabled_bluethoot, Toast.LENGTH_SHORT).show();
+                                                       buttonBluethoot.setText(R.string.disabled_bluetooth);
+                                                       Toast.makeText(getApplicationContext(), R.string.disabled_bluetooth, Toast.LENGTH_SHORT).show();
                                                    }
                                                }}
         );
@@ -179,7 +179,7 @@ public class MainActivity extends Activity {
                 dispositiviList = new ArrayList<>();
             }
 
-            //ogni volta che trova un dispositivo lo aggiunge all'arraylist di dispositivi
+            //ogni volta che trova un dispositivo, lo aggiunge all'arraylist di dispositivi
             else if (BluetoothDevice.ACTION_FOUND.equals(action)) {
                 BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
                 if (!dispositiviList.contains(device)) {

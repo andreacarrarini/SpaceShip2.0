@@ -1,7 +1,7 @@
 package com.example.andrea.starship_battle.Activities;
 import com.example.andrea.starship_battle.R;
 import com.example.andrea.starship_battle.dragNdrop.ShipPosition;
-import com.example.andrea.starship_battle.dragNdrop.dragShadowBuilder;
+import com.example.andrea.starship_battle.dragNdrop.DragShadowBuilder;
 import com.example.andrea.starship_battle.model.Casella;
 import com.example.andrea.starship_battle.model.CasellaPosition;
 import com.example.andrea.starship_battle.model.Resizer;
@@ -94,7 +94,7 @@ public class SetupShiptableActivity extends Activity implements View.OnTouchList
 
                     r.resize(row, dim_field_square); //resize delle caselle della scacchiera
 
-                    Casella c = new Casella((ImageView) row.getChildAt(j), false, false); //Lista di caselle: ImageView vuote
+                    Casella c = new Casella((ImageView) row.getChildAt(j), false); //Lista di caselle: ImageView vuote
                     caselleTableList.add(c);
                     CasellaPosition casellaPosition = new CasellaPosition();
                     casellaPosition.setImageName("space");
@@ -129,7 +129,7 @@ public class SetupShiptableActivity extends Activity implements View.OnTouchList
 
         if (view instanceof ImageView) {  //DRAG on ImageView
             if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
-                View.DragShadowBuilder shadowBuilder = new dragShadowBuilder(view);
+                View.DragShadowBuilder shadowBuilder = new DragShadowBuilder(view);
                 //TODO:Se vogliamo mantenere l'immagine in movimwento: View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(view);
                 view.startDrag(null, shadowBuilder, view, 0);
                 view.setVisibility(View.INVISIBLE);

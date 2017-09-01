@@ -11,13 +11,13 @@ import android.view.View;
  * Created by Diletta on 16/07/2017.
  */
 
-public class dragShadowBuilder extends View.DragShadowBuilder {
+public class DragShadowBuilder extends View.DragShadowBuilder {
 
     // The drag shadow image, defined as a drawable thing
     private static Drawable shadow;
 
     // Defines the constructor for myDragShadowBuilder
-    public dragShadowBuilder(View v) {
+    public DragShadowBuilder(View v) {
         // Stores the View parameter passed to myDragShadowBuilder.
         super(v);
         // Creates a draggable image that will fill the Canvas provided by the system.
