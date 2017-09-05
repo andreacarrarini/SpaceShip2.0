@@ -66,10 +66,12 @@ public class ShipPosition{
 
                     if (casella.getImageViewId() == cella.getId() && ((i+1)%8!=0)) {  // ((i+1)%8!=0): evita il bordo DX della tabella;
                         Casella casellaAccanto = caselleTableList.get(i + 1);
+                        Casella casellaAccanto1 = caselleTableList.get(i + 2);
 
-                        if (casellaLibera(casella) && casellaLibera(casellaAccanto)) {
+                        if (casellaLibera(casella) && casellaLibera(casellaAccanto) && casellaLibera(casellaAccanto1) ) {
 
                             casella.setOccupata(true);
+                            casellaAccanto1.setOccupata(true);
                             casella.setDrawable(context.getResources().getDrawable(R.drawable.star_destroyer_sx_2)); //La casella o contiene una barca
 
                             casellaAccanto.setOccupata(true);
@@ -101,13 +103,18 @@ public class ShipPosition{
                     if (casella.getImageViewId() == cella.getId() && ((i+1)%8!=0)&&(i<55)) { // ((i+1)%8!=0): evita il bordo DX della tabella
                         //(i<55): evita il bordo in basso della tabella
                         Casella casellaAccanto = caselleTableList.get(i + 1);
+                        Casella casellaAccanto1 = caselleTableList.get(i + 2);
                         Casella casellaSotto = caselleTableList.get(i + 8);
-                        Casella casellaSottoAccanto = caselleTableList.get(i + 9); //seleziona la casella
+                        Casella casellaSotto1 = caselleTableList.get(i + 10);
+                        Casella casellaSottoAccanto = caselleTableList.get(i + 9);//seleziona la casella
 
                         if (casellaLibera(casella) && casellaLibera(casellaAccanto) && casellaLibera(casellaSotto) && casellaLibera(casellaSottoAccanto)
-                                && caselleTableList.contains(casellaSotto) && caselleTableList.contains(casellaSottoAccanto)) {
+                            && casellaLibera(casellaAccanto1) && casellaLibera(casellaSotto1)
+                                && caselleTableList.contains(casellaSotto) && caselleTableList.contains(casellaSottoAccanto) ) {
 
                             casella.setOccupata(true);
+                            casellaAccanto1.setOccupata(true);
+                            casellaSotto1.setOccupata(true);
                             casella.setDrawable(context.getResources().getDrawable(R.drawable.death_star_sx_3)); //La casella o contiene una barca
 
                             casellaAccanto.setOccupata(true);
@@ -208,9 +215,6 @@ public class ShipPosition{
     }
 
     private boolean casellaLibera(Casella c){
-        if (c.getOccupata()){
-            return false;
-        }
-        return true;
+        return !c.getOccupata();
     }
 }
