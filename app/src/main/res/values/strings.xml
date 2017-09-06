@@ -30,10 +30,13 @@
     <string name="restartAll">Do you want to play again?</string>
 
     <string name="start" translatable="false">START</string>
+    <string name="jedi" translatable="false">Jedi</string>
+    <string name="sith" translatable="false">Sith</string>
 
     <string name="casella" translatable="false">casellaView</string>
     <string name="wait">Wait for the enimy\'s move</string>
     <string name="disconnected_avversario">Enemy disconnected</string>
+    <string name="chooseFazione">Who to be, you choose!</string>
 
 
 </resources>

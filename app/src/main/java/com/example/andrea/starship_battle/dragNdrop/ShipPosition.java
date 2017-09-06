@@ -1,11 +1,13 @@
 package com.example.andrea.starship_battle.dragNdrop;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.ViewGroup;
 import com.example.andrea.starship_battle.R;
 import com.example.andrea.starship_battle.model.Casella;
 import com.example.andrea.starship_battle.model.CasellaPosition;
+import com.example.andrea.starship_battle.model.Fazione;
 
 import java.util.ArrayList;
 
@@ -25,7 +27,7 @@ public class ShipPosition{
     private int numStarDeath=0;
 
 
-    public  ArrayList<Casella> setPositionShip(View view, View cella, ArrayList<Casella> caselleTableList) {
+    public  ArrayList<Casella> setPositionShip(View view, View cella, ArrayList<Casella> caselleTableList, Fazione fazione) {
 
         ShipFence fence = new ShipFence();
         ViewGroup owner = (ViewGroup) view.getParent();
@@ -39,7 +41,7 @@ public class ShipPosition{
                     if ( (casella.getImageViewId() == cella.getId()) && casellaLibera(casella)) {
 
                         casella.setOccupata(true); //La casella o contiene una barca
-                        casella.setDrawable(context.getResources().getDrawable(R.drawable.tie_sx));
+                        generateDrawable(casella, fazione,"tie_sx");
 
                         //disattiva il drag delle caselle intorno alla ship droppata
                         caselleTableList= fence.setShipFence(view, i, caselleTableList);
@@ -66,14 +68,15 @@ public class ShipPosition{
 
                     if (casella.getImageViewId() == cella.getId() && ((i+1)%8!=0)) {  // ((i+1)%8!=0): evita il bordo DX della tabella;
                         Casella casellaAccanto = caselleTableList.get(i + 1);
+                        Casella casellaAccanto1 = caselleTableList.get(i + 2);
 
-                        if (casellaLibera(casella) && casellaLibera(casellaAccanto)) {
+                        if (casellaLibera(casella) && casellaLibera(casellaAccanto) && casellaLibera(casellaAccanto1) ) {
 
                             casella.setOccupata(true);
-                            casella.setDrawable(context.getResources().getDrawable(R.drawable.star_destroyer_sx_2)); //La casella o contiene una barca
-
+                            casellaAccanto1.setOccupata(true);
+                            generateDrawable(casella, fazione, "star_destroyer_sx_2");
                             casellaAccanto.setOccupata(true);
-                            casellaAccanto.setDrawable(context.getResources().getDrawable(R.drawable.star_destroyer_sx_1));
+                            generateDrawable(casellaAccanto, fazione, "star_destroyer_sx_1");
 
                             //disattiva il drag delle caselle intorno alla ship droppata
                             caselleTableList=fence.setShipFence(view, i, caselleTableList);
@@ -101,23 +104,28 @@ public class ShipPosition{
                     if (casella.getImageViewId() == cella.getId() && ((i+1)%8!=0)&&(i<55)) { // ((i+1)%8!=0): evita il bordo DX della tabella
                         //(i<55): evita il bordo in basso della tabella
                         Casella casellaAccanto = caselleTableList.get(i + 1);
+                        Casella casellaAccanto1 = caselleTableList.get(i + 2);
                         Casella casellaSotto = caselleTableList.get(i + 8);
-                        Casella casellaSottoAccanto = caselleTableList.get(i + 9); //seleziona la casella
+                        Casella casellaSotto1 = caselleTableList.get(i + 10);
+                        Casella casellaSottoAccanto = caselleTableList.get(i + 9);//seleziona la casella
 
                         if (casellaLibera(casella) && casellaLibera(casellaAccanto) && casellaLibera(casellaSotto) && casellaLibera(casellaSottoAccanto)
-                                && caselleTableList.contains(casellaSotto) && caselleTableList.contains(casellaSottoAccanto)) {
+                            && casellaLibera(casellaAccanto1) && casellaLibera(casellaSotto1)
+                                && caselleTableList.contains(casellaSotto) && caselleTableList.contains(casellaSottoAccanto) ) {
 
                             casella.setOccupata(true);
-                            casella.setDrawable(context.getResources().getDrawable(R.drawable.death_star_sx_3)); //La casella o contiene una barca
+                            casellaAccanto1.setOccupata(true);
+                            casellaSotto1.setOccupata(true);
+                            generateDrawable(casella, fazione, "death_star_sx_3");
 
                             casellaAccanto.setOccupata(true);
-                            casellaAccanto.setDrawable(context.getResources().getDrawable(R.drawable.death_star_sx_1));
+                            generateDrawable(casellaAccanto, fazione, "death_star_sx_1");
 
                             casellaSotto.setOccupata(true);
-                            casellaSotto.setDrawable(context.getResources().getDrawable(R.drawable.death_star_sx_4));
+                            generateDrawable(casellaSotto, fazione, "death_star_sx_4");
 
                             casellaSottoAccanto.setOccupata(true);
-                            casellaSottoAccanto.setDrawable(context.getResources().getDrawable(R.drawable.death_star_sx_2));
+                            generateDrawable(casellaSottoAccanto, fazione, "death_star_sx_2");
 
                             //disattiva il drag delle caselle intorno alla ship droppata
                             caselleTableList=fence.setShipFence(view, i, caselleTableList);
@@ -208,9 +216,12 @@ public class ShipPosition{
     }
 
     private boolean casellaLibera(Casella c){
-        if (c.getOccupata()){
-            return false;
-        }
-        return true;
+        return !c.getOccupata();
+    }
+
+    private void generateDrawable(Casella casella, Fazione fazione, String s){
+        ShipDrawer drawer = new ShipDrawer(context);
+        Drawable d = drawer.getDrawableFromString(0, s, fazione);
+        casella.setDrawable(d);
     }
 }

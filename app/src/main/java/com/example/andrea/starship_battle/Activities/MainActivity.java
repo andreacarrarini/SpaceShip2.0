@@ -59,21 +59,24 @@ public class MainActivity extends Activity {
             }
         });
 
+        //permette al giocatore di scegliere la fazione
+        selectFazione(buttonProfilo);
+
         attivaBluethoot();
 
         intentTrovaDispositivi();
     }
 
-   /* public void playGame(Button button) {
+    public void selectFazione(Button button) {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, SetupShiptableActivity.class);
+                Intent intent = new Intent(MainActivity.this, ChooseFazione.class);
                 startActivity(intent);
             }
 
         });
-    }*/
+    }
 
 //--------------------------------------------------------------------------------------------------
 
@@ -163,13 +166,14 @@ public class MainActivity extends Activity {
                     filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_STARTED);
                     filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_FINISHED);
 
-                    registerReceiver(BrodcastReceiver, filter);
+                    registerReceiver(broadcastReceiver, filter);
                 }
+
             }
         });
     }
 
-    private final BroadcastReceiver BrodcastReceiver = new BroadcastReceiver() {
+    private final BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
 
@@ -192,7 +196,7 @@ public class MainActivity extends Activity {
                 scanningDialog.dismiss();
                 Intent intent1 = new Intent(MainActivity.this, DispositiviTrovatiActivity.class);
                 intent1.putParcelableArrayListExtra("dispositiviDisponibili", dispositiviList);
-                finish();
+                                finish();
                 startActivity(intent1);
             }
         }

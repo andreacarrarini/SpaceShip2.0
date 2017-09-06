@@ -4,6 +4,7 @@ import com.example.andrea.starship_battle.dragNdrop.ShipPosition;
 import com.example.andrea.starship_battle.dragNdrop.DragShadowBuilder;
 import com.example.andrea.starship_battle.model.Casella;
 import com.example.andrea.starship_battle.model.CasellaPosition;
+import com.example.andrea.starship_battle.model.Fazione;
 import com.example.andrea.starship_battle.model.Resizer;
 
 import android.app.Activity;
@@ -34,6 +35,7 @@ public class SetupShiptableActivity extends Activity implements View.OnTouchList
     MediaPlayer mediaPlayer = new MediaPlayer();
     Button btnAnnulla;
     Button btnStartGame;
+    public static Fazione fazione;
 
 
     @Override
@@ -44,6 +46,12 @@ public class SetupShiptableActivity extends Activity implements View.OnTouchList
 
         caselleTableList = new ArrayList<Casella>();
         casellePositionList = new ArrayList<CasellaPosition>();
+
+        //Se il giocatore non ha selezionato una sua fazione, è Sith di deafult
+        if (ChooseFazione.fazione == null)
+            fazione = Fazione.Sith;
+        else
+            fazione = ChooseFazione.fazione;
 
         btnAnnulla = (Button) findViewById(R.id.btnAnnulla);
         btnStartGame = (Button) findViewById(R.id.btnStart);
@@ -67,6 +75,7 @@ public class SetupShiptableActivity extends Activity implements View.OnTouchList
         //prepares the file audio asynchrously
         mediaPlayer.prepareAsync();
 
+        //Enemy's datas
         avversarioDevice = getIntent().getExtras().getParcelable("avversarioDevice");
 
         // Sets the activity title
@@ -82,6 +91,15 @@ public class SetupShiptableActivity extends Activity implements View.OnTouchList
         ImageView tie = (ImageView) findViewById(R.id.id_tie);
         ImageView star_destroyer = (ImageView) findViewById(R.id.id_star_dest);
         ImageView death_star = (ImageView) findViewById(R.id.id_death_star);
+        switch (fazione) {
+            case Sith:
+                break;
+            case Jedi:
+                tie.setImageDrawable(getResources().getDrawable(R.drawable.x_wing_dx));
+                star_destroyer.setImageDrawable(getResources().getDrawable(R.drawable.rebel_cruiser_sx));
+                death_star.setImageDrawable(getResources().getDrawable(R.drawable.millenium_falcon_dx));
+                break;
+        }
 
         //Creo una lista di ImageView che rappresenta la tabella e setto ogni ImageView onDRAGListener
         TableLayout rowCompleta = (TableLayout) findViewById(R.id.idTab);
@@ -117,6 +135,7 @@ public class SetupShiptableActivity extends Activity implements View.OnTouchList
 
         startGameButton(btnStartGame);
         cambiaFontButton(btnStartGame);
+
     }
 
     @Override
@@ -154,14 +173,15 @@ public class SetupShiptableActivity extends Activity implements View.OnTouchList
 
         switch (action) {
             case DragEvent.ACTION_DRAG_STARTED:
-                Log.d(LOGCAT, "Drag started");
+
+                Log.d(LOGCAT, "Drag started_"+fazione.toString());
                 break;
 
             case DragEvent.ACTION_DROP:
                 Log.d(LOGCAT, "Drop started");
 
                 //ShipPosition gestisce il drop in base al tipo di ship
-                caselleTableList = position.setPositionShip(view, cella, caselleTableList);
+                caselleTableList = position.setPositionShip(view, cella, caselleTableList, fazione);
                 casellePositionList = position.setPositionShip2(view, cella, caselleTableList, casellePositionList);
                 return true;
 
@@ -192,6 +212,7 @@ public class SetupShiptableActivity extends Activity implements View.OnTouchList
                 casellePositionList = new ArrayList<>();
                 Intent intent = new Intent(SetupShiptableActivity.this, SetupShiptableActivity.class);
                 intent.putExtra("avversarioDevice", avversarioDevice); //Sending paired device's info to StartGameActivity
+                intent.putExtra("fazioneScelta", fazione.toString());
                 finish();
 
                 startActivity(intent);
@@ -220,6 +241,7 @@ public class SetupShiptableActivity extends Activity implements View.OnTouchList
                     Intent intent = new Intent(SetupShiptableActivity.this, StartGameActivity.class);
                     intent.putExtra("bundle", extrainBundle); //Passa la lista alla nuova activity
                     intent.putExtra("avversarioDevice", avversarioDevice); //Sending paired device's info to StartGameActivity
+                    intent.putExtra("fazioneScelta", fazione.toString());
                     releaseMediaPlayer(mediaPlayer);
                     finish();
                     startActivity(intent);
