@@ -288,6 +288,7 @@ public class StartGameActivity extends Activity {
         shipFoundCounter(s);
     }
 
+    //TODO: ciao ciao
 
 
     @Override
