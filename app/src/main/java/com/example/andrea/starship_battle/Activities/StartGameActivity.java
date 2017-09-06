@@ -101,8 +101,8 @@ public class StartGameActivity extends Activity {
                 Bundle b = new Bundle();
                 b.putBoolean("new_window", true); //sets new window
                 intent.putExtras(b);
-                shipFiringMediaPlayer.stop();
-                shipResponseMediaPlayer.stop();
+                /*shipFiringMediaPlayer.stop();
+                shipResponseMediaPlayer.stop();*/
                 finish();
                 startActivity(intent);
             }
@@ -261,13 +261,15 @@ public class StartGameActivity extends Activity {
                     }
                     else {
                         if(s.contains("tie")) {
-                            ((ImageView) row.getChildAt(j)).setImageDrawable(getDrawableFromString(avversario, s)); //navi da 1 mostrate subito
+                            //navi da 1 mostrate subito
+                            ((ImageView) row.getChildAt(j)).setImageDrawable(getDrawableFromString(avversario, s));
 
                             //TODO:SUNK SHIP SOUND
                             playSound(shipResponseMediaPlayer, "SHIP_SUNK");
                         }
                         else {
-                            ((ImageView) row.getChildAt(j)).setImageDrawable(getResources().getDrawable(R.drawable.ic_boom)); //altre navi mostrate quando sono tutte colpite
+                            //altre navi mostrate quando sono tutte colpite
+                            ((ImageView) row.getChildAt(j)).setImageDrawable(getResources().getDrawable(R.drawable.ic_boom));
                         }
                         //TODO:HIT SOUND
                         playSound(shipResponseMediaPlayer, "SHIP_HIT");
@@ -493,7 +495,8 @@ public class StartGameActivity extends Activity {
                     }
                 });
                 try {
-                    mediaPlayer.setDataSource(getApplicationContext(), Uri.parse("android.resource://com.example.andrea.starship_battle/" + R.raw.star_wars_theme_song));
+                    mediaPlayer.setDataSource(getApplicationContext(), Uri.parse("android.resource://com." +
+                            "example.andrea.starship_battle/" + R.raw.star_wars_theme_song));
                     //prepares the file audio asynchrously
                     mediaPlayer.prepareAsync();
                 } catch (IOException e) {
@@ -511,7 +514,8 @@ public class StartGameActivity extends Activity {
                     }
                 });
                 try {
-                    mediaPlayer.setDataSource(getApplicationContext(), Uri.parse("android.resource://com.example.andrea.starship_battle/" + R.raw.imperial_march));
+                    mediaPlayer.setDataSource(getApplicationContext(), Uri.parse("android.resource://com." +
+                            "example.andrea.starship_battle/" + R.raw.imperial_march));
                     //prepares the file audio asynchrously
                     mediaPlayer.prepareAsync();
                 } catch (IOException e) {
@@ -532,7 +536,8 @@ public class StartGameActivity extends Activity {
                 });
 
                 try {
-                    mediaPlayer.setDataSource(getApplicationContext(), Uri.parse("android.resource://com.example.andrea.starship_battle/" + R.raw.tie_fighter_explode));
+                    mediaPlayer.setDataSource(getApplicationContext(), Uri.parse("android.resource://com." +
+                            "example.andrea.starship_battle/" + R.raw.tie_fighter_explode));
                     //prepares the file audio synchrously
                     mediaPlayer.prepare();
                 } catch (IOException e) {
@@ -553,7 +558,8 @@ public class StartGameActivity extends Activity {
                 });
 
                 try {
-                    mediaPlayer.setDataSource(getApplicationContext(), Uri.parse("android.resource://com.example.andrea.starship_battle/" + R.raw.xwing_explode));
+                    mediaPlayer.setDataSource(getApplicationContext(), Uri.parse("android.resource://com." +
+                            "example.andrea.starship_battle/" + R.raw.xwing_explode));
                     //prepares the file audio synchrously
                     mediaPlayer.prepare();
                 } catch (IOException e) {
@@ -574,7 +580,8 @@ public class StartGameActivity extends Activity {
                 });
 
                 try {
-                    mediaPlayer.setDataSource(getApplicationContext(), Uri.parse("android.resource://com.example.andrea.starship_battle/" + R.raw.flop));
+                    mediaPlayer.setDataSource(getApplicationContext(), Uri.parse("android.resource://com." +
+                            "example.andrea.starship_battle/" + R.raw.flop));
                     //prepares the file audio synchrously
                     mediaPlayer.prepare();
                 } catch (IOException e) {
@@ -592,7 +599,8 @@ public class StartGameActivity extends Activity {
                 });
 
                 try {
-                    mediaPlayer.setDataSource(getApplicationContext(), Uri.parse("android.resource://com.example.andrea.starship_battle/" + R.raw.tie_fire_2));
+                    mediaPlayer.setDataSource(getApplicationContext(), Uri.parse("android.resource://com." +
+                            "example.andrea.starship_battle/" + R.raw.tie_fire_2));
                     //prepares the file audio synchrously
                     mediaPlayer.prepare();
                 } catch (IOException e) {
