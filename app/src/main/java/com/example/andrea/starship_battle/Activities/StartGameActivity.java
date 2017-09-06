@@ -90,7 +90,7 @@ public class StartGameActivity extends Activity {
 
 
         casellaPositionListDX = position.createEnemyBattlefield(casellaPositionListDX);
-        fazione = ChooseFazione.fazione;
+        fazione = SetupShiptableActivity.fazione;
 
         avversarioDevice = getIntent().getExtras().getParcelable("avversarioDevice");
         if (avversarioDevice.getBondState() == BluetoothDevice.BOND_BONDED)

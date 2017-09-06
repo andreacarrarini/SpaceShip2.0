@@ -47,6 +47,12 @@ public class SetupShiptableActivity extends Activity implements View.OnTouchList
         caselleTableList = new ArrayList<Casella>();
         casellePositionList = new ArrayList<CasellaPosition>();
 
+        //Se il giocatore non ha selezionato una sua fazione, è Sith di deafult
+        if (ChooseFazione.fazione == null)
+            fazione = Fazione.Sith;
+        else
+            fazione = ChooseFazione.fazione;
+
         btnAnnulla = (Button) findViewById(R.id.btnAnnulla);
         btnStartGame = (Button) findViewById(R.id.btnStart);
         position = new ShipPosition(this);
@@ -85,6 +91,15 @@ public class SetupShiptableActivity extends Activity implements View.OnTouchList
         ImageView tie = (ImageView) findViewById(R.id.id_tie);
         ImageView star_destroyer = (ImageView) findViewById(R.id.id_star_dest);
         ImageView death_star = (ImageView) findViewById(R.id.id_death_star);
+        switch (fazione) {
+            case Sith:
+                break;
+            case Jedi:
+                tie.setImageDrawable(getResources().getDrawable(R.drawable.x_wing_dx));
+                star_destroyer.setImageDrawable(getResources().getDrawable(R.drawable.rebel_cruiser_sx));
+                death_star.setImageDrawable(getResources().getDrawable(R.drawable.millenium_falcon_dx));
+                break;
+        }
 
         //Creo una lista di ImageView che rappresenta la tabella e setto ogni ImageView onDRAGListener
         TableLayout rowCompleta = (TableLayout) findViewById(R.id.idTab);
@@ -158,11 +173,7 @@ public class SetupShiptableActivity extends Activity implements View.OnTouchList
 
         switch (action) {
             case DragEvent.ACTION_DRAG_STARTED:
-                //Se il giocatore non ha selezionato una sua fazione, è Sith di deafult
-                if (ChooseFazione.fazione != null)
-                    fazione = ChooseFazione.fazione;
-                else
-                    fazione = Fazione.Sith;
+
                 Log.d(LOGCAT, "Drag started_"+fazione.toString());
                 break;
 
