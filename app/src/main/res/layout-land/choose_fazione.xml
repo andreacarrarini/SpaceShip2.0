@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@drawable/sfondotrovadisp"
+    tools:context="com.example.andrea.starship_battle.Activities.MainActivity">
+
+
+
+    <TextView
+        android:id="@+id/chooseFazione"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/chooseFazione"
+        android:textAlignment="center"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        tools:textColor="@android:color/black"
+        />
+
+    <TextView
+        android:id="@+id/sith_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sith"
+        android:textAlignment="center"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        android:layout_above="@+id/DeathStar"
+        android:layout_alignEnd="@+id/DeathStar"
+        android:layout_marginEnd="64dp" />
+
+    <ImageView
+        android:id="@+id/DeathStar"
+        android:layout_width="@dimen/dimFazione"
+        android:layout_height="@dimen/dimFazione"
+        android:layout_marginStart="42dp"
+        android:layout_weight="1"
+        android:layout_alignTop="@+id/FalconImg"
+        android:layout_toEndOf="@+id/FalconImg"
+        android:contentDescription="@string/casella" />
+
+    <TextView
+        android:id="@+id/jedi_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/FalconImg"
+        android:layout_alignStart="@+id/FalconImg"
+        android:layout_marginStart="60dp"
+        android:text="@string/jedi"
+        android:textAlignment="center"
+        android:textColor="@android:color/white"
+        android:textSize="20sp" />
+    <ImageView
+        android:id="@+id/FalconImg"
+        android:layout_width="@dimen/dimFazione"
+        android:layout_height="@dimen/dimFazione"
+        android:layout_marginStart="92dp"
+        android:layout_weight="1"
+
+        android:layout_centerVertical="true"
+        android:layout_alignParentStart="true"
+        android:contentDescription="@string/casella" />
+
+
+
+</RelativeLayout>

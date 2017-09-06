@@ -20,6 +20,13 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".Activities.ChooseFazione"
+            android:screenOrientation="landscape">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".Activities.DispositiviTrovatiActivity"
             android:screenOrientation="landscape">
             <intent-filter>

@@ -24,8 +24,10 @@ import android.widget.*;
 
 import com.example.andrea.starship_battle.Bluetooth.BluetoothConnectionService;
 import com.example.andrea.starship_battle.R;
+import com.example.andrea.starship_battle.dragNdrop.ShipDrawer;
 import com.example.andrea.starship_battle.dragNdrop.ShipPosition;
 import com.example.andrea.starship_battle.model.CasellaPosition;
+import com.example.andrea.starship_battle.model.Fazione;
 import com.example.andrea.starship_battle.model.Resizer;
 
 import java.io.IOException;
@@ -50,9 +52,11 @@ public class StartGameActivity extends Activity {
     ArrayList<CasellaPosition> casellaPositionListSX = new ArrayList<>();
     RelativeLayout layout;
     ShipPosition position;
+    ShipDrawer drawer;
     TableLayout rowCompletaRX;
     TableLayout rowCompletaSX;
     int imageTouchedId;
+    static Fazione fazione;
 
     Button startBTconnession;
     BluetoothConnectionService mBluetoothConnection;
@@ -73,8 +77,6 @@ public class StartGameActivity extends Activity {
     final int avversario = 1;
     final int giocatore = 0;
 
-
-
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,8 +86,11 @@ public class StartGameActivity extends Activity {
         setContentView(R.layout.start_game);
         Resizer r = new Resizer(this);
         position = new ShipPosition(this);
+        drawer = new ShipDrawer(this);
+
 
         casellaPositionListDX = position.createEnemyBattlefield(casellaPositionListDX);
+        fazione = ChooseFazione.fazione;
 
         avversarioDevice = getIntent().getExtras().getParcelable("avversarioDevice");
         if (avversarioDevice.getBondState() == BluetoothDevice.BOND_BONDED)
@@ -155,7 +160,7 @@ public class StartGameActivity extends Activity {
                         @Override
                         public void onClick(View v) {
                             imageTouchedId = v.getId();
-                            //TODO:plays the file audio
+                            //plays the file audio
                             playSound(shipFiringMediaPlayer, "FIRE_EXEC");
                             String messageToSend = String.valueOf(imageID); //value of ImageView ID
                             sendMessage(messageToSend);
@@ -175,6 +180,8 @@ public class StartGameActivity extends Activity {
         cambiaFontButton(startBTconnession);
         startBTconnession.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
+
+                Log.d(TAG, "fazione value :"+fazione.toString());
 
                 mBluetoothConnection = new BluetoothConnectionService(StartGameActivity.this);
                 Log.d(TAG, "startBTConnection: Initializing RFCOM Bluetooth Connection.");
@@ -204,7 +211,7 @@ public class StartGameActivity extends Activity {
                 CasellaPosition casellaSelected = casellaPositionListSX.get(imageID);
                 TableRow row = null;
 
-                row= (TableRow) findViewById(rowCompletaSX.getChildAt( (imageID)/8 +1 ).getId());
+                row = (TableRow) findViewById(rowCompletaSX.getChildAt( (imageID)/8 +1 ).getId());
                 ImageView image = null;
                 if ( (row.getChildAt( (imageID+1)%8 )) instanceof ImageView)
                     image = (ImageView) row.getChildAt( (imageID+1)%8 );
@@ -256,20 +263,21 @@ public class StartGameActivity extends Activity {
                     if (s.equals("space")) {
                         (row.getChildAt(j)).setVisibility(View.INVISIBLE);
 
-                        //TODO:FLOP SOUND
+                        //FLOP SOUND
                         playSound(shipResponseMediaPlayer, "FLOP");
                     }
                     else {
-                        if(s.contains("tie")) {
-                            ((ImageView) row.getChildAt(j)).setImageDrawable(getDrawableFromString(avversario, s)); //navi da 1 mostrate subito
+                        if(s.contains("tie")) {//navi da 1 mostrate subito
+                            Drawable d = drawer.getDrawableFromString(avversario, s, fazione);
+                            ((ImageView) row.getChildAt(j)).setImageDrawable(d);
 
-                            //TODO:SUNK SHIP SOUND
+                            //SUNK SHIP SOUND
                             playSound(shipResponseMediaPlayer, "SHIP_SUNK");
                         }
-                        else {
-                            ((ImageView) row.getChildAt(j)).setImageDrawable(getResources().getDrawable(R.drawable.ic_boom)); //altre navi mostrate quando sono tutte colpite
+                        else {//altre navi mostrate quando sono tutte colpite
+                            ((ImageView) row.getChildAt(j)).setImageDrawable(getResources().getDrawable(R.drawable.ic_boom));
                         }
-                        //TODO:HIT SOUND
+                        //HIT SOUND
                         playSound(shipResponseMediaPlayer, "SHIP_HIT");
                     }
                     break;
@@ -298,7 +306,7 @@ public class StartGameActivity extends Activity {
         if (mBluetoothConnection != null) {
             mBluetoothConnection.stop();
         }
-        //TODO:to avoid memory leak
+        //to avoid memory leak
         /*shipFiringMediaPlayer.release();
         shipResponseMediaPlayer.release();*/
         /*shipFiringMediaPlayer = null;*/
@@ -309,7 +317,7 @@ public class StartGameActivity extends Activity {
     protected void onStop() {
         sendMessage("finish");
         resume = true;
-        //TODO:to avoid memory leak
+        //to avoid memory leak
         /*shipFiringMediaPlayer.release();
         shipResponseMediaPlayer.release();*/
         /*shipFiringMediaPlayer = null;*/
@@ -334,71 +342,7 @@ public class StartGameActivity extends Activity {
         Drawable drawable = null;
         if (!casellaPositionArrayList.isEmpty()) {
             String shipName = casellaPositionArrayList.get(row * 8 + column).getImageName();
-            drawable = getDrawableFromString(giocatore,shipName);
-        }
-        return drawable;
-    }
-
-    private Drawable getDrawableFromString (int tipoGiocatore, String s){
-        Drawable drawable = null;
-        switch (tipoGiocatore) {
-            case giocatore:
-
-                switch (s) {
-                    case "tie_sx":
-                        drawable = getResources().getDrawable(R.drawable.tie_sx);
-                        break;
-                    case "star_destroyer_sx_2":
-                        drawable = getResources().getDrawable(R.drawable.star_destroyer_sx_2);
-                        break;
-                    case "star_destroyer_sx_1":
-                        drawable = getResources().getDrawable(R.drawable.star_destroyer_sx_1);
-                        break;
-                    case "death_star_sx_3":
-                        drawable = getResources().getDrawable(R.drawable.death_star_sx_3);
-                        break;
-                    case "death_star_sx_1":
-                        drawable = getResources().getDrawable(R.drawable.death_star_sx_1);
-                        break;
-                    case "death_star_sx_4":
-                        drawable = getResources().getDrawable(R.drawable.death_star_sx_4);
-                        break;
-                    case "death_star_sx_2":
-                        drawable = getResources().getDrawable(R.drawable.death_star_sx_2);
-                        break;
-                    case "space":
-                        drawable = getResources().getDrawable(R.drawable.ic_galactic_space);
-                        break;
-                }
-                break;
-            case avversario:
-
-                switch (s) {
-                    case "tie_sx":
-                        drawable = getResources().getDrawable(R.drawable.x_wing_sx);
-                        break;
-                    case "star_destroyer_sx_2":
-                        drawable = getResources().getDrawable(R.drawable.rebel_cruiser_sx_2);
-                        break;
-                    case "star_destroyer_sx_1":
-                        drawable = getResources().getDrawable(R.drawable.rebel_cruiser_sx_1);
-                        break;
-                    case "death_star_sx_3":
-                        drawable = getResources().getDrawable(R.drawable.millenium_falcon_sx_3);
-                        break;
-                    case "death_star_sx_1":
-                        drawable = getResources().getDrawable(R.drawable.millenium_falcon_sx_1);
-                        break;
-                    case "death_star_sx_4":
-                        drawable = getResources().getDrawable(R.drawable.millenium_falcon_sx_4);
-                        break;
-                    case "death_star_sx_2":
-                        drawable = getResources().getDrawable(R.drawable.millenium_falcon_sx_2);
-                        break;
-                    case "space":
-                        drawable = getResources().getDrawable(R.drawable.ic_galactic_space);
-                        break;
-                }
+            drawable = drawer.getDrawableFromString(giocatore, shipName, fazione);
         }
         return drawable;
     }
@@ -407,23 +351,25 @@ public class StartGameActivity extends Activity {
         switch (s){
             case "star_destroyer":
                 if (array.contains(i-1)) {
-                    ((ImageView) findViewById(imageTouchedId-1)).setImageDrawable(getDrawableFromString(avversario, "star_destroyer_sx_2"));
-                    ((ImageView) findViewById(imageTouchedId)).setImageDrawable(getDrawableFromString(avversario, "star_destroyer_sx_1"));
+                    drawer.generateDrawable((ImageView) findViewById(imageTouchedId - 1), fazione, avversario, "star_destroyer_sx_2");
+                    drawer.generateDrawable((ImageView) findViewById(imageTouchedId), fazione, avversario, "star_destroyer_sx_1");
                 }
                 if (array.contains(i+1)) {
-                    ((ImageView) findViewById(imageTouchedId)).setImageDrawable(getDrawableFromString(avversario, "star_destroyer_sx_2"));
-                    ((ImageView) findViewById(imageTouchedId+1)).setImageDrawable(getDrawableFromString(avversario, "star_destroyer_sx_1"));
+                    drawer.generateDrawable((ImageView) findViewById(imageTouchedId), fazione, avversario, "star_destroyer_sx_2");
+                    drawer.generateDrawable((ImageView) findViewById(imageTouchedId+1), fazione, avversario, "star_destroyer_sx_1");
+
                 }
                 break;
             case "death_star":
                 Collections.sort(array);
-                ((ImageView) findViewById(array.get(0))).setImageDrawable(getDrawableFromString(avversario, "death_star_sx_3"));
-                ((ImageView) findViewById(array.get(1))).setImageDrawable(getDrawableFromString(avversario, "death_star_sx_1"));
-                ((ImageView) findViewById(array.get(2))).setImageDrawable(getDrawableFromString(avversario, "death_star_sx_4"));
-                ((ImageView) findViewById(array.get(3))).setImageDrawable(getDrawableFromString(avversario, "death_star_sx_2"));
+                drawer.generateDrawable((ImageView) findViewById(array.get(0)), fazione, avversario, "death_star_sx_3");
+                drawer.generateDrawable((ImageView) findViewById(array.get(1)), fazione, avversario, "death_star_sx_1");
+                drawer.generateDrawable((ImageView) findViewById(array.get(2)), fazione, avversario, "death_star_sx_4");
+                drawer.generateDrawable((ImageView) findViewById(array.get(3)), fazione, avversario, "death_star_sx_2");
+
                 break;
         }
-        // TODO:SUNK SHIP SOUND
+        //SUNK SHIP SOUND
         playSound(shipResponseMediaPlayer, "SHIP_SUNK");
     }
 
@@ -451,7 +397,7 @@ public class StartGameActivity extends Activity {
             //notifica all'avversario la fine della partita
             sendMessage("perso");
 
-            //TODO:WIN SOUND
+            //WIN SOUND
             playSound(shipResponseMediaPlayer, "WIN");
 
 
