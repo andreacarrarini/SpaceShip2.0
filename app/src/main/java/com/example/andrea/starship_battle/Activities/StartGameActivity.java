@@ -106,8 +106,8 @@ public class StartGameActivity extends Activity {
                 Bundle b = new Bundle();
                 b.putBoolean("new_window", true); //sets new window
                 intent.putExtras(b);
-                shipFiringMediaPlayer.stop();
-                shipResponseMediaPlayer.stop();
+                //shipFiringMediaPlayer.stop();
+                //shipResponseMediaPlayer.stop();
                 finish();
                 startActivity(intent);
             }
@@ -293,12 +293,10 @@ public class StartGameActivity extends Activity {
     @Override
     public void onResume() {
         super.onResume();
-
         if(resume) {
             Intent i = new Intent(StartGameActivity.this, MainActivity.class);
             startActivity(i);
         }
-
     }
 
     @Override
@@ -366,7 +364,6 @@ public class StartGameActivity extends Activity {
                 drawer.generateDrawable((ImageView) findViewById(array.get(1)), fazione, avversario, "death_star_sx_1");
                 drawer.generateDrawable((ImageView) findViewById(array.get(2)), fazione, avversario, "death_star_sx_4");
                 drawer.generateDrawable((ImageView) findViewById(array.get(3)), fazione, avversario, "death_star_sx_2");
-
                 break;
         }
         //SUNK SHIP SOUND
@@ -399,7 +396,6 @@ public class StartGameActivity extends Activity {
 
             //WIN SOUND
             playSound(shipResponseMediaPlayer, "WIN");
-
 
             AlertDialog.Builder builder = new AlertDialog.Builder(this);//android.R.style.Theme_Material_Dialog
             builder.setTitle(R.string.winner);

@@ -28,7 +28,6 @@ public class ShipDrawer {
 
                 switch (tipoGiocatore) {
                     case 0:
-
                         switch (s) {
                             case "tie_sx":
                                 drawable = context.getResources().getDrawable(R.drawable.tie_sx);
@@ -56,29 +55,29 @@ public class ShipDrawer {
                                 break;
                         }
                         break;
-                    case 1:
 
+                    case 1:
                         switch (s) {
                             case "tie_sx":
-                                drawable = context.getResources().getDrawable(R.drawable.x_wing_sx);
+                                drawable = context.getResources().getDrawable(R.drawable.x_wing_dx);
                                 break;
                             case "star_destroyer_sx_2":
-                                drawable = context.getResources().getDrawable(R.drawable.rebel_cruiser_sx_2);
+                                drawable = context.getResources().getDrawable(R.drawable.rebel_cruiser_dx_2);
                                 break;
                             case "star_destroyer_sx_1":
-                                drawable = context.getResources().getDrawable(R.drawable.rebel_cruiser_sx_1);
+                                drawable = context.getResources().getDrawable(R.drawable.rebel_cruiser_dx_1);
                                 break;
                             case "death_star_sx_3":
-                                drawable = context.getResources().getDrawable(R.drawable.millenium_falcon_sx_3);
+                                drawable = context.getResources().getDrawable(R.drawable.millenium_falcon_dx_3);
                                 break;
                             case "death_star_sx_1":
-                                drawable = context.getResources().getDrawable(R.drawable.millenium_falcon_sx_1);
+                                drawable = context.getResources().getDrawable(R.drawable.millenium_falcon_dx_1);
                                 break;
                             case "death_star_sx_4":
-                                drawable = context.getResources().getDrawable(R.drawable.millenium_falcon_sx_4);
+                                drawable = context.getResources().getDrawable(R.drawable.millenium_falcon_dx_4);
                                 break;
                             case "death_star_sx_2":
-                                drawable = context.getResources().getDrawable(R.drawable.millenium_falcon_sx_2);
+                                drawable = context.getResources().getDrawable(R.drawable.millenium_falcon_dx_2);
                                 break;
                             case "space":
                                 drawable = context.getResources().getDrawable(R.drawable.ic_galactic_space);
@@ -86,31 +85,32 @@ public class ShipDrawer {
                         }
                 }
                 return drawable;
+
             case Jedi:
                 switch (tipoGiocatore) {
                     case 1:
 
                         switch (s) {
                             case "tie_sx":
-                                drawable = context.getResources().getDrawable(R.drawable.tie_sx);
+                                drawable = context.getResources().getDrawable(R.drawable.tie_dx);
                                 break;
                             case "star_destroyer_sx_2":
-                                drawable = context.getResources().getDrawable(R.drawable.star_destroyer_sx_2);
+                                drawable = context.getResources().getDrawable(R.drawable.star_destroyer_dx_2);
                                 break;
                             case "star_destroyer_sx_1":
-                                drawable = context.getResources().getDrawable(R.drawable.star_destroyer_sx_1);
+                                drawable = context.getResources().getDrawable(R.drawable.star_destroyer_dx_1);
                                 break;
                             case "death_star_sx_3":
-                                drawable = context.getResources().getDrawable(R.drawable.death_star_sx_3);
+                                drawable = context.getResources().getDrawable(R.drawable.death_star_dx_3);
                                 break;
                             case "death_star_sx_1":
-                                drawable = context.getResources().getDrawable(R.drawable.death_star_sx_1);
+                                drawable = context.getResources().getDrawable(R.drawable.death_star_dx_1);
                                 break;
                             case "death_star_sx_4":
-                                drawable = context.getResources().getDrawable(R.drawable.death_star_sx_4);
+                                drawable = context.getResources().getDrawable(R.drawable.death_star_dx_4);
                                 break;
                             case "death_star_sx_2":
-                                drawable = context.getResources().getDrawable(R.drawable.death_star_sx_2);
+                                drawable = context.getResources().getDrawable(R.drawable.death_star_dx_2);
                                 break;
                             case "space":
                                 drawable = context.getResources().getDrawable(R.drawable.ic_galactic_space);
@@ -118,7 +118,6 @@ public class ShipDrawer {
                         }
                         break;
                     case 0:
-
                         switch (s) {
                             case "tie_sx":
                                 drawable = context.getResources().getDrawable(R.drawable.x_wing_sx);

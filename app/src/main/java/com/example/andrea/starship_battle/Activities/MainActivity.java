@@ -202,5 +202,12 @@ public class MainActivity extends Activity {
         }
     };
 
+    //viene tolta la registrazione del brodcast receiver
+    @Override
+    public void onDestroy() {
+        unregisterReceiver(broadcastReceiver);
+        super.onDestroy();
+    }
+
 
 }
