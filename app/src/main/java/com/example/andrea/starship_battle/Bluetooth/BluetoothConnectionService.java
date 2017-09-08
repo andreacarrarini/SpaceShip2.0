@@ -36,18 +36,11 @@ public class BluetoothConnectionService {
     private BluetoothDevice mmDevice;
     private UUID deviceUUID = UUID.fromString("8ce255c0-200a-11e0-ac64-0800200c9a66");
 
-    private ConnectedThread mConnectedThread;
+    public ConnectedThread mConnectedThread;
 
-    private BluetoothConnectionService() {
+    public BluetoothConnectionService() {
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         start();
-    }
-
-    private static BluetoothConnectionService instance = null;
-    public static BluetoothConnectionService getInstance() {
-        if (instance == null)
-            instance = new BluetoothConnectionService();
-        return instance;
     }
 
     /**
@@ -282,7 +275,6 @@ public class BluetoothConnectionService {
     private synchronized void connected(BluetoothSocket mmSocket, BluetoothDevice mmDevice) {
         Log.d(TAG, "connected: Starting.");
         Log.d(TAG, "connect to: " + mmDevice.getName());
-
 
         // Start the thread to manage the connection and perform transmissions
         mConnectedThread = new ConnectedThread(mmSocket);

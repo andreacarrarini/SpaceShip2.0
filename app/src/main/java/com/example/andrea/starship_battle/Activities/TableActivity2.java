@@ -26,7 +26,6 @@ public class TableActivity2 extends Activity implements View.OnTouchListener, Vi
     int dim_ship = 4;
     static ArrayList<Casella> caselleTableList = new ArrayList<>();
 
-  //  static ArrayList<ArrayList<CasellaPosition>> casellePositionMatrix = new ArrayList<>();
     static ArrayList<CasellaPosition> casellePositionList = new ArrayList<>();
 
     ShipPosition position = null;
@@ -78,7 +77,6 @@ public class TableActivity2 extends Activity implements View.OnTouchListener, Vi
                     r.resize(row, dim_field_square); //resize delle textView
                 }
             }
-        //    casellePositionMatrix.add(casellePositionList);
         }
 
         // ImageView's onTOUCHListener for Drag: se una delle ships viene toccata, inizia il Drag
@@ -102,7 +100,7 @@ public class TableActivity2 extends Activity implements View.OnTouchListener, Vi
         if (view instanceof ImageView) {  //DRAG on ImageView
             if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
                 View.DragShadowBuilder shadowBuilder = new dragShadowBuilder(view);
-                //Se vogliamo mantenere l'immagine in movimwento: View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(view);
+                //TODO:Se vogliamo mantenere l'immagine in movimwento: View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(view);
                 view.startDrag(null, shadowBuilder, view, 0);
                 view.setVisibility(View.INVISIBLE);
                 check = true;
