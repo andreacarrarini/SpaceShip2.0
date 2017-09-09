@@ -22,7 +22,7 @@ public class YourShiptableActivity extends Activity implements View.OnTouchListe
     private static final String LOGCAT = null;
 
     //CONST: Sets the dimension of the field square and the ships
-    int dim_field_square = 10;
+    int dim_field_square = 11;
     int dim_ship = 4;
     static ArrayList<Casella> caselleTableList = new ArrayList<>();
 
@@ -161,6 +161,8 @@ public class YourShiptableActivity extends Activity implements View.OnTouchListe
                 caselleTableList = new ArrayList<>();
                 casellePositionList = new ArrayList<CasellaPosition>();
                 Intent intent = new Intent(YourShiptableActivity.this, YourShiptableActivity.class);
+                intent.putExtra("avversarioDevice", avversarioDevice); //Sending paired device's info to StartGameActivity
+
                 startActivity(intent);
             }
 

@@ -24,6 +24,7 @@ public class MainActivity extends Activity {
     public TextView textViewSpaceButtle;
     public BluetoothAdapter myBluetoothAdapter;
     public Button playGameButton;
+    private ProgressDialog scanningDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +49,17 @@ public class MainActivity extends Activity {
         cambiaFontButton(buttonIniziaPartita);
         muoviBottone(buttonIniziaPartita);
         playGame(playGameButton);
+
+        scanningDialog = new ProgressDialog(this);
+        scanningDialog.setMessage(getResources().getString(R.string.scanning));
+        scanningDialog.setCanceledOnTouchOutside(false);
+        scanningDialog.setButton(DialogInterface.BUTTON_NEGATIVE, getResources().getString(R.string.cancel), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                myBluetoothAdapter.cancelDiscovery();
+            }
+        });
 
         attivaBluethoot();
 
@@ -170,7 +182,7 @@ public class MainActivity extends Activity {
 
             //Una volta partita la scansione svuoto l'arraylist
             if (BluetoothAdapter.ACTION_DISCOVERY_STARTED.equals(action)) {
-                Toast.makeText(getApplicationContext(), R.string.scanning, Toast.LENGTH_SHORT).show();
+                scanningDialog.show();
                 dispositiviList = new ArrayList<>();
             }
 
@@ -184,6 +196,7 @@ public class MainActivity extends Activity {
 
             //Finita la scansione passo alla ListActivity dei dispositivi trovati
             else if (BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(action)) {
+                scanningDialog.dismiss();
                 Intent intent1 = new Intent(MainActivity.this, DispositiviTrovatiActivity.class);
                 intent1.putParcelableArrayListExtra("dispositiviDisponibili", dispositiviList);
                 finish();

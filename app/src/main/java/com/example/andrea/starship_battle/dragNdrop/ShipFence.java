@@ -23,9 +23,9 @@ public class ShipFence {
 
                 //CASO SX
                 if( (i+1)%8==1){
-                    for (int j = (i - 8); j>=0 && j < (i - 6); j++)
+                    for (int j = (i - 8); j>=0 && j < (i - 6) && j<63; j++)
                         drawFench(j, c);
-                    for (int j = (i + 8); j>=0 && j < (i + 10); j++)
+                    for (int j = (i + 8); j>=0 && j < (i + 10) && j<63; j++)
                         drawFench(j, c);
 
                     drawFench(i+1, c);
@@ -33,9 +33,9 @@ public class ShipFence {
 
                 //CASI CENTRALI
                 if( (i+1)%8>=2 && (i+1)%8<=7) {
-                    for (int j = (i - 9); j>=0 && j < (i - 6); j++)
+                    for (int j = (i - 9); j>=0 && j < (i - 6) && j<63; j++)
                         drawFench(j, c);
-                    for (int j = (i + 7); j>=0 && j < (i + 10); j++)
+                    for (int j = (i + 7); j>=0 && j < (i + 10)&& j<63; j++)
                         drawFench(j, c);
                     if(i - 1 >= 0) {
                         drawFench(i-1,c);
@@ -45,10 +45,10 @@ public class ShipFence {
 
                 //CASO DX
                 if( (i+1)%8==0){
-                    for (int j = (i - 9); j>=0 && j < (i - 7); j++)
+                    for (int j = (i - 9); j>=0 && j < (i - 7)&& j<63; j++)
                         drawFench(j, c);
 
-                    for (int j = (i + 7); j>=0 && j < (i + 9); j++)
+                    for (int j = (i + 7); j>=0 && j < (i + 9)&& j<63; j++)
                         drawFench(j, c);
 
                     drawFench(i-1, c);
@@ -60,9 +60,9 @@ public class ShipFence {
 
                 //CASO SX
                 if( (i+1)%8==1){
-                    for (int j = (i - 8); j>=0 && j < (i - 5); j++)
+                    for (int j = (i - 8); j>=0 && j < (i - 5)&& j<63; j++)
                         drawFench(j, c);
-                    for (int j = (i + 8); j>=0 && j < (i + 11); j++)
+                    for (int j = (i + 8); j>=0 && j < (i + 11)&& j<63; j++)
                         drawFench(j, c);
 
                     drawFench(i+2, c);
@@ -71,9 +71,9 @@ public class ShipFence {
 
                 //CASI CENTRALI
                 if( (i+1)%8>=2 && (i+1)%8<=7) {
-                    for (int j = (i - 9); j>=0 && j < (i - 5); j++)
+                    for (int j = (i - 9); j>=0 && j < (i - 5)&& j<63; j++)
                         drawFench(j, c);
-                    for (int j = (i + 7); j>=0 && j < (i + 11); j++)
+                    for (int j = (i + 7); j>=0 && j < (i + 11)&& j<63; j++)
                         drawFench(j, c);
 
                     drawFench(i - 1, c);
@@ -82,10 +82,10 @@ public class ShipFence {
 
                 //CASO DX
                 if( (i+1)%8==0){
-                    for (int j = (i - 9); j>=0 && j < (i - 8); j++)
+                    for (int j = (i - 9); j>=0 && j < (i - 8)&& j<63; j++)
                         drawFench(j, c);
 
-                    for (int j = (i + 7); j>=0 && j < (i + 8); j++)
+                    for (int j = (i + 7); j>=0 && j < (i + 8)&& j<63; j++)
                         drawFench(j, c);
 
                     drawFench(i-1, c);
@@ -100,9 +100,9 @@ public class ShipFence {
 
                 //CASO SX
                 if( (i+1)%8==1){
-                    for (int j = (i - 8); j>=0 && j < (i - 5); j++)
+                    for (int j = (i - 8); j>=0 && j < (i - 5)&& j<63; j++)
                         drawFench(j, c);
-                    for (int j = (i + 16); j>=0 && j < (i + 19); j++)
+                    for (int j = (i + 16); j>=0 && j < (i + 19) && j<63; j++)
                         drawFench(j, c);
 
 
@@ -114,9 +114,9 @@ public class ShipFence {
 
                 //CASI CENTRALI
                 if( (i+1)%8>=2 && (i+1)%8<7) {
-                    for (int j = (i - 9); j>=0 && j < (i - 5); j++)
+                    for (int j = (i - 9); j>=0 && j < (i - 5) && j<63; j++)
                         drawFench(j, c);
-                    for (int j = (i + 15); j>=0 && j < (i + 19); j++)
+                    for (int j = (i + 15); j>=0 && j < (i + 19)&& j<63; j++)
                         drawFench(j, c);
 
                     drawFench(i - 1, c);
@@ -128,10 +128,10 @@ public class ShipFence {
 
                 //CASO DX
                 if( (i+1)%8==7){
-                    for (int j = (i - 9); j>=0 && j < (i - 6) && j<55; j++)
+                    for (int j = (i - 9); j>=0 && j < (i - 6) && j<63; j++)
                         drawFench(j, c);
 
-                    for (int j = (i + 15); j>=0 && j < (i + 17) && j<55; j++)
+                    for (int j = (i + 15); j>=0 && j < (i + 17) && j<63; j++)
                         drawFench(j, c);
 
                     drawFench(i-1, c);

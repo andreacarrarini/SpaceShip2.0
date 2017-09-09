@@ -237,6 +237,7 @@ public class StartGameActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(StartGameActivity.this, YourShiptableActivity.class);
+                intent.putExtra("avversarioDevice", avversarioDevice); 
                 startActivity(intent);
             }
 

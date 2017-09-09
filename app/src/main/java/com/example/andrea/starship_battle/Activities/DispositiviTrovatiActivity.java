@@ -45,7 +45,7 @@ public class DispositiviTrovatiActivity extends Activity {
 
         if (dispositiviList.size()==0) {
 
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);//, android.R.style.Theme_Material_Dialog
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);// TODO: android.R.style.Theme_Material_Dialog
             builder.setTitle(R.string.noSelectableDevices);
             builder.setMessage(R.string.errorMessage);
             builder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
@@ -57,7 +57,7 @@ public class DispositiviTrovatiActivity extends Activity {
                     intent.putExtras(b);
                     startActivity(intent);
                 }
-                    });
+            });
 
 
             AlertDialog alertDialog = builder.create();
