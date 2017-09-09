@@ -70,7 +70,7 @@ public class MainActivity extends Activity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, YourShiptableActivity.class);
+                Intent intent = new Intent(MainActivity.this, SetupShiptableActivity.class);
                 startActivity(intent);
             }
 

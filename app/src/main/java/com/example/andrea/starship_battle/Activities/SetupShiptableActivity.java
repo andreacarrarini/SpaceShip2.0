@@ -18,18 +18,16 @@ import android.widget.*;
 import java.util.ArrayList;
 
 
-public class YourShiptableActivity extends Activity implements View.OnTouchListener, View.OnDragListener {
+public class SetupShiptableActivity extends Activity implements View.OnTouchListener, View.OnDragListener {
     private static final String LOGCAT = null;
 
     //CONST: Sets the dimension of the field square and the ships
     int dim_field_square = 11;
     int dim_ship = 4;
     static ArrayList<Casella> caselleTableList = new ArrayList<>();
-
     static ArrayList<CasellaPosition> casellePositionList = new ArrayList<>();
 
     ShipPosition position = null;
-
     BluetoothDevice avversarioDevice;
 
     @Override
@@ -55,14 +53,13 @@ public class YourShiptableActivity extends Activity implements View.OnTouchListe
         ImageView star_destroyer = (ImageView) findViewById(R.id.id_star_dest);
         ImageView death_star = (ImageView) findViewById(R.id.id_death_star);
 
-//Creo una matrice di ImageView che rappresenta la tabella e setto ogni ImageView onDRAGListener
+//Creo una lista di ImageView che rappresenta la tabella e setto ogni ImageView onDRAGListener
         TableLayout rowCompleta = (TableLayout) findViewById(R.id.idTab);
         rowCompleta.setBackground(getResources().getDrawable(R.drawable.sfondotrovadisp));
         for (int i = 1; i < rowCompleta.getChildCount(); i++) {
             TableRow row = (TableRow) findViewById(rowCompleta.getChildAt(i).getId());
             for (int j = 1; j < row.getChildCount(); j++) {
                 if(row.getChildAt(j) instanceof ImageView) {
-                    //InvisibileView:((ImageView) row.getChildAt(j)).setImageDrawable(null);
                     row.getChildAt(j).setOnDragListener(this);
 
                     r.resize(row, dim_field_square); //resize delle caselle della scacchiera
@@ -159,8 +156,8 @@ public class YourShiptableActivity extends Activity implements View.OnTouchListe
             public void onClick(View v) {
 
                 caselleTableList = new ArrayList<>();
-                casellePositionList = new ArrayList<CasellaPosition>();
-                Intent intent = new Intent(YourShiptableActivity.this, YourShiptableActivity.class);
+                casellePositionList = new ArrayList<>();
+                Intent intent = new Intent(SetupShiptableActivity.this, SetupShiptableActivity.class);
                 intent.putExtra("avversarioDevice", avversarioDevice); //Sending paired device's info to StartGameActivity
 
                 startActivity(intent);
@@ -179,7 +176,7 @@ public class YourShiptableActivity extends Activity implements View.OnTouchListe
                     Bundle extrainBundle = new Bundle();
                     extrainBundle.putParcelableArrayList("casellePositionListSX", casellePositionList);
 
-                    Intent intent = new Intent(YourShiptableActivity.this, StartGameActivity.class);
+                    Intent intent = new Intent(SetupShiptableActivity.this, StartGameActivity.class);
                     intent.putExtra("bundle", extrainBundle); //Passa la lista alla nuova activity
                     intent.putExtra("avversarioDevice", avversarioDevice); //Sending paired device's info to StartGameActivity
                     finish();

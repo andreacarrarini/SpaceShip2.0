@@ -31,5 +31,8 @@
 
     <string name="start" translatable="false">START</string>
 
+    <string name="casella" translatable="false">casellaView</string>
+    <string name="wait">Wait for the enimy\'s move</string>
+
 
 </resources>

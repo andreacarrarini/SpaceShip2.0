@@ -46,6 +46,7 @@ public class StartGameActivity extends Activity {
     RelativeLayout layout;
     ShipPosition position;
     TableLayout rowCompletaRX;
+    TableLayout rowCompletaSX;
     int  imageTouchedId;
 
     BluetoothConnectionService mBluetoothConnection;
@@ -59,6 +60,8 @@ public class StartGameActivity extends Activity {
     static int stardest_count = 4;
     static int stardeath_count = 4;
 
+    final int avversario = 1;
+    final int giocatore = 0;
 
 
 
@@ -75,7 +78,7 @@ public class StartGameActivity extends Activity {
 
         avversarioDevice = getIntent().getExtras().getParcelable("avversarioDevice");
         if (avversarioDevice.getBondState() == BluetoothDevice.BOND_BONDED)
-            Log.i(TAG, "bonded");
+            Log.i(TAG, "devices are bonded");
 
         AlertDialog.Builder builder = new AlertDialog.Builder(StartGameActivity.this);// TODO: android.R.style.Theme_Material_Dialog
         builder.setTitle(R.string.loser);
@@ -95,10 +98,7 @@ public class StartGameActivity extends Activity {
                 dialog.dismiss();
             }
         });
-         alertDialogFAIL= builder.create();
-
-
-
+        alertDialogFAIL = builder.create();
 
 
         /*AUDIO-------------------------------------------------------------------------------------
@@ -125,7 +125,7 @@ public class StartGameActivity extends Activity {
         Bundle b = getIntent().getBundleExtra("bundle");
         casellaPositionListSX = b.getParcelableArrayList("casellePositionListSX");
 
-        TableLayout rowCompletaSX = (TableLayout) findViewById(R.id.idTab);
+        rowCompletaSX = (TableLayout) findViewById(R.id.idTab);
         for (int i = 1; i < rowCompletaSX.getChildCount(); i++) {
             TableRow row = (TableRow) findViewById(rowCompletaSX.getChildAt(i).getId());
             for (int j = 1; j < row.getChildCount(); j++) {
@@ -155,7 +155,7 @@ public class StartGameActivity extends Activity {
                     if (!casellaPositionListDX.isEmpty()) {
                         ((ImageView) row.getChildAt(j)).setImageDrawable(getShip(casellaPositionListDX, i - 1, j - 1));
                     }
-                    ((ImageView) row.getChildAt(j)).setOnClickListener(new View.OnClickListener() {
+                    ( row.getChildAt(j)).setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             imageTouchedId = v.getId();
@@ -212,6 +212,17 @@ public class StartGameActivity extends Activity {
 
                 CasellaPosition casellaSelected = casellaPositionListSX.get(imageID);
                 casellaSelected.setAffondata(true);
+
+                for (int i = 1; i < rowCompletaSX.getChildCount(); i++) {
+                    TableRow row = (TableRow) findViewById(rowCompletaSX.getChildAt(i).getId());
+                    for (int j = 1; j < row.getChildCount(); j++) {
+                        if (row.getChildAt(j) instanceof ImageView ) {
+                            ((ImageView)row.getChildAt(j)).setImageDrawable(getResources().getDrawable(R.drawable.icon)); //TODO: cambia
+                            break;
+                        }
+                    }
+                }
+
                 sendMessage(casellaSelected.getImageName());
 
             }else if(!isInteger(text)){
@@ -228,14 +239,14 @@ public class StartGameActivity extends Activity {
 
 
     private void setDrawValue(String s){
-        Drawable d = getDrawableFromString(s);
+        Drawable d = getDrawableFromString(avversario,s);
 
         for (int i = 1; i < rowCompletaRX.getChildCount(); i++) {
             TableRow row = (TableRow) findViewById(rowCompletaRX.getChildAt(i).getId());
             for (int j = 1; j < row.getChildCount(); j++) {
                 if (row.getChildAt(j) instanceof ImageView && row.getChildAt(j).getId()==imageTouchedId) {
                     if (s.equals("space"))
-                        ((ImageView) row.getChildAt(j)).setVisibility(View.INVISIBLE);
+                        (row.getChildAt(j)).setVisibility(View.INVISIBLE);
                         //TODO: suono flop
                     else {
                         ((ImageView) row.getChildAt(j)).setImageDrawable(d);
@@ -245,8 +256,7 @@ public class StartGameActivity extends Activity {
                 }
             }
         }
-        //contatore per le navi dell'avversario
-        // trovate
+        //contatore per le navi dell'avversario trovate
         shipFoundCounter(s);
     }
 
@@ -262,7 +272,7 @@ public class StartGameActivity extends Activity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(StartGameActivity.this, YourShiptableActivity.class);
+                Intent intent = new Intent(StartGameActivity.this, SetupShiptableActivity.class);
                 intent.putExtra("avversarioDevice", avversarioDevice);
                 startActivity(intent);
             }
@@ -294,38 +304,71 @@ public class StartGameActivity extends Activity {
         Drawable drawable = null;
         if (!casellaPositionArrayList.isEmpty()) {
             String shipName = casellaPositionArrayList.get(row * 8 + column).getImageName();
-            drawable = getDrawableFromString(shipName);
+            drawable = getDrawableFromString(giocatore,shipName);
         }
         return drawable;
     }
 
-    private Drawable getDrawableFromString (String s){
+    private Drawable getDrawableFromString (int tipoGiocatore, String s){
         Drawable drawable = null;
-        switch (s) {
-            case "tie_sx":
-                drawable = getResources().getDrawable(R.drawable.tie_sx);
+        switch (tipoGiocatore) {
+            case giocatore:
+
+                switch (s) {
+                    case "tie_sx":
+                        drawable = getResources().getDrawable(R.drawable.tie_sx);
+                        break;
+                    case "star_destroyer_sx_2":
+                        drawable = getResources().getDrawable(R.drawable.star_destroyer_sx_2);
+                        break;
+                    case "star_destroyer_sx_1":
+                        drawable = getResources().getDrawable(R.drawable.star_destroyer_sx_1);
+                        break;
+                    case "death_star_sx_3":
+                        drawable = getResources().getDrawable(R.drawable.death_star_sx_3);
+                        break;
+                    case "death_star_sx_1":
+                        drawable = getResources().getDrawable(R.drawable.death_star_sx_1);
+                        break;
+                    case "death_star_sx_4":
+                        drawable = getResources().getDrawable(R.drawable.death_star_sx_4);
+                        break;
+                    case "death_star_sx_2":
+                        drawable = getResources().getDrawable(R.drawable.death_star_sx_2);
+                        break;
+                    case "space":
+                        drawable = getResources().getDrawable(R.drawable.ic_galactic_space);
+                        break;
+                }
                 break;
-            case "star_destroyer_sx_2":
-                drawable = getResources().getDrawable(R.drawable.star_destroyer_sx_2);
-                break;
-            case "star_destroyer_sx_1":
-                drawable = getResources().getDrawable(R.drawable.star_destroyer_sx_1);
-                break;
-            case "death_star_sx_3":
-                drawable = getResources().getDrawable(R.drawable.death_star_sx_3);
-                break;
-            case "death_star_sx_1":
-                drawable = getResources().getDrawable(R.drawable.death_star_sx_1);
-                break;
-            case "death_star_sx_4":
-                drawable = getResources().getDrawable(R.drawable.death_star_sx_4);
-                break;
-            case "death_star_sx_2":
-                drawable = getResources().getDrawable(R.drawable.death_star_sx_2);
-                break;
-            case "space":
-                drawable = getResources().getDrawable(R.drawable.ic_galactic_space);
-                break;
+            case avversario:
+
+                switch (s) {
+                    case "tie_sx":
+                        drawable = getResources().getDrawable(R.drawable.x_wing_sx);
+                        break;
+                    case "star_destroyer_sx_2":
+                        drawable = getResources().getDrawable(R.drawable.rebel_cruiser_sx_2);
+                        break;
+                    case "star_destroyer_sx_1":
+                        drawable = getResources().getDrawable(R.drawable.rebel_cruiser_sx_1);
+                        break;
+                    case "death_star_sx_3":
+                        drawable = getResources().getDrawable(R.drawable.millenium_falcon_sx_3);
+                        break;
+                    case "death_star_sx_1":
+                        drawable = getResources().getDrawable(R.drawable.millenium_falcon_sx_1);
+                        break;
+                    case "death_star_sx_4":
+                        drawable = getResources().getDrawable(R.drawable.millenium_falcon_sx_4);
+                        break;
+                    case "death_star_sx_2":
+                        drawable = getResources().getDrawable(R.drawable.millenium_falcon_sx_2);
+                        break;
+                    case "space":
+                        drawable = getResources().getDrawable(R.drawable.ic_galactic_space);
+                        break;
+                }
         }
         return drawable;
     }
@@ -356,22 +399,22 @@ public class StartGameActivity extends Activity {
                 }
             });
             builder.setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-
-           });
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
             AlertDialog alertDialog = builder.create();
             alertDialog.show();
         }
     }
     private void setTurno (boolean b){
         turno = b;
+
         layout = (RelativeLayout) findViewById(R.id.starGameSfondo);
-        if(!turno)
+        if(!turno) {
             layout.setBackgroundColor(Color.RED);
-        else
+        }else
             layout.setBackgroundColor(Color.BLACK);
     }
 }

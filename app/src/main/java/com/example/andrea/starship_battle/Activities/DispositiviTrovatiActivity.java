@@ -77,7 +77,7 @@ public class DispositiviTrovatiActivity extends Activity {
                         String bondedText = getResources().getString(R.string.bonded) + " " + avversarioDevice.getName();
                         Toast.makeText(getApplicationContext(),  bondedText , Toast.LENGTH_SHORT).show();
 
-                        Intent intent = new Intent(DispositiviTrovatiActivity.this, YourShiptableActivity.class);
+                        Intent intent = new Intent(DispositiviTrovatiActivity.this, SetupShiptableActivity.class);
                         intent.putExtra("avversarioDevice", avversarioDevice);
                         finish();
                         startActivity(intent);
