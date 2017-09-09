@@ -261,11 +261,15 @@ public class SetupShiptableActivity extends Activity implements View.OnTouchList
     }
 
     @Override
+    public void onPause() {
+        releaseMediaPlayer(mediaPlayer);
+        super.onPause();
+    }
+
+    @Override
     public void onDestroy() {
         //to avoid memory leak
-        mediaPlayer.release();
-        mediaPlayer.release();
-        mediaPlayer= null;
+        releaseMediaPlayer(mediaPlayer);
         super.onDestroy();
     }
 
