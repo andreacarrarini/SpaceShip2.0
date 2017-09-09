@@ -106,8 +106,6 @@ public class StartGameActivity extends Activity {
                 Bundle b = new Bundle();
                 b.putBoolean("new_window", true); //sets new window
                 intent.putExtras(b);
-                //shipFiringMediaPlayer.stop();
-                //shipResponseMediaPlayer.stop();
                 finish();
                 startActivity(intent);
             }
@@ -235,11 +233,8 @@ public class StartGameActivity extends Activity {
             }else if(!isInteger(text)){
                 switch (text) {
                     case "perso":
-
-                        //TODO:LOSE SOUND
                         playSound(shipResponseMediaPlayer, "LOSE");
                         alertDialogFAIL.show();
-
                         break;
 
                     case "finish":
@@ -253,7 +248,6 @@ public class StartGameActivity extends Activity {
                         Log.d(TAG, "messaggio ricevuto MAINACTIVY2: " + text);
                         setDrawValue(text);
                         setTurno(false);
-
                         break;
                 }
             }
@@ -312,21 +306,19 @@ public class StartGameActivity extends Activity {
         if (mBluetoothConnection != null) {
             mBluetoothConnection.stop();
         }
-        //to avoid memory leak
-        /*shipFiringMediaPlayer.release();
-        shipResponseMediaPlayer.release();*/
-        /*shipFiringMediaPlayer = null;*/
         super.onDestroy();
+    }
+
+    @Override
+    public void onPause() {
+        sendMessage("finish");
+        super.onPause();
     }
 
     @Override
     protected void onStop() {
         sendMessage("finish");
         resume = true;
-        //to avoid memory leak
-        /*shipFiringMediaPlayer.release();
-        shipResponseMediaPlayer.release();*/
-        /*shipFiringMediaPlayer = null;*/
         super.onStop();
     }
 
@@ -416,12 +408,6 @@ public class StartGameActivity extends Activity {
                     Bundle b = new Bundle();
                     b.putBoolean("new_window", true); //sets new window
                     intent.putExtras(b);
-                    /*shipFiringMediaPlayer.stop();
-                    shipFiringMediaPlayer.release();
-                    shipFiringMediaPlayer = null;
-                    shipResponseMediaPlayer.stop();
-                    shipResponseMediaPlayer.release();
-                    shipResponseMediaPlayer = null;*/
                     finish();
                     startActivity(intent);
                 }
