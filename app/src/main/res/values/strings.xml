@@ -22,6 +22,7 @@
     <string name="selectedDevice">Select</string>
     <string name="noSelectableDevices">Couldn\'t find any devices</string>
     <string name="errorMessage">Would you like to go back?</string>
+    <string name="go">"LET'S GO!"</string>
 
     <string name="loser">YOU FAILED!</string>
     <string name="start" translatable="false">START</string>

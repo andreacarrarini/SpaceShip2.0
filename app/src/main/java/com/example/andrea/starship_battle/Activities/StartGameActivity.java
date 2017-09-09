@@ -5,10 +5,10 @@ import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.content.IntentFilter;
 import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
@@ -23,7 +23,6 @@ import com.example.andrea.starship_battle.dragNdrop.ShipPosition;
 import com.example.andrea.starship_battle.model.CasellaPosition;
 import com.example.andrea.starship_battle.model.Resizer;
 
-import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.UUID;
@@ -41,6 +40,7 @@ public class StartGameActivity extends Activity {
     int dim_field_square = 11;
     ArrayList<CasellaPosition> casellaPositionListDX = new ArrayList<>();
     ArrayList<CasellaPosition> casellaPositionListSX;
+    RelativeLayout layout;
     ShipPosition position;
     TableLayout rowCompletaRX;
     int  imageTouchedId;
@@ -54,6 +54,7 @@ public class StartGameActivity extends Activity {
     static int tie_count = 2;
     static int stardest_count = 4;
     static int stardeath_count = 4;
+
 
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
@@ -73,7 +74,7 @@ public class StartGameActivity extends Activity {
 
 
 
-        //AUDIO-------------------------------------------------------------------------------------
+        /*AUDIO-------------------------------------------------------------------------------------
 
         shipFiringMediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
@@ -89,7 +90,7 @@ public class StartGameActivity extends Activity {
             e.printStackTrace();
         }
         //prepares the file audio asynchrously
-        shipFiringMediaPlayer.prepareAsync();
+        shipFiringMediaPlayer.prepareAsync();*/
 
         //------------------------------------------------------------------------------------------
 
@@ -132,20 +133,21 @@ public class StartGameActivity extends Activity {
                         public void onClick(View v) {
                             imageTouchedId = v.getId();
 
-                            //plays the file audio
-                            shipFiringMediaPlayer.start();
+                            /*plays the file audio
+                            shipFiringMediaPlayer.start();*/
 
                             String messageToSend = String.valueOf(imageID); //value of ImageView ID
                             sendMessage(messageToSend);
+
+                            /*seeks the file audio to 0 msec
+                            shipFiringMediaPlayer.seekTo(0);*/
                         }
                     });
                     r.resize(row, dim_field_square); //resize delle caselle della scacchiera
-                    for (CasellaPosition c: casellaPositionListDX)
-                        System.out.println(c.getImageName());
+
                 }
             }
         }
-
 
         //Message receiver
         LocalBroadcastManager.getInstance(this).registerReceiver(mReceiver, new IntentFilter("incomingMessage"));
@@ -159,8 +161,10 @@ public class StartGameActivity extends Activity {
                 Log.d(TAG, "startBTConnection: Initializing RFCOM Bluetooth Connection.");
                 Log.d(TAG, "Trying to pair with " + avversarioDevice.getName());
                 mBluetoothConnection.startClient(avversarioDevice, MY_UUID_INSECURE);
-                //TODO: un timer di 4-5sec per la syncr dei thread
-                Toast.makeText(StartGameActivity.this, "LET'S GO!", Toast.LENGTH_SHORT).show();
+
+                //TODO: wait 4-5 sec
+                Toast.makeText(StartGameActivity.this, R.string.go, Toast.LENGTH_LONG).show();
+
                 turno = true;
             }
         });
@@ -180,6 +184,8 @@ public class StartGameActivity extends Activity {
             }else if(isInteger(text)){
                 int imageID = Integer.parseInt(text);
 
+                setTurno (true);
+
                 CasellaPosition casellaSelected = casellaPositionListSX.get(imageID);
                 casellaSelected.setAffondata(true);
                 sendMessage(casellaSelected.getImageName());
@@ -189,7 +195,8 @@ public class StartGameActivity extends Activity {
                     Toast.makeText(getApplicationContext(), R.string.loser, Toast.LENGTH_LONG).show();
                 Log.d(TAG, "messaggio ricevuto MAINACTIVY2: " + text);
                 setDrawValue(text);
-                turno = false;
+
+                setTurno(false);
             }
         }
     };
@@ -229,7 +236,7 @@ public class StartGameActivity extends Activity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(StartGameActivity.this, TableActivity2.class);
+                Intent intent = new Intent(StartGameActivity.this, YourShiptableActivity.class);
                 startActivity(intent);
             }
 
@@ -311,6 +318,10 @@ public class StartGameActivity extends Activity {
     }
     private void setTurno (boolean b){
         turno = b;
-        //if (!turno)
+        layout = (RelativeLayout) findViewById(R.id.starGameSfondo);
+        if(!turno)
+            layout.setBackgroundColor(Color.RED);
+        else
+            layout.setBackgroundColor(Color.BLACK);
     }
 }

@@ -107,8 +107,9 @@ public class BluetoothConnectionService {
      * with a device. It runs straight through; the connection either
      * succeeds or fails.
      */
+    public BluetoothSocket mmSocket;
     private class ConnectThread extends Thread {
-        private BluetoothSocket mmSocket;
+
 
         public ConnectThread(BluetoothDevice device, UUID uuid) {
             Log.d(TAG, "ConnectThread: started.");

@@ -99,7 +99,7 @@ public class ShipPosition{
                 for (int i =0; i < caselleTableList.size(); i++) {
                     Casella casella = caselleTableList.get(i);
 
-                    if (casella.getImageViewId() == cella.getId() && ((i+1)%8!=0)&&(i<39)) { // ((i+1)%8!=0): evita il bordo DX della tabella
+                    if (casella.getImageViewId() == cella.getId() && ((i+1)%8!=0)&&(i<55)) { // ((i+1)%8!=0): evita il bordo DX della tabella
                         //(i<39): evita il bordo in basso della tabella
                         Casella casellaAccanto = caselleTableList.get(i + 1);
                         Casella casellaSotto = caselleTableList.get(i + 8);
@@ -183,7 +183,7 @@ public class ShipPosition{
                 for (int i =0; i < caselleTableList.size(); i++) {
                     Casella casella = caselleTableList.get(i);
 
-                    if (casella.getImageViewId() == cella.getId() && ((i+1)%8!=0)&&(i<39)) { // ((i+1)%8!=0): evita il bordo DX della tabella
+                    if (casella.getImageViewId() == cella.getId() && ((i+1)%8!=0)&&(i<55)) { // ((i+1)%8!=0): evita il bordo DX della tabella
                         //(i<39): evita il bordo in basso della tabella
                         Casella casellaAccanto = caselleTableList.get(i + 1);
                         Casella casellaSotto = caselleTableList.get(i + 8);

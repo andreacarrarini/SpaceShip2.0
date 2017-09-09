@@ -6,17 +6,14 @@ import android.bluetooth.*;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
-import android.os.Build;
 import android.os.Bundle;
 
-import android.support.annotation.RequiresApi;
 import android.view.View;
 import android.widget.*;
 
 import com.example.andrea.starship_battle.Bluetooth.AdapterTrovaDispositiviClass;
 import com.example.andrea.starship_battle.R;
 
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 
 
@@ -79,7 +76,7 @@ public class DispositiviTrovatiActivity extends Activity {
                         String deviceName = createBond(avversarioDevice);
                         Toast.makeText(getApplicationContext(), deviceName, Toast.LENGTH_SHORT).show();
 
-                        Intent intent = new Intent(DispositiviTrovatiActivity.this, TableActivity2.class);
+                        Intent intent = new Intent(DispositiviTrovatiActivity.this, YourShiptableActivity.class);
                         intent.putExtra("avversarioDevice", avversarioDevice);
                         finish();
                         startActivity(intent);
@@ -97,7 +94,7 @@ public class DispositiviTrovatiActivity extends Activity {
 //--------------------------------------------------------------------------------------------------
 
     public void cambiaFontTextView2(TextView textView) {
-        Typeface face = Typeface.createFromAsset(getAssets(), "fonts/Blanche de la Fontaine.ttf");
+        Typeface face = Typeface.createFromAsset(getAssets(), "fonts/Starjedi.ttf");
         textView.setTypeface(face);
     }
 

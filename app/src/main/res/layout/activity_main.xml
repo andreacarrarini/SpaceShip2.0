@@ -40,7 +40,7 @@
             android:textColor="@color/colorFontButtonHomeScreen"
             android:layout_width="match_parent"
             android:layout_height="@dimen/altezza_bottone"
-            android:layout_marginTop="@dimen/margineAlto_primoBottone_HomeScreen"
+            android:layout_marginTop="@dimen/dim_35"
             android:background="@drawable/shape"
             android:id="@+id/btn_profilo" />
 

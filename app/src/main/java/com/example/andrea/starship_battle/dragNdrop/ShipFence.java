@@ -128,10 +128,10 @@ public class ShipFence {
 
                 //CASO DX
                 if( (i+1)%8==7){
-                    for (int j = (i - 9); j>=0 && j < (i - 6) && j<38; j++)
+                    for (int j = (i - 9); j>=0 && j < (i - 6) && j<55; j++)
                         drawFench(j, c);
 
-                    for (int j = (i + 15); j>=0 && j < (i + 17) && j<38; j++)
+                    for (int j = (i + 15); j>=0 && j < (i + 17) && j<55; j++)
                         drawFench(j, c);
 
                     drawFench(i-1, c);

@@ -18,11 +18,11 @@ import android.widget.*;
 import java.util.ArrayList;
 
 
-public class TableActivity2 extends Activity implements View.OnTouchListener, View.OnDragListener {
+public class YourShiptableActivity extends Activity implements View.OnTouchListener, View.OnDragListener {
     private static final String LOGCAT = null;
 
     //CONST: Sets the dimension of the field square and the ships
-    int dim_field_square = 11;
+    int dim_field_square = 10;
     int dim_ship = 4;
     static ArrayList<Casella> caselleTableList = new ArrayList<>();
 
@@ -160,7 +160,7 @@ public class TableActivity2 extends Activity implements View.OnTouchListener, Vi
 
                 caselleTableList = new ArrayList<>();
                 casellePositionList = new ArrayList<CasellaPosition>();
-                Intent intent = new Intent(TableActivity2.this, TableActivity2.class);
+                Intent intent = new Intent(YourShiptableActivity.this, YourShiptableActivity.class);
                 startActivity(intent);
             }
 
@@ -177,7 +177,7 @@ public class TableActivity2 extends Activity implements View.OnTouchListener, Vi
                     Bundle extrainBundle = new Bundle();
                     extrainBundle.putParcelableArrayList("casellePositionListSX", casellePositionList);
 
-                    Intent intent = new Intent(TableActivity2.this, StartGameActivity.class);
+                    Intent intent = new Intent(YourShiptableActivity.this, StartGameActivity.class);
                     intent.putExtra("bundle", extrainBundle); //Passa la lista alla nuova activity
                     intent.putExtra("avversarioDevice", avversarioDevice); //Sending paired device's info to StartGameActivity
                     finish();
