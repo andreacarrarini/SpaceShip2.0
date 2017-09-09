@@ -15,12 +15,12 @@ public class ShipFence {
 
     public ArrayList<Casella> setShipFence (View view, int i, ArrayList<Casella> c){
 
-        //Crea un quadrato intorno alla Shipview in cui non è possibile inserire altre navi
+        //Creating a square around the Shipview, where other ships can not be dropped
 
         switch (view.getId()) {
             case R.id.id_tie:
 
-                //CASO SX
+                //Case: left
                 if( (i+1)%8==1){
                     for (int j = (i - 8); j>=0 && j < (i - 6) && j<63; j++)
                         drawFench(j, c);
@@ -30,7 +30,7 @@ public class ShipFence {
                     drawFench(i+1, c);
                 }
 
-                //CASI CENTRALI
+                //Case: central
                 if( (i+1)%8>=2 && (i+1)%8<=7) {
                     for (int j = (i - 9); j>=0 && j < (i - 6) && j<63; j++)
                         drawFench(j, c);
@@ -42,7 +42,7 @@ public class ShipFence {
                     drawFench(i+1,c);
                 }
 
-                //CASO DX
+                //Case: right
                 if( (i+1)%8==0){
                     for (int j = (i - 9); j>=0 && j < (i - 7)&& j<63; j++)
                         drawFench(j, c);
@@ -57,7 +57,7 @@ public class ShipFence {
 
             case R.id.id_star_dest:
 
-                //CASO SX
+                //Case: left
                 if( (i+1)%8==1){
                     for (int j = (i - 8); j>=0 && j < (i - 5)&& j<63; j++)
                         drawFench(j, c);
@@ -67,8 +67,7 @@ public class ShipFence {
                     drawFench(i+2, c);
                 }
 
-
-                //CASI CENTRALI
+                //Case: central
                 if( (i+1)%8>=2 && (i+1)%8<=7) {
                     for (int j = (i - 9); j>=0 && j < (i - 5)&& j<63; j++)
                         drawFench(j, c);
@@ -79,7 +78,7 @@ public class ShipFence {
                     drawFench(i + 2, c);
                 }
 
-                //CASO DX
+                //Case: right
                 if( (i+1)%8==0){
                     for (int j = (i - 9); j>=0 && j < (i - 8)&& j<63; j++)
                         drawFench(j, c);
@@ -97,7 +96,7 @@ public class ShipFence {
 
             case R.id.id_death_star:
 
-                //CASO SX
+                //Case: left
                 if( (i+1)%8==1){
                     for (int j = (i - 8); j>=0 && j < (i - 5)&& j<63; j++)
                         drawFench(j, c);
@@ -110,8 +109,7 @@ public class ShipFence {
 
                 }
 
-
-                //CASI CENTRALI
+                //Case: central
                 if( (i+1)%8>=2 && (i+1)%8<7) {
                     for (int j = (i - 9); j>=0 && j < (i - 5) && j<63; j++)
                         drawFench(j, c);
@@ -125,7 +123,7 @@ public class ShipFence {
 
                 }
 
-                //CASO DX
+                //Case: right
                 if( (i+1)%8==7){
                     for (int j = (i - 9); j>=0 && j < (i - 6) && j<63; j++)
                         drawFench(j, c);

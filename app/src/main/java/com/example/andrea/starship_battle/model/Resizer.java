@@ -19,7 +19,7 @@ public class Resizer {
         for (int index = 0; index < ((ViewGroup) view).getChildCount(); ++index) {
             View nextChild = ((ViewGroup) view).getChildAt(index);
             ViewGroup.LayoutParams lp = nextChild.getLayoutParams();
-            //per avere dim dello schermo
+            //getting screen dimen
             Display d = ((Activity)context).getWindowManager().getDefaultDisplay();
             Point outsize = new Point();
             d.getSize(outsize);

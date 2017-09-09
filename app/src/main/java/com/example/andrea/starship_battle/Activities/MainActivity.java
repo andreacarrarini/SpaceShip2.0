@@ -19,7 +19,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends Activity {
     public Button buttonProfilo;
-    public Button buttonBluethoot;
+    public Button buttonBluetooth;
     public Button buttonIniziaPartita;
     public TextView textViewSpaceButtle;
     public BluetoothAdapter myBluetoothAdapter;
@@ -30,20 +30,17 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //inizializzo i bottoni
         buttonProfilo = (Button) findViewById(R.id.btn_profilo);
-        buttonBluethoot = (Button) findViewById(R.id.btn_bluethoot);
+        buttonBluetooth = (Button) findViewById(R.id.btn_bluethoot);
         buttonIniziaPartita = (Button) findViewById(R.id.btn_iniziapartita);
-        //inizializzo le textView
         textViewSpaceButtle = (TextView) findViewById(R.id.txt_spacebuttle);
-        //inizializzo il bluethoot
         myBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 
         cambiaFontTextView(textViewSpaceButtle);
         cambiaFontButton(buttonProfilo);
         muoviBottone(buttonProfilo);
-        cambiaFontButton(buttonBluethoot);
-        muoviBottone(buttonBluethoot);
+        cambiaFontButton(buttonBluetooth);
+        muoviBottone(buttonBluetooth);
         cambiaFontButton(buttonIniziaPartita);
         muoviBottone(buttonIniziaPartita);
 
@@ -59,9 +56,9 @@ public class MainActivity extends Activity {
             }
         });
 
-        //permette al giocatore di scegliere la fazione
+        //The player chooses his team
         selectFazione(buttonProfilo);
-
+        //The player activates the device's bluetooth
         attivaBluethoot();
 
         intentTrovaDispositivi();
@@ -93,11 +90,11 @@ public class MainActivity extends Activity {
 //--------------------------------------------------------------------------------------------------
 
     public void muoviBottone(Button button) {
-        //imposta la posizione TranslateAnimation(float fromXDelta, float toXDelta, float fromYDelta, float toYDelta)
+        //sets the TranslateAnimation position(float fromXDelta, float toXDelta, float fromYDelta, float toYDelta)
         final Animation animation = new TranslateAnimation(0, 0, 200, 0);
         // imposta l'Animazione per 2,5 sec
         animation.setDuration(2000);
-        //per fermare il bottone nella nuova posizione
+        //to stop the button in the new position
         animation.setFillAfter(true);
         button.startAnimation(animation);
     }
@@ -106,33 +103,33 @@ public class MainActivity extends Activity {
 
     public void attivaBluethoot() {
 
-        //mostra toast se il dispositivo non sopporta il bluetooth
+        //If the device does not support bluetooth
         if (myBluetoothAdapter == null) {
             Toast.makeText(getApplicationContext(), R.string.no_Bluetooth_Default, Toast.LENGTH_SHORT).show();
         }
         if (myBluetoothAdapter.isEnabled()) {
-            buttonBluethoot.setText(R.string.bluetooth_attivo);
+            buttonBluetooth.setText(R.string.bluetooth_attivo);
         }
-        //accensione e spegnimento del bluethoot
-        buttonBluethoot.setOnClickListener(new View.OnClickListener() {
+        //turning on/off bluetooth
+        buttonBluetooth.setOnClickListener(new View.OnClickListener() {
                                                @Override
                                                public void onClick(View view) {
 
                                                    if (!myBluetoothAdapter.isEnabled()) {
                                                        Intent intent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-                                                       //chiamo la startActivityForResult per acendere il bluethoot attraverso
-                                                       //le impostazioni del sistema senza uscire dall'app
+                                                       //calling startActivityForResult turning on the bleuetooth
                                                        startActivityForResult(intent, 10);
-                                                       buttonBluethoot.setText(R.string.activated_bluetooth);
+                                                       buttonBluetooth.setText(R.string.activated_bluetooth);
                                                        Toast.makeText(getApplicationContext(), R.string.activated_bluetooth, Toast.LENGTH_SHORT).show();
-                                                       //attivo la visibilita del bluethoot sul mio dispositivo
+
+                                                       //Enabling discovery on this device
                                                        Intent discoverableIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
                                                        discoverableIntent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 300);
                                                        startActivity(discoverableIntent);
 
                                                    } else {
                                                        myBluetoothAdapter.disable();
-                                                       buttonBluethoot.setText(R.string.disabled_bluetooth);
+                                                       buttonBluetooth.setText(R.string.disabled_bluetooth);
                                                        Toast.makeText(getApplicationContext(), R.string.disabled_bluetooth, Toast.LENGTH_SHORT).show();
                                                    }
                                                }}
@@ -150,11 +147,11 @@ public class MainActivity extends Activity {
             public void onClick(View view) {
                 bAdapter = BluetoothAdapter.getDefaultAdapter();
 
-                //inizio la scansione per i nuovi dispositivi
+                //showing all the permissions
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
                 }
-
+                //discovering other devices
                 bAdapter.startDiscovery();
 
                 if (!bAdapter.isEnabled()) {
@@ -177,13 +174,13 @@ public class MainActivity extends Activity {
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
 
-            //Una volta partita la scansione svuoto l'arraylist
+            //For each discovery creates a new ArrayList
             if (BluetoothAdapter.ACTION_DISCOVERY_STARTED.equals(action)) {
                 scanningDialog.show();
                 dispositiviList = new ArrayList<>();
             }
 
-            //ogni volta che trova un dispositivo, lo aggiunge all'arraylist di dispositivi
+            //Adding the devices which has been found
             else if (BluetoothDevice.ACTION_FOUND.equals(action)) {
                 BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
                 if (!dispositiviList.contains(device)) {
@@ -191,7 +188,7 @@ public class MainActivity extends Activity {
                 }
             }
 
-            //Finita la scansione passo alla ListActivity dei dispositivi trovati
+            //Ending the scanning and showing the new Activity
             else if (BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(action)) {
                 scanningDialog.dismiss();
                 Intent intent1 = new Intent(MainActivity.this, DispositiviTrovatiActivity.class);
@@ -202,7 +199,7 @@ public class MainActivity extends Activity {
         }
     };
 
-    //viene tolta la registrazione del brodcast receiver
+    //ending the BroadcastReceiver
     @Override
     public void onDestroy() {
         unregisterReceiver(broadcastReceiver);

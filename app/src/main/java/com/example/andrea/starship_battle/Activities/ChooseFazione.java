@@ -13,7 +13,7 @@ import com.example.andrea.starship_battle.R;
 import com.example.andrea.starship_battle.model.Fazione;
 
 /**
- * Created by utente on 06/09/2017.
+ * Created by Diletta on 06/09/2017.
  */
 
 public class ChooseFazione extends Activity {
@@ -23,8 +23,7 @@ public class ChooseFazione extends Activity {
     public static Fazione fazione;
     private static final String LOGCAT = "ChooseFazione";
 
-
-
+    //The player chooses his team between Jedi and Sith
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

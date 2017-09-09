@@ -31,7 +31,7 @@ public class ShipPosition{
 
         ShipFence fence = new ShipFence();
         ViewGroup owner = (ViewGroup) view.getParent();
-        //Drop a seconda della grandezza delle navi
+        //Drop depending on the size of the ships
         switch (view.getId()) {
             case R.id.id_tie:
 
@@ -40,17 +40,16 @@ public class ShipPosition{
 
                     if ( (casella.getImageViewId() == cella.getId()) && casellaLibera(casella)) {
 
-                        casella.setOccupata(true); //La casella o contiene una barca
+                        casella.setOccupata(true);
                         generateDrawable(casella, fazione,"tie_sx");
 
-                        //disattiva il drag delle caselle intorno alla ship droppata
+                        //creates the ship's fence
                         caselleTableList= fence.setShipFence(view, i, caselleTableList);
 
-                        //disattiva il drag per quelle caselle
+                        //deactivates onDragListener around the dropped ship
                         owner.setOnDragListener(null);
 
-                        //Numero di Volte che si possono inserire le ships
-
+                        //Ship with size 1 counter
                         numTie += 1;
                         if(numTie>1)
                             owner.removeView(view);
@@ -64,7 +63,7 @@ public class ShipPosition{
             case R.id.id_star_dest:
 
                 for (int i = 0; i < caselleTableList.size(); i++) {
-                    Casella casella = caselleTableList.get(i);//seleziona la casella
+                    Casella casella = caselleTableList.get(i);
 
                     if (casella.getImageViewId() == cella.getId() && ((i+1)%8!=0)) {  // ((i+1)%8!=0): evita il bordo DX della tabella;
                         Casella casellaAccanto = caselleTableList.get(i + 1);
@@ -78,13 +77,13 @@ public class ShipPosition{
                             casellaAccanto.setOccupata(true);
                             generateDrawable(casellaAccanto, fazione, "star_destroyer_sx_1");
 
-                            //disattiva il drag delle caselle intorno alla ship droppata
+                            //creates the ship's fence
                             caselleTableList=fence.setShipFence(view, i, caselleTableList);
 
-                            //disattiva il drag per quelle caselle
+                            //deactivates onDragListener around the dropped ship
                             owner.setOnDragListener(null);
 
-                            //Numero di Volte che si possono inserire le ships
+                            //Ship with size 2 counter
                             numStarDest += 1;
                             if (numStarDest>1)
                                 owner.removeView(view);
@@ -101,13 +100,13 @@ public class ShipPosition{
                 for (int i = 0; i < caselleTableList.size(); i++) {
                     Casella casella = caselleTableList.get(i);
 
-                    if (casella.getImageViewId() == cella.getId() && ((i+1)%8!=0)&&(i<55)) { // ((i+1)%8!=0): evita il bordo DX della tabella
-                        //(i<55): evita il bordo in basso della tabella
+                    if (casella.getImageViewId() == cella.getId() && ((i+1)%8!=0)&&(i<55)) {
+
                         Casella casellaAccanto = caselleTableList.get(i + 1);
                         Casella casellaAccanto1 = caselleTableList.get(i + 2);
                         Casella casellaSotto = caselleTableList.get(i + 8);
                         Casella casellaSotto1 = caselleTableList.get(i + 10);
-                        Casella casellaSottoAccanto = caselleTableList.get(i + 9);//seleziona la casella
+                        Casella casellaSottoAccanto = caselleTableList.get(i + 9);
 
                         if (casellaLibera(casella) && casellaLibera(casellaAccanto) && casellaLibera(casellaSotto) && casellaLibera(casellaSottoAccanto)
                             && casellaLibera(casellaAccanto1) && casellaLibera(casellaSotto1)
@@ -127,13 +126,13 @@ public class ShipPosition{
                             casellaSottoAccanto.setOccupata(true);
                             generateDrawable(casellaSottoAccanto, fazione, "death_star_sx_2");
 
-                            //disattiva il drag delle caselle intorno alla ship droppata
+                            //creates the ship's fence
                             caselleTableList=fence.setShipFence(view, i, caselleTableList);
 
-                            //disattiva il drag per quelle caselle
+                            //deactivates onDragListener around the dropped ship
                             owner.setOnDragListener(null);
 
-                            //Numero di Volte che si possono inserire le ships
+                            //Ship with size 4 counter
                             numStarDeath += 1;
                             if (numStarDeath>0)
                                 owner.removeView(view);
@@ -151,7 +150,6 @@ public class ShipPosition{
     //Andrea: to fill the ArrayList<CasellaPosition>
     public  ArrayList<CasellaPosition> setPositionShip2(View view, View cella, ArrayList<Casella> caselleTableList, ArrayList<CasellaPosition> casellaPositionArrayList) {
 
-        //Drop a seconda della grandezza delle navi
         switch (view.getId()) {
             case R.id.id_tie:
 
@@ -172,9 +170,9 @@ public class ShipPosition{
             case R.id.id_star_dest:
 
                 for (int i = 0; i < caselleTableList.size(); i++) {
-                    Casella casella = caselleTableList.get(i);//seleziona la casella
+                    Casella casella = caselleTableList.get(i);
 
-                    if (casella.getImageViewId() == cella.getId() && ((i+1)%8!=0)) {  // ((i+1)%8!=0): evita il bordo DX della tabella;
+                    if (casella.getImageViewId() == cella.getId() && ((i+1)%8!=0)) {
 
                         //Andrea: fills another ArrayList in parallel
                         casellaPositionArrayList.get(i).setImageName("star_destroyer_sx_2");
@@ -189,8 +187,7 @@ public class ShipPosition{
                 for (int i =0; i < caselleTableList.size(); i++) {
                     Casella casella = caselleTableList.get(i);
 
-                    if (casella.getImageViewId() == cella.getId() && ((i+1)%8!=0)&&(i<55)) { // ((i+1)%8!=0): evita il bordo DX della tabella
-                        //(i<55): evita il bordo in basso della tabella
+                    if (casella.getImageViewId() == cella.getId() && ((i+1)%8!=0)&&(i<55)) {
 
                         //Andrea: fills another ArrayList in parallel
                         casellaPositionArrayList.get(i).setImageName("death_star_sx_3");

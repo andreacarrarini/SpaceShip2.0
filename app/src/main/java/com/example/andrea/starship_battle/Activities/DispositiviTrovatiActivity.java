@@ -38,11 +38,11 @@ public class DispositiviTrovatiActivity extends Activity {
         textViewBluethootTrovati = (TextView) findViewById(R.id.txt_bluethootTrovati);
         listViewBluethootTrovati = (ListView) findViewById(R.id.listView_bluethoot_trovati);
 
-        //Presi i valori dei dispositivi attivi, li mostro nella listView
+        //Shows all the found devices in the listview
         adapter = new AdapterTrovaDispositiviClass(this);
         dispositiviList = getIntent().getExtras().getParcelableArrayList("dispositiviDisponibili");
 
-        //Se non ci sono dispositivi disponibili a giocare nelle vicinanze
+        //If there are no players around, shows a dialog
         if (dispositiviList.size()==0) {
 
             AlertDialog.Builder builder = new AlertDialog.Builder(this);// TODO: android.R.style.Theme_Material_Dialog

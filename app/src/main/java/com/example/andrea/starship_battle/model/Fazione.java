@@ -1,7 +1,7 @@
 package com.example.andrea.starship_battle.model;
 
 /**
- * Created by utente on 06/09/2017.
+ * Created by Diletta on 06/09/2017.
  */
 
 public enum Fazione {

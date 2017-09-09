@@ -2,15 +2,13 @@ package com.example.andrea.starship_battle.dragNdrop;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.view.View;
 import android.widget.ImageView;
 
 import com.example.andrea.starship_battle.R;
-import com.example.andrea.starship_battle.model.Casella;
 import com.example.andrea.starship_battle.model.Fazione;
 
 /**
- * Created by utente on 06/09/2017.
+ * Created by Diletta on 06/09/2017.
  */
 
 public class ShipDrawer {
@@ -62,22 +60,22 @@ public class ShipDrawer {
                                 drawable = context.getResources().getDrawable(R.drawable.x_wing_dx);
                                 break;
                             case "star_destroyer_sx_2":
-                                drawable = context.getResources().getDrawable(R.drawable.rebel_cruiser_dx_2);
-                                break;
-                            case "star_destroyer_sx_1":
                                 drawable = context.getResources().getDrawable(R.drawable.rebel_cruiser_dx_1);
                                 break;
-                            case "death_star_sx_3":
-                                drawable = context.getResources().getDrawable(R.drawable.millenium_falcon_dx_3);
+                            case "star_destroyer_sx_1":
+                                drawable = context.getResources().getDrawable(R.drawable.rebel_cruiser_dx_2);
                                 break;
-                            case "death_star_sx_1":
+                            case "death_star_sx_3":
                                 drawable = context.getResources().getDrawable(R.drawable.millenium_falcon_dx_1);
                                 break;
+                            case "death_star_sx_1":
+                                drawable = context.getResources().getDrawable(R.drawable.millenium_falcon_dx_3);
+                                break;
                             case "death_star_sx_4":
-                                drawable = context.getResources().getDrawable(R.drawable.millenium_falcon_dx_4);
+                                drawable = context.getResources().getDrawable(R.drawable.millenium_falcon_dx_2);
                                 break;
                             case "death_star_sx_2":
-                                drawable = context.getResources().getDrawable(R.drawable.millenium_falcon_dx_2);
+                                drawable = context.getResources().getDrawable(R.drawable.millenium_falcon_dx_4);
                                 break;
                             case "space":
                                 drawable = context.getResources().getDrawable(R.drawable.ic_galactic_space);
@@ -95,22 +93,22 @@ public class ShipDrawer {
                                 drawable = context.getResources().getDrawable(R.drawable.tie_dx);
                                 break;
                             case "star_destroyer_sx_2":
-                                drawable = context.getResources().getDrawable(R.drawable.star_destroyer_dx_2);
-                                break;
-                            case "star_destroyer_sx_1":
                                 drawable = context.getResources().getDrawable(R.drawable.star_destroyer_dx_1);
                                 break;
-                            case "death_star_sx_3":
-                                drawable = context.getResources().getDrawable(R.drawable.death_star_dx_3);
+                            case "star_destroyer_sx_1":
+                                drawable = context.getResources().getDrawable(R.drawable.star_destroyer_dx_2);
                                 break;
-                            case "death_star_sx_1":
+                            case "death_star_sx_3":
                                 drawable = context.getResources().getDrawable(R.drawable.death_star_dx_1);
                                 break;
+                            case "death_star_sx_1":
+                                drawable = context.getResources().getDrawable(R.drawable.death_star_dx_3);
+                                break;
                             case "death_star_sx_4":
-                                drawable = context.getResources().getDrawable(R.drawable.death_star_dx_4);
+                                drawable = context.getResources().getDrawable(R.drawable.death_star_dx_2);
                                 break;
                             case "death_star_sx_2":
-                                drawable = context.getResources().getDrawable(R.drawable.death_star_dx_2);
+                                drawable = context.getResources().getDrawable(R.drawable.death_star_dx_4);
                                 break;
                             case "space":
                                 drawable = context.getResources().getDrawable(R.drawable.ic_galactic_space);

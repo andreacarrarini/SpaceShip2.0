@@ -47,7 +47,7 @@ public class SetupShiptableActivity extends Activity implements View.OnTouchList
         caselleTableList = new ArrayList<Casella>();
         casellePositionList = new ArrayList<CasellaPosition>();
 
-        //Se il giocatore non ha selezionato una sua fazione, è Sith di deafult
+        //If the player has not choose his team, it becomes Sith by default
         if (ChooseFazione.fazione == null)
             fazione = Fazione.Sith;
         else
@@ -75,7 +75,7 @@ public class SetupShiptableActivity extends Activity implements View.OnTouchList
         //prepares the file audio asynchrously
         mediaPlayer.prepareAsync();
 
-        //Enemy's datas
+        //Enemy's device datas
         avversarioDevice = getIntent().getExtras().getParcelable("avversarioDevice");
 
         // Sets the activity title
@@ -95,41 +95,44 @@ public class SetupShiptableActivity extends Activity implements View.OnTouchList
             case Sith:
                 break;
             case Jedi:
-                tie.setImageDrawable(getResources().getDrawable(R.drawable.x_wing_dx));
+                tie.setImageDrawable(getResources().getDrawable(R.drawable.x_wing_sx));
                 star_destroyer.setImageDrawable(getResources().getDrawable(R.drawable.rebel_cruiser_sx));
-                death_star.setImageDrawable(getResources().getDrawable(R.drawable.millenium_falcon_dx));
+                death_star.setImageDrawable(getResources().getDrawable(R.drawable.millenium_falcon_sx));
                 break;
         }
 
-        //Creo una lista di ImageView che rappresenta la tabella e setto ogni ImageView onDRAGListener
+        //The playing field is created with a List of ImageViews
         TableLayout rowCompleta = (TableLayout) findViewById(R.id.idTab);
         rowCompleta.setBackground(getResources().getDrawable(R.drawable.sfondotrovadisp));
         for (int i = 1; i < rowCompleta.getChildCount(); i++) {
             TableRow row = (TableRow) findViewById(rowCompleta.getChildAt(i).getId());
             for (int j = 1; j < row.getChildCount(); j++) {
                 if(row.getChildAt(j) instanceof ImageView) {
+
+                    //Every ImageView has his own onDragListener
                     row.getChildAt(j).setOnDragListener(this);
 
-                    r.resize(row, dim_field_square); //resize delle caselle della scacchiera
+                    r.resize(row, dim_field_square); //resize of chessboard boxes
 
-                    Casella c = new Casella((ImageView) row.getChildAt(j), false); //Lista di caselle: ImageView vuote
+                    //All the Caselle are empty at first
+                    Casella c = new Casella((ImageView) row.getChildAt(j), false);
                     caselleTableList.add(c);
                     CasellaPosition casellaPosition = new CasellaPosition();
                     casellaPosition.setImageName("space");
                     casellePositionList.add(casellaPosition);
 
                 }else{
-                    r.resize(row, dim_field_square); //resize delle textView
+                    r.resize(row, dim_field_square); //resize of textView
                 }
             }
         }
 
-        // ImageView's onTOUCHListener for Drag: se una delle ships viene toccata, inizia il Drag
+        // ImageView's onTouchListener for Drag
         tie.setOnTouchListener(this);
         star_destroyer.setOnTouchListener(this);
         death_star.setOnTouchListener(this);
 
-        //Annulla tutta la disposizione delle navi
+        //Cancels all ships disposition
         restartShiptable(btnAnnulla);
         cambiaFontButton(btnAnnulla);
 
@@ -140,9 +143,9 @@ public class SetupShiptableActivity extends Activity implements View.OnTouchList
 
     @Override
     public boolean onTouch(View view, MotionEvent motionEvent) {
-        /*Con lo stesso metodo Touch eseguo le due azioni: si differenzia in base a:
-        -ACTION_DOWN = l'utente ha appena toccato qualcosa (le ships che verranno draggate)
-        -ACTION_UP = l'utente ha staccato il dito dallo schermo ( inizia il drop della ship)
+        /*Catching two actions:
+        -ACTION_DOWN = the player has touched the ship's view and starts dragging it;
+        -ACTION_UP = the player has released the view, dropping it.
         */
         Boolean check=true;
 
@@ -154,7 +157,7 @@ public class SetupShiptableActivity extends Activity implements View.OnTouchList
                 view.setVisibility(View.INVISIBLE);
                 check = true;
             } else {
-                view.setVisibility(View.VISIBLE); //Non fa sparire la view se si sbaglia a cliccare
+                view.setVisibility(View.VISIBLE);
                 check = false;
             }
         }else  if (view instanceof TableRow) {  //DROP on Table
@@ -173,14 +176,13 @@ public class SetupShiptableActivity extends Activity implements View.OnTouchList
 
         switch (action) {
             case DragEvent.ACTION_DRAG_STARTED:
-
                 Log.d(LOGCAT, "Drag started_"+fazione.toString());
                 break;
 
             case DragEvent.ACTION_DROP:
                 Log.d(LOGCAT, "Drop started");
 
-                //ShipPosition gestisce il drop in base al tipo di ship
+                //ShipPosition handles the dropped view
                 caselleTableList = position.setPositionShip(view, cella, caselleTableList, fazione);
                 casellePositionList = position.setPositionShip2(view, cella, caselleTableList, casellePositionList);
                 return true;
@@ -233,13 +235,14 @@ public class SetupShiptableActivity extends Activity implements View.OnTouchList
             @Override
             public void onClick(View v) {
 
-                if( ((LinearLayout) findViewById(R.id.ship_deposit)).getChildCount() == 0  ) { //non ci sono più navi
+                //The player has to place all the ships
+                if( ((LinearLayout) findViewById(R.id.ship_deposit)).getChildCount() == 0  ) {
 
                     Bundle extrainBundle = new Bundle();
                     extrainBundle.putParcelableArrayList("casellePositionListSX", casellePositionList);
 
                     Intent intent = new Intent(SetupShiptableActivity.this, StartGameActivity.class);
-                    intent.putExtra("bundle", extrainBundle); //Passa la lista alla nuova activity
+                    intent.putExtra("bundle", extrainBundle); //Starting the new Activity
                     intent.putExtra("avversarioDevice", avversarioDevice); //Sending paired device's info to StartGameActivity
                     intent.putExtra("fazioneScelta", fazione.toString());
                     releaseMediaPlayer(mediaPlayer);

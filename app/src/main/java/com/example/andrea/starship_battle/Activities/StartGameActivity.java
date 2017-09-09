@@ -96,7 +96,7 @@ public class StartGameActivity extends Activity {
         if (avversarioDevice.getBondState() == BluetoothDevice.BOND_BONDED)
             Log.i(TAG, "devices are bonded");
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(StartGameActivity.this);//android.R.style.Theme_Material_Dialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(StartGameActivity.this);
         builder.setTitle(R.string.loser);
         builder.setMessage(R.string.restartAll);
         builder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
@@ -123,7 +123,7 @@ public class StartGameActivity extends Activity {
 
         //------------------------------------------------------------------------------------------
 
-        //TABLE GAME SX: tablegame con le ships inserite dal giocatore
+        //TABLE GAME SX: game field with the player's arranged ships
         Bundle b = getIntent().getBundleExtra("bundle");
         casellaPositionListSX = b.getParcelableArrayList("casellePositionListSX");
 
@@ -137,13 +137,13 @@ public class StartGameActivity extends Activity {
                         (row.getChildAt(j)).setBackground(getResources().getDrawable(R.drawable.ic_galactic_space));
                         ((ImageView) row.getChildAt(j)).setImageDrawable(getShip(casellaPositionListSX, i - 1, j - 1));
                     }
-                    r.resize(row, dim_field_square); //resize delle caselle della scacchiera
+                    r.resize(row, dim_field_square); //resize of chessboard boxes
                 }
             }
         }
 
 
-        //TABLE GAME DX: tablegame per la ricerca delle ship dell'avversario
+        //TABLE GAME DX: game field for the search of enemy ships
         rowCompletaRX = (TableLayout) findViewById(R.id.idTabB);
         rowCompletaRX.setBackground(getResources().getDrawable(R.drawable.sfondotrovadisp));
         for (int i = 1; i < rowCompletaRX.getChildCount(); i++) {
@@ -151,7 +151,7 @@ public class StartGameActivity extends Activity {
             for (int j = 1; j < row.getChildCount(); j++) {
                 if (row.getChildAt(j) instanceof ImageView) {
 
-                    final int  imageID = (i-1) * 8 + (j-1); // Numero della casella toccata
+                    final int  imageID = (i-1) * 8 + (j-1); // Number of imageview touched
 
                     if (!casellaPositionListDX.isEmpty()) {
                         ((ImageView) row.getChildAt(j)).setImageDrawable(getShip(casellaPositionListDX, i - 1, j - 1));
@@ -160,14 +160,20 @@ public class StartGameActivity extends Activity {
                         @Override
                         public void onClick(View v) {
                             imageTouchedId = v.getId();
-                            //plays the file audio
-                            playSound(shipFiringMediaPlayer, "FIRE_EXEC");
-                            String messageToSend = String.valueOf(imageID); //value of ImageView ID
-                            sendMessage(messageToSend);
-                            v.invalidate();
+                            if(turno){
+
+                                //plays the file audio
+                                playSound(shipFiringMediaPlayer, "FIRE_EXEC");
+                                String messageToSend = String.valueOf(imageID);
+                                sendMessage(messageToSend);
+                                v.invalidate();
+
+                            }else{
+                                Log.d(TAG, "non è il tuo turno");
+                            }
                         }
                     });
-                    r.resize(row, dim_field_square); //resize delle caselle della scacchiera
+                    r.resize(row, dim_field_square); //resize of chessboard boxes
                 }
             }
         }
@@ -175,7 +181,7 @@ public class StartGameActivity extends Activity {
         //Message receiver
         LocalBroadcastManager.getInstance(this).registerReceiver(mReceiver, new IntentFilter("incomingMessage"));
 
-        //Sincronizzazione dispositivi sui thread di connessione BT
+        //Synchronizing devices on Bluetooth connection threads
         startBTconnession = (Button) findViewById(R.id.btnStart);
         cambiaFontButton(startBTconnession);
         startBTconnession.setOnClickListener(new Button.OnClickListener() {
@@ -193,7 +199,7 @@ public class StartGameActivity extends Activity {
         });
     }
 
-    //scambio pacchetti via BT
+    //Receiving exchanged packages via Bluetooth
     BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -229,10 +235,11 @@ public class StartGameActivity extends Activity {
             }else if(!isInteger(text)){
                 switch (text) {
                     case "perso":
-                        alertDialogFAIL.show();
 
                         //TODO:LOSE SOUND
                         playSound(shipResponseMediaPlayer, "LOSE");
+                        alertDialogFAIL.show();
+
                         break;
 
                     case "finish":
@@ -267,14 +274,16 @@ public class StartGameActivity extends Activity {
                         playSound(shipResponseMediaPlayer, "FLOP");
                     }
                     else {
-                        if(s.contains("tie")) {//navi da 1 mostrate subito
+                        //if the ship has size 1, is displayed immediately
+                        if(s.contains("tie")) {
                             Drawable d = drawer.getDrawableFromString(avversario, s, fazione);
                             ((ImageView) row.getChildAt(j)).setImageDrawable(d);
 
                             //SUNK SHIP SOUND
                             playSound(shipResponseMediaPlayer, "SHIP_SUNK");
                         }
-                        else {//altre navi mostrate quando sono tutte colpite
+                        //other ships shown when they are all affected
+                        else {
                             ((ImageView) row.getChildAt(j)).setImageDrawable(getResources().getDrawable(R.drawable.ic_boom));
                         }
                         //HIT SOUND
@@ -284,11 +293,9 @@ public class StartGameActivity extends Activity {
                 }
             }
         }
-        //contatore per le navi dell'avversario trovate
+        //counter for the enemy ships which have been found
         shipFoundCounter(s);
     }
-
-    //TODO: ciao ciao
 
 
     @Override
@@ -347,6 +354,7 @@ public class StartGameActivity extends Activity {
     }
 
     private void naviColpite(ArrayList<Integer> array, int i, String s ) {
+        //Drawing the sunken ships
         switch (s){
             case "star_destroyer":
                 if (array.contains(i-1)) {
@@ -392,7 +400,7 @@ public class StartGameActivity extends Activity {
 
         if (tie_count <= 0 && stardeath_count <= 0 && stardest_count <= 0){
 
-            //notifica all'avversario la fine della partita
+            //Notify the opponent the end of the match
             sendMessage("perso");
 
             //WIN SOUND
