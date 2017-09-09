@@ -13,7 +13,7 @@
     <dimen name="column_heigth">50dp</dimen>
     <dimen name="label_dim">20dp</dimen>
 
-    <dimen name="dim_20">20dp</dimen>
+    <dimen name="dim_20sp">20sp</dimen>
     <dimen name="dim_35">35dp</dimen>
     <dimen name="dim_50">50dp</dimen>
 </resources>

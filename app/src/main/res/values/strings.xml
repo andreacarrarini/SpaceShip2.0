@@ -1,15 +1,15 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="app_name" translatable="false">SpaceButtle</string>
-    <string name="attiva_bluethoot">Enable bluethoot</string>
     <string name="inizia_partita">Starts the match</string>
     <string name="profilo">My profile</string>
     <string name="space_buttle" translatable="false">Space Buttle</string>
-    <string name="no_Bluethoot_Default">Your device does not support bluethoot</string>
-    <string name="activated_bluethoot">Enabled bluethoot</string>
-    <string name="disabled_bluethoot">disabled bluethoot</string>
+    <string name="no_Bluethoot_Default">Your device does not support bluetooth</string>
+    <string name="activated_bluethoot">Enabled bluetooth</string>
+    <string name="disabled_bluethoot">Disabled bluetooth</string>
     <string name="bluethoot_attivo">Bluethoot is enable</string>
     <string name="textview">Bluethoot found nearby</string>
     <string name="dispositivi_accoppiati"> Device already paired!</string>
+    <string name="attiva_bluethoot">Enable bluethoot</string>
     <string name="please">Please, enable bluethoot</string>
     <string name="scanning">Scanning…</string>
     <string name="name_disp" translatable="false">Name</string>
@@ -22,9 +22,13 @@
     <string name="selectedDevice">Select</string>
     <string name="noSelectableDevices">Couldn\'t find any devices</string>
     <string name="errorMessage">Would you like to go back?</string>
-    <string name="go">"LET'S GO!"</string>
+    <string name="bonded">Connected to</string>
+
 
     <string name="loser">YOU FAILED!</string>
+    <string name="winner" translatable="false">Mission complete c: </string>
+    <string name="restartAll">Do you want to play again?</string>
+
     <string name="start" translatable="false">START</string>
 
 

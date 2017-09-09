@@ -25,55 +25,55 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text=" "
-                    android:textSize="20dp" />
+                    android:textSize="@dimen/dim_20sp" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="1"
-                    android:textSize="20dp" />
+                    android:textSize="@dimen/dim_20sp" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="2"
-                    android:textSize="20dp" />
+                    android:textSize="@dimen/dim_20sp" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="3"
-                    android:textSize="20dp" />
+                    android:textSize="@dimen/dim_20sp" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="4"
-                    android:textSize="20dp" />
+                    android:textSize="@dimen/dim_20sp" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="5"
-                    android:textSize="20dp" />
+                    android:textSize="@dimen/dim_20sp" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="6"
-                    android:textSize="20dp" />
+                    android:textSize="@dimen/dim_20sp" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="7"
-                    android:textSize="20dp" />
+                    android:textSize="@dimen/dim_20sp" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="8"
-                    android:textSize="20dp" />
+                    android:textSize="@dimen/dim_20sp" />
             </TableRow>
 
             <TableRow
@@ -85,7 +85,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="A"
-                    android:textSize="20dp" />
+                    android:textSize="@dimen/dim_20sp" />
 
                 <ImageView
                     android:id="@+id/row1col1"
@@ -145,7 +145,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="B"
-                    android:textSize="20dp" />
+                    android:textSize="@dimen/dim_20sp" />
 
                 <ImageView
                     android:id="@+id/row2col1"
@@ -205,7 +205,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="C"
-                    android:textSize="20dp" />
+                    android:textSize="@dimen/dim_20sp" />
 
                 <ImageView
                     android:id="@+id/row3col1"
@@ -265,7 +265,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="D"
-                    android:textSize="20dp" />
+                    android:textSize="@dimen/dim_20sp" />
 
                 <ImageView
                     android:id="@+id/row4col1"
@@ -325,7 +325,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="E"
-                    android:textSize="20dp" />
+                    android:textSize="@dimen/dim_20sp" />
 
                 <ImageView
                     android:id="@+id/row5col1"
@@ -385,7 +385,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="F"
-                    android:textSize="20dp" />
+                    android:textSize="@dimen/dim_20sp" />
 
                 <ImageView
                     android:id="@+id/row6col1"
@@ -445,7 +445,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="G"
-                    android:textSize="20dp" />
+                    android:textSize="@dimen/dim_20sp" />
 
                 <ImageView
                     android:id="@+id/row7col1"
@@ -505,7 +505,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="H"
-                    android:textSize="20dp" />
+                    android:textSize="@dimen/dim_20sp" />
 
                 <ImageView
                     android:id="@+id/row8col1"
@@ -572,55 +572,55 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text=" "
-                    android:textSize="20dp" />
+                    android:textSize="@dimen/dim_20sp" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="1"
-                    android:textSize="20dp" />
+                    android:textSize="@dimen/dim_20sp" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="2"
-                    android:textSize="20dp" />
+                    android:textSize="@dimen/dim_20sp" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="3"
-                    android:textSize="20dp" />
+                    android:textSize="@dimen/dim_20sp" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="4"
-                    android:textSize="20dp" />
+                    android:textSize="@dimen/dim_20sp" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="5"
-                    android:textSize="20dp" />
+                    android:textSize="@dimen/dim_20sp" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="6"
-                    android:textSize="20dp" />
+                    android:textSize="@dimen/dim_20sp" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="7"
-                    android:textSize="20dp" />
+                    android:textSize="@dimen/dim_20sp" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="8"
-                    android:textSize="20dp" />
+                    android:textSize="@dimen/dim_20sp" />
             </TableRow>
 
             <TableRow
@@ -632,7 +632,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="A"
-                    android:textSize="20dp" />
+                    android:textSize="@dimen/dim_20sp" />
 
                 <ImageView
                     android:id="@+id/row1col1B"
@@ -692,7 +692,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="B"
-                    android:textSize="20dp" />
+                    android:textSize="@dimen/dim_20sp" />
 
                 <ImageView
                     android:id="@+id/row2col1B"
@@ -752,7 +752,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="C"
-                    android:textSize="20dp" />
+                    android:textSize="@dimen/dim_20sp" />
 
                 <ImageView
                     android:id="@+id/row3col1B"
@@ -812,7 +812,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="D"
-                    android:textSize="20dp" />
+                    android:textSize="@dimen/dim_20sp" />
 
                 <ImageView
                     android:id="@+id/row4col1B"
@@ -872,7 +872,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="E"
-                    android:textSize="20dp" />
+                    android:textSize="@dimen/dim_20sp" />
 
                 <ImageView
                     android:id="@+id/row5col1B"
@@ -932,7 +932,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="F"
-                    android:textSize="20dp" />
+                    android:textSize="@dimen/dim_20sp" />
 
                 <ImageView
                     android:id="@+id/row6col1B"
@@ -992,7 +992,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="G"
-                    android:textSize="20dp" />
+                    android:textSize="@dimen/dim_20sp" />
 
                 <ImageView
                     android:id="@+id/row7col1B"
@@ -1052,7 +1052,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="H"
-                    android:textSize="20dp" />
+                    android:textSize="@dimen/dim_20sp" />
 
                 <ImageView
                     android:id="@+id/row8col1B"

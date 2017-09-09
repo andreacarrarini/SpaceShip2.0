@@ -1,9 +1,12 @@
 package com.example.andrea.starship_battle.Activities;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -50,10 +53,12 @@ public class StartGameActivity extends Activity {
     private static final UUID MY_UUID_INSECURE = UUID.fromString("8ce255c0-200a-11e0-ac64-0800200c9a66");
 
     MediaPlayer shipFiringMediaPlayer = new MediaPlayer();
+    AlertDialog alertDialogFAIL;
 
     static int tie_count = 2;
     static int stardest_count = 4;
     static int stardeath_count = 4;
+
 
 
 
@@ -71,6 +76,28 @@ public class StartGameActivity extends Activity {
         avversarioDevice = getIntent().getExtras().getParcelable("avversarioDevice");
         if (avversarioDevice.getBondState() == BluetoothDevice.BOND_BONDED)
             Log.i(TAG, "bonded");
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(StartGameActivity.this);// TODO: android.R.style.Theme_Material_Dialog
+        builder.setTitle(R.string.loser);
+        builder.setMessage(R.string.restartAll);
+        builder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent intent = new Intent(StartGameActivity.this, MainActivity.class);
+                Bundle b = new Bundle();
+                b.putBoolean("new_window", true); //sets new window
+                intent.putExtras(b);
+                startActivity(intent);
+            }
+        });
+        builder.setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+         alertDialogFAIL= builder.create();
+
+
 
 
 
@@ -157,13 +184,10 @@ public class StartGameActivity extends Activity {
         startBTconnession.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
 
-                mBluetoothConnection = new BluetoothConnectionService();
+                mBluetoothConnection = new BluetoothConnectionService(StartGameActivity.this);
                 Log.d(TAG, "startBTConnection: Initializing RFCOM Bluetooth Connection.");
                 Log.d(TAG, "Trying to pair with " + avversarioDevice.getName());
                 mBluetoothConnection.startClient(avversarioDevice, MY_UUID_INSECURE);
-
-                //TODO: wait 4-5 sec
-                Toast.makeText(StartGameActivity.this, R.string.go, Toast.LENGTH_LONG).show();
 
                 turno = true;
             }
@@ -191,8 +215,9 @@ public class StartGameActivity extends Activity {
                 sendMessage(casellaSelected.getImageName());
 
             }else if(!isInteger(text)){
-                if(text.equals("perso"))
-                    Toast.makeText(getApplicationContext(), R.string.loser, Toast.LENGTH_LONG).show();
+                if(text.equals("perso")){
+                    alertDialogFAIL.show();
+                }
                 Log.d(TAG, "messaggio ricevuto MAINACTIVY2: " + text);
                 setDrawValue(text);
 
@@ -220,8 +245,9 @@ public class StartGameActivity extends Activity {
                 }
             }
         }
-        //contatore per le navi trovate
-        shipFountCounter(s);
+        //contatore per le navi dell'avversario
+        // trovate
+        shipFoundCounter(s);
     }
 
     @Override
@@ -237,7 +263,7 @@ public class StartGameActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(StartGameActivity.this, YourShiptableActivity.class);
-                intent.putExtra("avversarioDevice", avversarioDevice); 
+                intent.putExtra("avversarioDevice", avversarioDevice);
                 startActivity(intent);
             }
 
@@ -304,7 +330,7 @@ public class StartGameActivity extends Activity {
         return drawable;
     }
 
-    private void shipFountCounter(String s){
+    private void shipFoundCounter(String s){
 
         if (s.contains("tie"))
             tie_count = tie_count - 1;
@@ -315,6 +341,29 @@ public class StartGameActivity extends Activity {
         if (tie_count==0 && stardeath_count==0 && stardest_count==0){
             //TODO: suono hai vinto
             sendMessage("perso");
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);// TODO: android.R.style.Theme_Material_Dialog
+            builder.setTitle(R.string.winner);
+            builder.setMessage(R.string.restartAll);
+            builder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Intent intent = new Intent(StartGameActivity.this, MainActivity.class);
+                    Bundle b = new Bundle();
+                    b.putBoolean("new_window", true); //sets new window
+                    intent.putExtras(b);
+                    startActivity(intent);
+                }
+            });
+            builder.setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+
+           });
+            AlertDialog alertDialog = builder.create();
+            alertDialog.show();
         }
     }
     private void setTurno (boolean b){

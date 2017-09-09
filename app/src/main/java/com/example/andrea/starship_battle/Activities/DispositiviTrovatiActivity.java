@@ -73,8 +73,9 @@ public class DispositiviTrovatiActivity extends Activity {
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     avversarioDevice = dispositiviList.get(position);
                     try {
-                        String deviceName = createBond(avversarioDevice);
-                        Toast.makeText(getApplicationContext(), deviceName, Toast.LENGTH_SHORT).show();
+                        avversarioDevice.createBond();
+                        String bondedText = getResources().getString(R.string.bonded) + " " + avversarioDevice.getName();
+                        Toast.makeText(getApplicationContext(),  bondedText , Toast.LENGTH_SHORT).show();
 
                         Intent intent = new Intent(DispositiviTrovatiActivity.this, YourShiptableActivity.class);
                         intent.putExtra("avversarioDevice", avversarioDevice);
@@ -99,15 +100,6 @@ public class DispositiviTrovatiActivity extends Activity {
     }
 
 //--------------------------------------------------------------------------------------------------
-
-    //accoppiamento device
-    public String createBond(BluetoothDevice btDevice) throws Exception{
-        btDevice.createBond();
-        //TEST
-        if(btDevice.getBondState()==BluetoothDevice.BOND_BONDED)
-            return btDevice.getName()+ ": bonded "+ String.valueOf(btDevice.getBondState()); //TODO: string value
-        return "error";
-    }
 
     public void goBack(Button button) {
         button.setOnClickListener(new View.OnClickListener() {

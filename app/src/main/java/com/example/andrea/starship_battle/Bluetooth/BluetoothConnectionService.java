@@ -1,5 +1,6 @@
 package com.example.andrea.starship_battle.Bluetooth;
 
+import android.app.ProgressDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothServerSocket;
@@ -37,8 +38,10 @@ public class BluetoothConnectionService {
     private UUID deviceUUID = UUID.fromString("8ce255c0-200a-11e0-ac64-0800200c9a66");
 
     public ConnectedThread mConnectedThread;
+    ProgressDialog connectionDialog;
 
-    public BluetoothConnectionService() {
+    public BluetoothConnectionService(Context context) {
+        mContext = context;
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         start();
     }
@@ -194,6 +197,8 @@ public class BluetoothConnectionService {
 
     public void startClient(BluetoothDevice device, UUID uuid) {
         Log.d(TAG, "startClient: Started.");
+        connectionDialog = ProgressDialog.show(mContext,"Connecting Bluetooth" ,"Please Wait...",true);
+
         //initprogress dialog
         mConnectThread = new ConnectThread(device, uuid);
         mConnectThread.start();
@@ -216,6 +221,12 @@ public class BluetoothConnectionService {
             OutputStream tmpOut = null;
 
             //dismiss the progressdialog when connection is established
+            try{
+                connectionDialog.dismiss();
+            }catch (NullPointerException e){
+                e.printStackTrace();
+            }
+
             try {
                 tmpIn = mmSocket.getInputStream();
                 tmpOut = mmSocket.getOutputStream();
