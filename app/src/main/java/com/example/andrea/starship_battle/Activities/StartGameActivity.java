@@ -213,16 +213,13 @@ public class StartGameActivity extends Activity {
                 CasellaPosition casellaSelected = casellaPositionListSX.get(imageID);
                 casellaSelected.setAffondata(true);
 
-                for (int i = 1; i < rowCompletaSX.getChildCount(); i++) {
-                    TableRow row = (TableRow) findViewById(rowCompletaSX.getChildAt(i).getId());
-                    for (int j = 1; j < row.getChildCount(); j++) {
-                        if (row.getChildAt(j) instanceof ImageView ) {
-                            ((ImageView)row.getChildAt(j)).setImageDrawable(getResources().getDrawable(R.drawable.icon)); //TODO: cambia
-                            break;
-                        }
-                    }
-                }
 
+                TableRow row = (TableRow) findViewById(rowCompletaSX.getChildAt( (imageID)/8 +1 ).getId());
+                ImageView image = (ImageView) row.getChildAt( (imageID+1)%8 );
+                if (casellaSelected.getImageName().equals("space"))
+                    image.setImageDrawable(getResources().getDrawable(R.mipmap.ic_launcher)); //TODO: cambia per "acqua"
+                else
+                    image.setImageDrawable(getResources().getDrawable(R .drawable.icon)); //TODO: cambia per "colpito"
                 sendMessage(casellaSelected.getImageName());
 
             }else if(!isInteger(text)){
