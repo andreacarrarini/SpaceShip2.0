@@ -260,16 +260,17 @@ public class SetupShiptableActivity extends Activity implements View.OnTouchList
         button.setTypeface(face);
     }
 
-    @Override
+/*    @Override
     public void onPause() {
         releaseMediaPlayer(mediaPlayer);
         super.onPause();
-    }
+    }*/
 
     @Override
     public void onDestroy() {
         //to avoid memory leak
-        releaseMediaPlayer(mediaPlayer);
+        mediaPlayer.release();
+        mediaPlayer= null;
         super.onDestroy();
     }
 
