@@ -151,8 +151,8 @@ public class SetupShiptableActivity extends Activity implements View.OnTouchList
 
         if (view instanceof ImageView) {  //DRAG on ImageView
             if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
-                View.DragShadowBuilder shadowBuilder = new DragShadowBuilder(view);
-                //TODO:Se vogliamo mantenere l'immagine in movimwento: View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(view);
+
+                View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(view);
                 view.startDrag(null, shadowBuilder, view, 0);
                 view.setVisibility(View.INVISIBLE);
                 check = true;
@@ -260,5 +260,13 @@ public class SetupShiptableActivity extends Activity implements View.OnTouchList
         button.setTypeface(face);
     }
 
+    @Override
+    public void onDestroy() {
+        //to avoid memory leak
+        mediaPlayer.release();
+        mediaPlayer.release();
+        mediaPlayer= null;
+        super.onDestroy();
+    }
 
 }

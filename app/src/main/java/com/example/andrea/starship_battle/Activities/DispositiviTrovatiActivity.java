@@ -45,7 +45,7 @@ public class DispositiviTrovatiActivity extends Activity {
         //If there are no players around, shows a dialog
         if (dispositiviList.size()==0) {
 
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);// TODO: android.R.style.Theme_Material_Dialog
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle(R.string.noSelectableDevices);
             builder.setMessage(R.string.errorMessage);
             builder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {

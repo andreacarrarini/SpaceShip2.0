@@ -215,10 +215,10 @@ public class StartGameActivity extends Activity {
                 setTurno (true);
 
                 CasellaPosition casellaSelected = casellaPositionListSX.get(imageID);
-                TableRow row = null;
+                TableRow row;
 
                 row = (TableRow) findViewById(rowCompletaSX.getChildAt( (imageID)/8 +1 ).getId());
-                ImageView image = null;
+                ImageView image;
                 if ( (row.getChildAt( (imageID+1)%8 )) instanceof ImageView)
                     image = (ImageView) row.getChildAt( (imageID+1)%8 );
                 else{
