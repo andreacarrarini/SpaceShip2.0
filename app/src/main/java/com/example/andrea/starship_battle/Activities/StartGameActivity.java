@@ -2,7 +2,6 @@ package com.example.andrea.starship_battle.Activities;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -40,6 +39,7 @@ import java.util.UUID;
 public class StartGameActivity extends Activity {
 
     boolean turno;
+    boolean resume = false;
 
     private static final String TAG = "StartGameActivity";
     int dim_field_square = 11;
@@ -138,7 +138,6 @@ public class StartGameActivity extends Activity {
                         ((ImageView) row.getChildAt(j)).setImageDrawable(getShip(casellaPositionListSX, i - 1, j - 1));
                     }
                     r.resize(row, dim_field_square); //resize delle caselle della scacchiera
-
                 }
             }
         }
@@ -173,7 +172,6 @@ public class StartGameActivity extends Activity {
                         }
                     });
                     r.resize(row, dim_field_square); //resize delle caselle della scacchiera
-
                 }
             }
         }
@@ -219,19 +217,27 @@ public class StartGameActivity extends Activity {
                 TableRow row = (TableRow) findViewById(rowCompletaSX.getChildAt( (imageID)/8 +1 ).getId());
                 ImageView image = (ImageView) row.getChildAt( (imageID+1)%8 );
                 if (casellaSelected.getImageName().equals("space"))
-                    image.setImageDrawable(getResources().getDrawable(R.mipmap.ic_launcher)); //TODO: cambia per "acqua"
+                    image.setImageDrawable(getResources().getDrawable(R.drawable.ic_water));
                 else
-                    image.setImageDrawable(getResources().getDrawable(R .drawable.icon)); //TODO: cambia per "colpito"
+                    image.setImageDrawable(getResources().getDrawable(R .drawable.ic_boom));
                 sendMessage(casellaSelected.getImageName());
 
             }else if(!isInteger(text)){
-                if(text.equals("perso")){
-                    alertDialogFAIL.show();
+                switch (text) {
+                    case "perso":
+                        alertDialogFAIL.show();
+                        break;
+                    case "finish":
+                        Toast.makeText(StartGameActivity.this, R.string.disconnected_avversario, Toast.LENGTH_SHORT).show();
+                        Intent i = new Intent(StartGameActivity.this, MainActivity.class);
+                        startActivity(i);
+                        break;
+                    default:
+                        Log.d(TAG, "messaggio ricevuto MAINACTIVY2: " + text);
+                        setDrawValue(text);
+                        setTurno(false);
+                        break;
                 }
-                Log.d(TAG, "messaggio ricevuto MAINACTIVY2: " + text);
-                setDrawValue(text);
-
-                setTurno(false);
             }
         }
     };
@@ -260,7 +266,29 @@ public class StartGameActivity extends Activity {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+
+        if(resume) {
+            Intent i = new Intent(StartGameActivity.this, MainActivity.class);
+            startActivity(i);
+        }
+
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (mBluetoothConnection != null) {
+            mBluetoothConnection.stop();
+        }
+    }
+
+
+    @Override
     protected void onStop() {
+        sendMessage("finish");
+        resume = true;
         //to avoid memory leak
         shipFiringMediaPlayer.release();
         shipFiringMediaPlayer = null;

@@ -59,7 +59,6 @@ public class DispositiviTrovatiActivity extends Activity {
                 }
             });
 
-
             AlertDialog alertDialog = builder.create();
             alertDialog.show();
 

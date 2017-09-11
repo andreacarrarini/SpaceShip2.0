@@ -2,7 +2,7 @@
     <string name="app_name" translatable="false">SpaceButtle</string>
     <string name="inizia_partita">Starts the match</string>
     <string name="profilo">My profile</string>
-    <string name="space_buttle" translatable="false">Space Buttle</string>
+    <string name="space_battle" translatable="false">Space Battle</string>
     <string name="no_Bluethoot_Default">Your device does not support bluetooth</string>
     <string name="activated_bluethoot">Enabled bluetooth</string>
     <string name="disabled_bluethoot">Disabled bluetooth</string>
@@ -33,6 +33,7 @@
 
     <string name="casella" translatable="false">casellaView</string>
     <string name="wait">Wait for the enimy\'s move</string>
+    <string name="disconnected_avversario">Enemy disconnected, that loser…</string>
 
 
 </resources>

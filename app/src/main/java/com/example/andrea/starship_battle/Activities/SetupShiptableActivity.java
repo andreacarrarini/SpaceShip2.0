@@ -29,7 +29,6 @@ public class SetupShiptableActivity extends Activity implements View.OnTouchList
     ShipPosition position = null;
     BluetoothDevice avversarioDevice;
 
-/*    BluetoothDevice avversarioDevice;*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,20 +53,18 @@ public class SetupShiptableActivity extends Activity implements View.OnTouchList
         ImageView star_destroyer = (ImageView) findViewById(R.id.id_star_dest);
         ImageView death_star = (ImageView) findViewById(R.id.id_death_star);
 
-        //Creo una matrice di ImageView che rappresenta la tabella e setto ogni ImageView onDRAGListener
-//Creo una lista di ImageView che rappresenta la tabella e setto ogni ImageView onDRAGListener
+        //Creo una lista di ImageView che rappresenta la tabella e setto ogni ImageView onDRAGListener
         TableLayout rowCompleta = (TableLayout) findViewById(R.id.idTab);
         rowCompleta.setBackground(getResources().getDrawable(R.drawable.sfondotrovadisp));
         for (int i = 1; i < rowCompleta.getChildCount(); i++) {
             TableRow row = (TableRow) findViewById(rowCompleta.getChildAt(i).getId());
             for (int j = 1; j < row.getChildCount(); j++) {
                 if(row.getChildAt(j) instanceof ImageView) {
-                    //InvisibileView:((ImageView) row.getChildAt(j)).setImageDrawable(null);
                     row.getChildAt(j).setOnDragListener(this);
 
                     r.resize(row, dim_field_square); //resize delle caselle della scacchiera
 
-                    Casella c = new Casella((ImageView) row.getChildAt(j), false, false); //Matrice di caselle: ImageView vuote
+                    Casella c = new Casella((ImageView) row.getChildAt(j), false, false); //Lista di caselle: ImageView vuote
                     caselleTableList.add(c);
                     CasellaPosition casellaPosition = new CasellaPosition();
                     casellaPosition.setImageName("space");
@@ -77,10 +74,7 @@ public class SetupShiptableActivity extends Activity implements View.OnTouchList
                     r.resize(row, dim_field_square); //resize delle textView
                 }
             }
-        //    casellePositionMatrix.add(casellePositionList);
         }
-
-        //DILETTA
 
         // ImageView's onTOUCHListener for Drag: se una delle ships viene toccata, inizia il Drag
         tie.setOnTouchListener(this);

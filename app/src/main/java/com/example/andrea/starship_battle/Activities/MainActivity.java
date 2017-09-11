@@ -142,8 +142,6 @@ public class MainActivity extends Activity {
 
     private BluetoothAdapter bAdapter;
     public ArrayList<BluetoothDevice> dispositiviList;
-  /*  private BluetoothLeScanner mLEScanner;
-    private ScanSettings settings;*/
 
     private void intentTrovaDispositivi() {
         buttonIniziaPartita.setOnClickListener(new View.OnClickListener() {
@@ -161,9 +159,6 @@ public class MainActivity extends Activity {
                 if (!bAdapter.isEnabled()) {
                     Toast.makeText(getApplicationContext(), R.string.please, Toast.LENGTH_LONG).show();
                 } else {
-                    //ottengo i dispositivi con cui ho già accettato di condividere il bluethoot pairedDevices
-                   /* Set<BluetoothDevice> pairedDevices = bAdapter.getBondedDevices();
-                    dispositiviList.addAll(pairedDevices);*/
 
                     IntentFilter filter = new IntentFilter();
                     filter.addAction(BluetoothDevice.ACTION_FOUND);
@@ -205,11 +200,5 @@ public class MainActivity extends Activity {
         }
     };
 
-    //viene tolta la registrazione del brodcast receiver
-    @Override
-    public void onDestroy() {
-        unregisterReceiver(BrodcastReceiver);
-        super.onDestroy();
-    }
 
 }
